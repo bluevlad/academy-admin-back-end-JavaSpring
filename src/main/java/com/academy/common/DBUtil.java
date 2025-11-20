@@ -1,4 +1,4 @@
-﻿package com.academy.common;
+package com.academy.common; 
 
 import java.sql.Connection;
 import java.sql.DriverManager;
