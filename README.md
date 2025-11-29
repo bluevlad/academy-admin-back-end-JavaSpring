@@ -1,75 +1,776 @@
-Small Online Academy 백엔드 (Spring Boot)
+# Academy Backend - Spring Boot REST API
 
-프로젝트 소개
-- 소규모 온라인 학원 시스템의 백엔드 서비스입니다.
-- Spring Boot 3.x, MyBatis, MySQL을 사용하며, 게시판/회원/로그인/시험/사물함/대시보드 API를 제공합니다.
+Small Online Academy backend service - A comprehensive educational platform management system built with Spring Boot 3.2.0.
 
-기술 스택
-- Java 17, Spring Boot 3.2.0
-- MyBatis 3.0.4, Spring JDBC
-- MySQL Connector/J
-- JJWT(io.jsonwebtoken) 기반 JWT 토큰 처리
+## Technology Stack
 
-프로젝트 구조(일부)
-- src/main/java/com/academy
-  - board, member, login, exam, locker, dashboard, menu, main 패키지의 API 및 서비스
-  - common: CORSFilter, PaginationInfo, JwtUtil, DBUtil, Configurations 등 공통 유틸
-- src/main/resources
-  - mapper/*.xml: MyBatis 매퍼
-  - application.properties: 애플리케이션 환경설정
-- ddls/*.sql: 초기 스키마/데이터 스크립트
+- **Java**: 17
+- **Spring Boot**: 3.2.0
+- **MyBatis**: 3.0.4
+- **Database**: MySQL 8.x
+- **JWT**: JJWT 0.11.5
+- **Jakarta EE**: jakarta.servlet.*
 
-사전 준비물
-- JDK 17 이상
-- Maven 3.8+
-- MySQL 8.x (로컬 127.0.0.1:3306, 스키마 acm_basic)
+## Quick Start
 
-설정(application.properties)
-- 기본 값은 로컬 개발 환경을 가정합니다.
-- 주요 키
-  - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-  - spring.datasource.url=jdbc:mysql://127.0.0.1:3306/acm_basic
-  - spring.datasource.username=root
-  - spring.datasource.password=dnflskfk
-  - mybatis.mapper-locations=classpath:/mapper/*.xml
-  - pageUnit=10, pageSize=10
-- 필요 시 데이터베이스 접속 정보를 환경에 맞게 수정하세요.
+### Prerequisites
 
-DB 초기화
-1) MySQL에서 acm_basic 스키마를 생성합니다.
-2) ddls/member.sql, ddls/board.sql 순으로 실행하여 테이블과 기본 데이터를 생성합니다.
+- JDK 17+
+- Maven 3.6+
+- MySQL 8.x
 
-빌드 및 실행
-- 빌드: mvn clean package
-- 실행: mvn spring-boot:run 또는 생성된 jar 실행
-  - java -jar target/academy-0.0.1-SNAPSHOT.jar
- - 기본 포트: 8080
+### Build & Run
 
-주요 API 엔드포인트(예시)
-- 게시판(Board)
-  - GET /api/board/getBoardList
-  - GET /api/board/getBoardDetail
-  - POST /api/board/insertBoard
-  - POST /api/board/updateBoard
-  - POST /api/board/deleteBoard
-- 회원(Member)
-  - GET /api/member/getMemberList
-  - GET /api/member/getMemberDetail
-  - GET /api/member/insertMember
-  - GET /api/member/updateMember
-  - GET /api/member/deleteMember
-- 그 외 패키지: login, exam, locker, dashboard, menu 등 유사한 패턴으로 구성
+```bash
+# Build the project
+mvn clean package
 
-연관 프론트엔드 참고 자료
-- React Admin Template 참고: https://github.com/bluevlad/react/tree/main/datta-able-free-react-admin-template
-- 관리자 화면(레거시 참조): https://github.com/bluevlad/Java/tree/master/Academy-egovframework
+# Run development server
+mvn spring-boot:run
 
-트러블슈팅
-- 포트 충돌: 다른 프로세스가 8080 사용 시 server.port를 변경하거나 충돌 프로세스를 종료하세요.
-- DB 연결 오류: application.properties의 URL/계정/비밀번호와 MySQL 서버 상태를 확인하세요.
-- BOM 관련 컴파일 오류('\ufeff'): 소스 파일을 UTF-8 without BOM으로 저장하세요. (과거 Configurations.java, DBUtil.java에서 동일 이슈 해결)
+# Run from JAR
+java -jar target/academy-0.0.1-SNAPSHOT.jar
+```
 
-참고 문서
-- Maven: https://maven.apache.org/guides/index.html
-- Spring Boot Maven Plugin: https://docs.spring.io/spring-boot/3.4.2/maven-plugin
-- MyBatis: https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/
+Server runs on: `http://localhost:8080`
+
+### Database Setup
+
+1. Create MySQL schema:
+```sql
+CREATE SCHEMA acm_basic;
+```
+
+2. Execute DDL scripts:
+```bash
+# From MySQL client or workbench
+source ddls/member.sql
+source ddls/board.sql
+```
+
+### Testing
+
+```bash
+mvn test
+```
+
+## Architecture
+
+### Layered Architecture Pattern
+
+This project follows a **layered architecture with direct Mapper usage** (no DAO layer):
+
+```
+com.academy/
+├── [module]/                           # Feature modules
+│   ├── [Module]Api.java               # REST Controller
+│   └── service/
+│       ├── [Module]Service.java       # Service interface
+│       └── [Module]ServiceImpl.java   # Service implementation
+├── mapper/                             # MyBatis Mapper interfaces
+│   └── [Module]Mapper.java
+└── common/                             # Shared utilities
+```
+
+**Key Pattern**: ServiceImpl classes directly inject Mapper interfaces - **NO DAO layer**.
+
+### Package Structure
+
+```
+com.academy/
+├── AcademyApplication.java            # Spring Boot main class
+│
+├── board/                             # Bulletin board system
+│   ├── BoardApi.java
+│   └── service/
+│       ├── BoardService.java
+│       └── BoardServiceImpl.java
+│
+├── book/                              # Textbook management
+│   ├── BookApi.java
+│   └── service/
+│       ├── BookService.java
+│       └── BookServiceImpl.java
+│
+├── bookCmmt/                          # Book comments
+│   └── service/
+│       ├── BookCmmtService.java
+│       └── BookCmmtServiceImpl.java
+│
+├── bookOrder/                         # Book ordering
+│   └── service/
+│       ├── BookOrderService.java
+│       └── BookOrderServiceImpl.java
+│
+├── dashboard/                         # Admin dashboard
+│   ├── DashBoardApi.java
+│   └── service/
+│       ├── DashBoardService.java
+│       └── DashBoardServiceImpl.java
+│
+├── exam/                              # Examination system
+│   ├── ExamApi.java
+│   ├── ExamBankApi.java
+│   └── service/
+│       ├── ExamService.java
+│       ├── ExamServiceImpl.java
+│       ├── ExamBankService.java
+│       └── ExamBankServiceImpl.java
+│
+├── lecture/                           # Course/Lecture management (largest module)
+│   ├── CategoryApi.java              # Lecture categories
+│   ├── FormApi.java                  # Lecture formats
+│   ├── KindApi.java                  # Lecture types
+│   ├── LectureApi.java               # Main lecture CRUD
+│   ├── LectureMstApi.java            # Lecture master data
+│   ├── MacAddressManagerApi.java     # MAC address management
+│   ├── OpenLectureApi.java           # Open lecture management
+│   ├── ProductEventApi.java          # Product events/promotions
+│   ├── SeriesApi.java                # Lecture series
+│   ├── SubjectApi.java               # Subject management
+│   ├── TeacherApi.java               # Instructor management
+│   └── service/
+│       ├── CategoryService.java
+│       ├── CategoryServiceImpl.java
+│       ├── FormService.java
+│       ├── FormServiceImpl.java
+│       ├── KindService.java
+│       ├── KindServiceImpl.java
+│       ├── LectureService.java
+│       ├── LectureServiceImpl.java
+│       ├── LectureMstService.java
+│       ├── LectureMstServiceImpl.java
+│       ├── MacAddressManagerService.java
+│       ├── MacAddressManagerServiceImpl.java
+│       ├── OpenLectureService.java
+│       ├── OpenLectureServiceImpl.java
+│       ├── ProductEventService.java
+│       ├── ProductEventServiceImpl.java
+│       ├── SeriesService.java
+│       ├── SeriesServiceImpl.java
+│       ├── SubjectService.java
+│       ├── SubjectServiceImpl.java
+│       ├── TeacherService.java
+│       └── TeacherServiceImpl.java
+│
+├── locker/                            # Locker assignment
+│   ├── LockerApi.java
+│   └── service/
+│       ├── LockerService.java
+│       └── LockerServiceImpl.java
+│
+├── login/                             # Authentication
+│   ├── LoginApi.java
+│   └── service/
+│       ├── LoginService.java
+│       └── LoginServiceImpl.java
+│
+├── main/                              # Main page
+│   ├── MainApi.java
+│   └── service/
+│       ├── MainService.java
+│       └── MainServiceImpl.java
+│
+├── member/                            # User management
+│   ├── MemberApi.java
+│   └── service/
+│       ├── MemberService.java
+│       └── MemberServiceImpl.java
+│
+├── menu/                              # Menu management
+│   ├── MenuApi.java
+│   └── service/
+│       ├── MenuService.java
+│       └── MenuServiceImpl.java
+│
+├── productorder/                      # Product ordering
+│   ├── CouponMngApi.java
+│   ├── ProductOrderApi.java
+│   └── service/
+│       ├── CouponMngService.java
+│       ├── CouponMngServiceImpl.java
+│       ├── ProductOrderService.java
+│       └── ProductOrderServiceImpl.java
+│
+├── mapper/                            # MyBatis Mapper interfaces
+│   ├── BoardMapper.java
+│   ├── BookMapper.java
+│   ├── CategoryMapper.java
+│   ├── CouponMngMapper.java
+│   ├── DashBoardMapper.java
+│   ├── ExamBankMapper.java
+│   ├── ExamMapper.java
+│   ├── FormMapper.java
+│   ├── KindMapper.java
+│   ├── LectureMapper.java
+│   ├── LectureMstMapper.java
+│   ├── LockerMapper.java
+│   ├── LoginMapper.java
+│   ├── MacAddressManagerMapper.java
+│   ├── MainMapper.java
+│   ├── MemberMapper.java
+│   ├── MenuMapper.java
+│   ├── OpenLectureMapper.java
+│   ├── ProductEventMapper.java
+│   ├── ProductOrderMapper.java
+│   ├── SeriesMapper.java
+│   ├── SubjectMapper.java
+│   └── TeacherMapper.java
+│
+└── common/                            # Common utilities
+    ├── CORSFilter.java               # Base class for all API controllers
+    ├── JwtUtil.java                  # JWT token utilities
+    ├── PaginationInfo.java           # Pagination helper
+    ├── CommonUtil.java               # Common utility methods
+    ├── DBUtil.java                   # Database utilities
+    ├── Configurations.java           # Spring configuration beans
+    ├── CommonVO.java                 # Common value object
+    ├── ComDefaultVO.java             # Default value object
+    ├── ComDefaultCodeVO.java         # Default code value object
+    └── service/
+        ├── CmmUseService.java        # Common service
+        └── CmmnDetailCode.java       # Common detail code
+```
+
+## API Modules
+
+### Core Business Modules
+
+| Module | Description | API Endpoints | Key Features |
+|--------|-------------|---------------|--------------|
+| **lecture** | Course/Lecture management | 11 APIs | Largest module with category, teacher, subject, form, kind, series, lecture master, MAC address, open lecture, product events |
+| **exam** | Examination system | 2 APIs | Exam management and exam bank |
+| **member** | User management | 1 API | Student/instructor registration, profile management |
+| **locker** | Locker assignment | 1 API | Locker booking and management |
+| **book** | Textbook management | 1 API | Course materials and textbooks |
+| **productorder** | Product ordering | 2 APIs | Coupon management, product orders |
+
+### Content & Support Modules
+
+| Module | Description | API Endpoints | Key Features |
+|--------|-------------|---------------|--------------|
+| **board** | Bulletin board | 1 API | Announcements, notices, discussions |
+| **bookOrder** | Book ordering | Service only | Book purchase and delivery |
+| **bookCmmt** | Book comments | Service only | User reviews and comments |
+| **dashboard** | Admin dashboard | 1 API | Statistics and overview |
+| **login** | Authentication | 1 API | Session-based authentication |
+| **main** | Main page | 1 API | Landing page content |
+| **menu** | Menu management | 1 API | Navigation menu configuration |
+
+### Lecture Module (Most Complex)
+
+The lecture module is the largest and most feature-rich module with **11 separate APIs**:
+
+1. **CategoryApi** (`/api/lecture/category`) - Lecture category management
+2. **TeacherApi** (`/api/lecture/teacher`) - Instructor management (supports up to 32 images)
+3. **SubjectApi** (`/api/lecture/subject`) - Subject/course management
+4. **FormApi** (`/api/lecture/form`) - Lecture format types
+5. **KindApi** (`/api/lecture/kind`) - Lecture kind/classification
+6. **SeriesApi** (`/api/lecture/series`) - Lecture series management
+7. **LectureApi** (`/api/lecture`) - Main lecture CRUD operations
+8. **LectureMstApi** (`/api/lecture/mst`) - Lecture master data
+9. **MacAddressManagerApi** (`/api/lecture/macaddress`) - Device MAC address management
+10. **OpenLectureApi** (`/api/lecture/open`) - Open lecture scheduling
+11. **ProductEventApi** (`/api/lecture/event`) - Promotional events
+
+**Key Features:**
+- Automatic code generation (e.g., `D202400001`, `M202400001`)
+- Bridge table pattern for many-to-many relationships
+- Extensive file upload support
+- Complex business logic with multiple related entities
+
+## REST API Pattern
+
+### Controller Pattern
+
+All API controllers follow this standard pattern:
+
+```java
+@RestController
+@RequestMapping("/api/[module]")
+public class ExampleApi extends CORSFilter {
+
+    @Value("${pageUnit:10}")
+    private int pageUnit;
+
+    private final ExampleService exampleService;
+
+    @Autowired
+    public ExampleApi(ExampleService exampleService) {
+        this.exampleService = exampleService;
+    }
+
+    @GetMapping("/list")
+    public JSONObject list(@ModelAttribute HashMap<String, String> params,
+                          HttpServletRequest request) throws Exception {
+        // Implementation
+    }
+
+    @PostMapping("/insert")
+    public JSONObject insert(@ModelAttribute HashMap<String, String> params,
+                            HttpServletRequest request) throws Exception {
+        // Implementation
+    }
+}
+```
+
+### Key Characteristics
+
+- **Extend CORSFilter**: All controllers extend `CORSFilter` for CORS support
+- **Constructor Injection**: Use constructor-based dependency injection
+- **JSONObject Response**: All endpoints return `JSONObject` from org.json.simple
+- **HTTP Method Mapping**: Use specific annotations (`@GetMapping`, `@PostMapping`, etc.)
+
+### Standard Response Format
+
+**Success Response:**
+```json
+{
+  "result": "success",
+  "message": "작업이 완료되었습니다",
+  "list": [...],
+  "totalCount": 100,
+  "currentPage": 1,
+  "totalPage": 10
+}
+```
+
+**Error Response:**
+- Transaction rollback with exception handling
+
+### Pagination
+
+All list endpoints support pagination:
+- **Request params**: `currentPage` (default: 1), `pageRow` (default: from `pageUnit` property)
+- **Response fields**: `list`, `totalCount`, `totalPage`, `currentPage`
+- **Helper class**: `PaginationInfo`
+
+## Service Layer Pattern
+
+### Direct Mapper Injection (No DAO)
+
+ServiceImpl classes directly use MyBatis Mapper interfaces:
+
+```java
+@Service
+public class ExampleServiceImpl implements ExampleService {
+
+    @Autowired
+    private ExampleMapper exampleMapper;  // Direct Mapper injection
+
+    @Override
+    public List<HashMap<String, String>> getList(HashMap<String, String> params) {
+        return exampleMapper.exampleList(params);  // Direct call
+    }
+
+    @Override
+    @Transactional
+    public void insert(HashMap<String, String> params) {
+        exampleMapper.exampleInsert(params);
+    }
+}
+```
+
+**Important**:
+- NO DAO layer exists in this architecture
+- ServiceImpl classes are in `service` package (NOT `service.impl`)
+- Direct dependency on Mapper interfaces
+
+## MyBatis Mapper Layer
+
+### Mapper Interface Pattern
+
+```java
+package com.academy.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+import java.util.HashMap;
+import java.util.List;
+
+@Mapper
+public interface ExampleMapper {
+    List<HashMap<String, String>> exampleList(HashMap<String, String> params);
+    int exampleListCount(HashMap<String, String> params);
+    HashMap<String, String> exampleView(HashMap<String, String> params);
+    void exampleInsert(HashMap<String, String> params);
+    void exampleUpdate(HashMap<String, String> params);
+    void exampleDelete(HashMap<String, String> params);
+}
+```
+
+### XML Mapper Pattern
+
+Location: `src/main/resources/mapper/[Module]Mapper.xml`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.academy.mapper.ExampleMapper">
+
+    <select id="exampleList" parameterType="hashMap" resultType="hashMap">
+        SELECT *
+        FROM TB_EXAMPLE
+        WHERE 1=1
+        <if test="searchKeyword != null and searchKeyword != ''">
+            AND NAME LIKE CONCAT('%', #{searchKeyword}, '%')
+        </if>
+        ORDER BY REG_DT DESC
+        LIMIT #{firstIndex}, #{recordCountPerPage}
+    </select>
+
+    <select id="exampleListCount" parameterType="hashMap" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_EXAMPLE
+        WHERE 1=1
+    </select>
+
+    <insert id="exampleInsert" parameterType="hashMap">
+        INSERT INTO TB_EXAMPLE (
+            TITLE, CONTENT, REG_ID, REG_DT
+        ) VALUES (
+            #{title}, #{content}, #{regId}, NOW()
+        )
+    </insert>
+
+</mapper>
+```
+
+### Mapper Method Naming Conventions
+
+| Operation | Method Name | Description |
+|-----------|-------------|-------------|
+| List | `[module]List` | Get list of records |
+| Count | `[module]ListCount` | Count total records |
+| View | `[module]View` | Get single record |
+| Insert | `[module]Insert` | Insert new record |
+| Update | `[module]Update` | Update existing record |
+| Delete | `[module]Delete` | Delete record |
+
+## Common Utilities
+
+### CORSFilter
+
+Base class for all API controllers providing CORS support:
+
+```java
+public class CORSFilter {
+    @ModelAttribute
+    public void setResponseHeader(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, content-type");
+    }
+}
+```
+
+### JwtUtil
+
+JWT token generation and validation:
+
+```java
+public class JwtUtil {
+    public static String generateToken(String userId);
+    public static boolean validateToken(String token);
+    public static String getUserIdFromToken(String token);
+}
+```
+
+### PaginationInfo
+
+Pagination calculation helper:
+
+```java
+public class PaginationInfo {
+    private int currentPageNo;
+    private int recordCountPerPage;
+    private int pageSize;
+    private int totalRecordCount;
+
+    public void setTotalRecordCount(int totalRecordCount);
+    public int getFirstRecordIndex();
+    public int getLastRecordIndex();
+    public int getTotalPageCount();
+}
+```
+
+### CommonUtil
+
+Common utility methods:
+
+```java
+public class CommonUtil {
+    public static String nullToBlank(Object obj);
+    public static String getClientIP(HttpServletRequest request);
+    public static String getCurrentTimestamp();
+}
+```
+
+### DBUtil
+
+Database connection utilities for direct JDBC operations when needed.
+
+## Authentication
+
+### Session-Based Authentication
+
+- **Session Key**: `AdmUserInfo.USER_ID`
+- **Usage**: Automatically populated in `REG_ID` and `UPD_ID` fields
+- **Access Pattern**:
+
+```java
+// Get user from session
+Object userInfo = request.getSession().getAttribute("AdmUserInfo");
+HashMap<String, String> user = (HashMap<String, String>) userInfo;
+String userId = user.get("USER_ID");
+
+// Set audit fields
+params.put("REG_ID", userId);
+params.put("UPD_ID", userId);
+```
+
+### JWT Support
+
+JWT utilities are available in `JwtUtil` class but session-based auth is primarily used for API endpoints.
+
+## File Upload
+
+### Upload Pattern
+
+```java
+@PostMapping("/upload")
+public JSONObject upload(MultipartHttpServletRequest request) throws Exception {
+    MultipartFile file = request.getFile("file");
+    String uploadPath = "member_upload/";
+
+    // Use FileUtil for upload
+    String savedFileName = FileUtil.uploadFile(file, uploadPath);
+
+    return response;
+}
+```
+
+### Upload Directories
+
+- `member_upload/` - Member-related files
+- `openlecture_upload/` - Open lecture materials
+- Teacher module supports up to 32 images
+
+## Configuration
+
+### application.properties
+
+```properties
+# Database
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/acm_basic
+spring.datasource.username=root
+spring.datasource.password=dnflskfk
+
+# MyBatis
+mybatis.mapper-locations=classpath:/mapper/*.xml
+mybatis.type-aliases-package=com.academy
+
+# Server
+server.port=8080
+
+# Pagination
+pageUnit=10
+
+# File Upload
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+```
+
+### Property Injection Pattern
+
+Use `@Value` annotation (NOT EgovPropertyService):
+
+```java
+@Value("${pageUnit:10}")
+private int pageUnit;
+
+@Value("${uploadPath:/uploads}")
+private String uploadPath;
+```
+
+## Development Guidelines
+
+### File Encoding
+
+**CRITICAL**: Always use **UTF-8 without BOM**
+- BOM characters (`\ufeff`) cause compilation errors
+- If compile errors occur with `\ufeff`, re-save files as UTF-8 without BOM
+
+### Jakarta EE (Spring Boot 3.x)
+
+- Always use `jakarta.servlet.*`, `jakarta.annotation.*`
+- **NEVER** use `javax.*` - this project uses Spring Boot 3.x
+
+### Adding a New Module
+
+1. **Create Mapper Interface** in `com.academy.mapper`:
+```java
+@Mapper
+public interface ExampleMapper {
+    List<HashMap<String, String>> exampleList(HashMap<String, String> params);
+}
+```
+
+2. **Create MyBatis XML Mapper** in `src/main/resources/mapper/`:
+```xml
+<mapper namespace="com.academy.mapper.ExampleMapper">
+    <select id="exampleList" parameterType="hashMap" resultType="hashMap">
+        SELECT * FROM TB_EXAMPLE
+    </select>
+</mapper>
+```
+
+3. **Create Service Interface** in `com.academy.[module].service`:
+```java
+public interface ExampleService {
+    List<HashMap<String, String>> getList(HashMap<String, String> params);
+}
+```
+
+4. **Create ServiceImpl** in same package:
+```java
+@Service
+public class ExampleServiceImpl implements ExampleService {
+    @Autowired
+    private ExampleMapper exampleMapper;
+
+    @Override
+    public List<HashMap<String, String>> getList(HashMap<String, String> params) {
+        return exampleMapper.exampleList(params);
+    }
+}
+```
+
+5. **Create API Controller**:
+```java
+@RestController
+@RequestMapping("/api/example")
+public class ExampleApi extends CORSFilter {
+    @Value("${pageUnit:10}")
+    private int pageUnit;
+
+    private final ExampleService exampleService;
+
+    @Autowired
+    public ExampleApi(ExampleService exampleService) {
+        this.exampleService = exampleService;
+    }
+
+    @GetMapping("/list")
+    public JSONObject list(@ModelAttribute HashMap<String, String> params) {
+        // Implementation
+    }
+}
+```
+
+### Refactoring Legacy Code
+
+When migrating from old DAO-based pattern:
+
+1. Delete DAO classes and `service.impl` package
+2. Create Mapper interface in `com.academy.mapper`
+3. Move ServiceImpl to `service` package (not `service.impl`)
+4. Update ServiceImpl to inject Mapper (not DAO)
+5. Update XML namespace to point to Mapper
+6. Replace all `dao.*` calls with `mapper.*`
+
+## Testing
+
+### Unit Tests
+
+```bash
+mvn test
+```
+
+### API Testing
+
+Use tools like:
+- Postman
+- curl
+- HTTPie
+
+Example:
+```bash
+# Get lecture list
+curl http://localhost:8080/api/lecture/list?currentPage=1&pageRow=10
+
+# Get member info
+curl http://localhost:8080/api/member/view?userId=user001
+```
+
+## Related Repositories
+
+- **Frontend**: [React Admin Dashboard](https://github.com/bluevlad/react/tree/main/datta-able-free-react-admin-template)
+- **Legacy Admin**: [eGov Framework Admin](https://github.com/bluevlad/Java/tree/master/Academy-egovframework)
+
+## Database Schema
+
+### Core Tables
+
+- `TB_MEMBER` - User/member information
+- `TB_BOARD` - Bulletin board posts
+- `TB_LECTURE` - Lecture information
+- `TB_TEACHER` - Instructor information
+- `TB_EXAM` - Examination data
+- `TB_LOCKER` - Locker assignments
+- `TB_BOOK` - Textbook catalog
+- `TB_PRODUCT_ORDER` - Product orders
+- `TB_COUPON` - Coupon management
+
+DDL scripts available in `ddls/` directory.
+
+## API Endpoints Summary
+
+| Module | Endpoint Base | Controllers |
+|--------|--------------|-------------|
+| Lecture | `/api/lecture/*` | 11 APIs (category, teacher, subject, form, kind, series, lecture, mst, macaddress, open, event) |
+| Exam | `/api/exam/*` | 2 APIs (exam, exambank) |
+| Member | `/api/member/*` | 1 API |
+| Board | `/api/board/*` | 1 API |
+| Book | `/api/book/*` | 1 API |
+| Product Order | `/api/productorder/*` | 2 APIs (coupon, order) |
+| Locker | `/api/locker/*` | 1 API |
+| Dashboard | `/api/dashboard/*` | 1 API |
+| Login | `/api/login/*` | 1 API |
+| Main | `/api/main/*` | 1 API |
+| Menu | `/api/menu/*` | 1 API |
+
+**Total**: 23 REST API Controllers
+
+## Troubleshooting
+
+### Port Conflicts
+
+If port 8080 is in use:
+- Change port in `application.properties`: `server.port=8081`
+- Or stop the conflicting process
+
+### Database Connection Issues
+
+- Verify MySQL is running
+- Check connection details in `application.properties`
+- Ensure `acm_basic` schema exists
+
+### BOM Encoding Errors
+
+If you see compilation errors with `\ufeff`:
+- Re-save files as UTF-8 without BOM
+- Common in: `Configurations.java`, `DBUtil.java`
+
+## License
+
+[Add license information]
+
+## Contributors
+
+[Add contributor information]
+
+## Support
+
+For issues and questions, please refer to the project issue tracker.
