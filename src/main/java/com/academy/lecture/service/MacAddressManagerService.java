@@ -1,46 +1,62 @@
 package com.academy.lecture.service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.academy.mapper.MacAddressManagerMapper;
 
 /**
  * MacAddressManager Service
- * ExamService 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * MAC 주소 관리 서비스 (직접 구현)
  */
-@Service
+@Service(value="macaddressmanagerservice")
 public class MacAddressManagerService {
 
-	private MacAddressManagerMapper macAddressManagerMapper;
+    @Autowired
+    private MacAddressManagerMapper macAddressManagerMapper;
 
-	public MacAddressManagerService(MacAddressManagerMapper macAddressManagerMapper) {
-		this.macAddressManagerMapper = macAddressManagerMapper;
-	}
+    /**
+     * MAC주소 관리 목록 조회
+     */
+    public List<HashMap<String, String>> macaddressmanagerList(MacAddressManagerVO vo){
+        return macAddressManagerMapper.macaddressmanagerList(vo);
+    }
 
-	public ArrayList<JSONObject> macaddressmanagerList(MacAddressManagerVO macAddressManagerVO) {
-		return macAddressManagerMapper.macaddressmanagerList(macAddressManagerVO);
-	}
+    /**
+     * 디바이스 목록 조회
+     */
+    public List<HashMap<String, String>> devicelist(MacAddressManagerVO vo){
+        return macAddressManagerMapper.devicelist(vo);
+    }
 
-	public ArrayList<JSONObject> devicelist(MacAddressManagerVO macAddressManagerVO) {
-		return macAddressManagerMapper.devicelist(macAddressManagerVO);
-	}
+    /**
+     * MAC주소 상세 조회
+     */
+    public List<HashMap<String, String>> macaddressView(MacAddressManagerVO vo){
+        return macAddressManagerMapper.macaddressView(vo);
+    }
 
-	public ArrayList<JSONObject> macaddressView(MacAddressManagerVO macAddressManagerVO) {
-		return macAddressManagerMapper.macaddressView(macAddressManagerVO);
-	}
+    /**
+     * MAC주소 관리 목록 개수 조회
+     */
+    public int macaddressmanagerListCount(MacAddressManagerVO vo){
+        return macAddressManagerMapper.macaddressmanagerListCount(vo);
+    }
 
-	public int macaddressmanagerListCount(MacAddressManagerVO macAddressManagerVO) {
-		return macAddressManagerMapper.macaddressmanagerListCount(macAddressManagerVO);
-	}
+    /**
+     * MAC주소 업데이트
+     */
+    public void macaddressmanagerUpdate(MacAddressManagerVO vo){
+        macAddressManagerMapper.macaddressmanagerUpdate(vo);
+    }
 
-	public void macaddressmanagerUpdate(MacAddressManagerVO macAddressManagerVO) {
-		macAddressManagerMapper.macaddressmanagerUpdate(macAddressManagerVO);
-	}
-
-	public void macaddressmanagerUpdate1(MacAddressManagerVO macAddressManagerVO) {
-		macAddressManagerMapper.macaddressmanagerUpdate1(macAddressManagerVO);
-	}
+    /**
+     * MAC주소 업데이트1 (모바일 초기화)
+     */
+    public void macaddressmanagerUpdate1(MacAddressManagerVO vo){
+        macAddressManagerMapper.macaddressmanagerUpdate1(vo);
+    }
 }

@@ -1,250 +1,248 @@
 package com.academy.lecture.service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.academy.mapper.OpenLectureMapper;
 
 /**
  * OpenLecture Service
- * ExamService 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * 오픈강의(Off) 관리 서비스 (직접 구현)
  */
-@Service
+@Service(value="openlectureservice")
 public class OpenLectureService {
 
-	private OpenLectureMapper openLectureMapper;
+    @Autowired
+    private OpenLectureMapper openLectureMapper;
 
-	public OpenLectureService(OpenLectureMapper openLectureMapper) {
-		this.openLectureMapper = openLectureMapper;
-	}
+    public List<HashMap<String, String>> openlectureList(LectureVO lectureVO){
+        return openLectureMapper.openlectureList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureList(openLectureVO);
-	}
+    public int openlectureListCount(LectureVO lectureVO){
+        return openLectureMapper.openlectureListCount(lectureVO);
+    }
 
-	public int openlectureListCount(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureListCount(openLectureVO);
-	}
+    public List<HashMap<String, String>> bookList(LectureVO lectureVO){
+        return openLectureMapper.bookList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> bookList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.bookList(openLectureVO);
-	}
+    public int bookListCount(LectureVO lectureVO){
+        return openLectureMapper.bookListCount(lectureVO);
+    }
 
-	public int bookListCount(OpenLectureVO openLectureVO) {
-		return openLectureMapper.bookListCount(openLectureVO);
-	}
+    public List<HashMap<String, String>> getBridgeLeccodeSeq(LectureVO lectureVO){
+        return openLectureMapper.getBridgeLeccodeSeq(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getBridgeLeccodeSeq(OpenLectureVO openLectureVO) {
-		return openLectureMapper.getBridgeLeccodeSeq(openLectureVO);
-	}
+    public List<HashMap<String, String>> getJongLeccodeSeq(LectureVO lectureVO){
+        return openLectureMapper.getJongLeccodeSeq(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getJongLeccodeSeq(OpenLectureVO openLectureVO) {
-		return openLectureMapper.getJongLeccodeSeq(openLectureVO);
-	}
+    public List<HashMap<String, String>> getopenLeccode(LectureVO lectureVO){
+        return openLectureMapper.getopenLeccode(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getopenLeccode(OpenLectureVO openLectureVO) {
-		return openLectureMapper.getopenLeccode(openLectureVO);
-	}
+    public List<HashMap<String, String>> getBridgeLeccode(LectureVO lectureVO){
+        return openLectureMapper.getBridgeLeccode(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getBridgeLeccode(OpenLectureVO openLectureVO) {
-		return openLectureMapper.getBridgeLeccode(openLectureVO);
-	}
+    public List<HashMap<String, String>> BridgeLeccode(LectureVO lectureVO){
+        return openLectureMapper.BridgeLeccode(lectureVO);
+    }
 
-	public ArrayList<JSONObject> BridgeLeccode(OpenLectureVO openLectureVO) {
-		return openLectureMapper.BridgeLeccode(openLectureVO);
-	}
+    public void openlectureInsert(LectureVO lectureVO){
+        openLectureMapper.openlectureInsert(lectureVO);
+    }
 
-	public void openlectureInsert(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureInsert(openLectureVO);
-	}
+    public void openlectureBridgeInsert(LectureVO lectureVO){
+        openLectureMapper.openlectureBridgeInsert(lectureVO);
+    }
 
-	public void openlectureBridgeInsert(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureBridgeInsert(openLectureVO);
-	}
+    public void openlectureBookInsert2(LectureVO lectureVO){
+        openLectureMapper.openlectureBookInsert2(lectureVO);
+    }
 
-	public void openlectureBookInsert(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureBookInsert(openLectureVO);
-	}
+    public void openlectureBookInsert(LectureVO lectureVO){
+        openLectureMapper.openlectureBookInsert(lectureVO);
+    }
 
-	public void openlectureBookInsert2(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureBookInsert2(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureViewList(LectureVO lectureVO){
+        return openLectureMapper.openlectureViewList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureViewList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureViewList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureView(LectureVO lectureVO){
+        return openLectureMapper.openlectureView(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureView(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureView(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureViewBookList(LectureVO lectureVO){
+        return openLectureMapper.openlectureViewBookList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureViewBookList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureViewBookList(openLectureVO);
-	}
+    public void openlectureBookDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureBookDelete(lectureVO);
+    }
 
-	public void openlectureBookDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureBookDelete(openLectureVO);
-	}
+    public void openlectureUpdate(LectureVO lectureVO){
+        openLectureMapper.openlectureUpdate(lectureVO);
+    }
 
-	public void openlectureUpdate(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureUpdate(openLectureVO);
-	}
+    public void openlectureIsUseUpdate(LectureVO lectureVO){
+        openLectureMapper.openlectureIsUseUpdate(lectureVO);
+    }
 
-	public void Modify_Lecture_On_Off(OpenLectureVO openLectureVO) {
-		openLectureMapper.Modify_Lecture_On_Off(openLectureVO);
-	}
+    public void openlectureDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureDelete(lectureVO);
+    }
 
-	public void openlectureIsUseUpdate(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureIsUseUpdate(openLectureVO);
-	}
+    public void openlectureBridgeDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureBridgeDelete(lectureVO);
+    }
 
-	public void openlectureDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureDelete(openLectureVO);
-	}
+    public void lecMovUpdate(LectureVO lectureVO){
+        openLectureMapper.lecMovUpdate(lectureVO);
+    }
 
-	public void openlectureBridgeDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureBridgeDelete(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureSeqList(LectureVO lectureVO){
+        return openLectureMapper.openlectureSeqList(lectureVO);
+    }
 
-	public void lecMovUpdate(OpenLectureVO openLectureVO) {
-		openLectureMapper.lecMovUpdate(openLectureVO);
-	}
+    public void openlectureSeqUpdate(LectureVO lectureVO){
+        openLectureMapper.openlectureSeqUpdate(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureSeqList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureSeqList(openLectureVO);
-	}
+    public void Modify_Lecture_On_Off(LectureVO lectureVO){
+        openLectureMapper.Modify_Lecture_On_Off(lectureVO);
+    }
 
-	public void openlectureSeqUpdate(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureSeqUpdate(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureViewJongList(LectureVO lectureVO){
+        return openLectureMapper.openlectureViewJongList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureViewJongList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureViewJongList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureJongList(LectureVO lectureVO){
+        return openLectureMapper.openlectureJongList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureJongList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureJongList(openLectureVO);
-	}
+    public int openlectureJongListCount(LectureVO lectureVO){
+        return openLectureMapper.openlectureJongListCount(lectureVO);
+    }
 
-	public int openlectureJongListCount(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureJongListCount(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureJongView(LectureVO lectureVO){
+        return openLectureMapper.openlectureJongView(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureJongSubjectList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureJongSubjectList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureJongSubjectList(LectureVO lectureVO){
+        return openLectureMapper.openlectureJongSubjectList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureJongView(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureJongView(openLectureVO);
-	}
+    public int openlectureJongSubjectListCount(LectureVO lectureVO){
+        return openLectureMapper.openlectureJongSubjectListCount(lectureVO);
+    }
 
-	public int openlectureJongSubjectListCount(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureJongSubjectListCount(openLectureVO);
-	}
+    public void openlectureLecJongInsert(LectureVO lectureVO){
+        openLectureMapper.openlectureLecJongInsert(lectureVO);
+    }
 
-	public void openlectureLecJongInsert(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureLecJongInsert(openLectureVO);
-	}
+    public void openlectureChoiceJongNoInsert(LectureVO lectureVO){
+        openLectureMapper.openlectureChoiceJongNoInsert(lectureVO);
+    }
 
-	public void openlectureChoiceJongNoInsert(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureChoiceJongNoInsert(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureViewLeccodeList(LectureVO lectureVO){
+        return openLectureMapper.openlectureViewLeccodeList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureViewLeccodeList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureViewLeccodeList(openLectureVO);
-	}
+    public void openlectureLecJongDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureLecJongDelete(lectureVO);
+    }
 
-	public void openlectureLecJongDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureLecJongDelete(openLectureVO);
-	}
+    public void openlectureChoiceJongNoDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureChoiceJongNoDelete(lectureVO);
+    }
 
-	public void openlectureChoiceJongNoDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureChoiceJongNoDelete(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlecturePayList(LectureVO lectureVO){
+        return openLectureMapper.openlecturePayList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlecturePayList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlecturePayList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureJongPayList(LectureVO lectureVO){
+        return openLectureMapper.openlectureJongPayList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureJongPayList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureJongPayList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureDataMemoViewList(LectureVO lectureVO){
+        return openLectureMapper.openlectureDataMemoViewList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureDataMemoViewList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureDataMemoViewList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureDataViewList(LectureVO lectureVO){
+        return openLectureMapper.openlectureDataViewList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureDataViewList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureDataViewList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureDataMovieViewList(LectureVO lectureVO){
+        return openLectureMapper.openlectureDataMovieViewList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureDataMovieViewList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureDataMovieViewList(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureDataMovieList(LectureVO lectureVO){
+        return openLectureMapper.openlectureDataMovieList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureDataMovieList(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureDataMovieList(openLectureVO);
-	}
+    public void openlectureMovieInsert(LectureVO lectureVO){
+        openLectureMapper.openlectureMovieInsert(lectureVO);
+    }
 
-	public void openlectureMovieInsert(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureMovieInsert(openLectureVO);
-	}
+    public void openlectureMovieDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureMovieDelete(lectureVO);
+    }
 
-	public void openlectureMovieDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureMovieDelete(openLectureVO);
-	}
+    public void openlectureMovieUpdate(LectureVO lectureVO){
+        openLectureMapper.openlectureMovieUpdate(lectureVO);
+    }
 
-	public void openlectureMovieUpdate(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureMovieUpdate(openLectureVO);
-	}
+    public void openlectureMovieFileDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureMovieFileDelete(lectureVO);
+    }
 
-	public void openlectureMovieFileDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureMovieFileDelete(openLectureVO);
-	}
+    public void openlectureMovieMemoInsert(LectureVO lectureVO){
+        openLectureMapper.openlectureMovieMemoInsert(lectureVO);
+    }
 
-	public void openlectureMovieMemoInsert(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureMovieMemoInsert(openLectureVO);
-	}
+    public void openlectureMovieMemoUpdate(LectureVO lectureVO){
+        openLectureMapper.openlectureMovieMemoUpdate(lectureVO);
+    }
 
-	public void openlectureMovieMemoUpdate(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureMovieMemoUpdate(openLectureVO);
-	}
+    public void openlectureMovieMemoDelete(LectureVO lectureVO){
+        openLectureMapper.openlectureMovieMemoDelete(lectureVO);
+    }
 
-	public void openlectureMovieMemoDelete(OpenLectureVO openLectureVO) {
-		openLectureMapper.openlectureMovieMemoDelete(openLectureVO);
-	}
+    public int openlectureDeleteCheck(LectureVO lectureVO){
+        return openLectureMapper.openlectureDeleteCheck(lectureVO);
+    }
 
-	public int openlectureDeleteCheck(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureDeleteCheck(openLectureVO);
-	}
+    public List<HashMap<String, String>> playinfo(LectureVO lectureVO){
+        return openLectureMapper.playinfo(lectureVO);
+    }
 
-	public ArrayList<JSONObject> playinfo(OpenLectureVO openLectureVO) {
-		return openLectureMapper.playinfo(openLectureVO);
-	}
+    public List<HashMap<String, String>> getCbMovie4_free_admin(LectureVO lectureVO){
+        return openLectureMapper.getCbMovie4_free_admin(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getCbMovie4_free_admin(OpenLectureVO openLectureVO) {
-		return openLectureMapper.getCbMovie4_free_admin(openLectureVO);
-	}
+    public int getCbMovie4_free_admin_count(LectureVO lectureVO){
+        return openLectureMapper.getCbMovie4_free_admin_count(lectureVO);
+    }
 
-	public int getCbMovie4_free_admin_count(OpenLectureVO openLectureVO) {
-		return openLectureMapper.getCbMovie4_free_admin_count(openLectureVO);
-	}
+    public HashMap<String, String> openlectureOnDetailS(LectureVO lectureVO) {
+        return openLectureMapper.openlectureOnDetailS(lectureVO);
+    }
 
-	public JSONObject openlectureOnDetailS(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureOnDetailS(openLectureVO);
-	}
+    public void insertPmpDownLog(LectureVO lectureVO){
+        openLectureMapper.insertPmpDownLog(lectureVO);
+    }
 
-	public void insertPmpDownLog(OpenLectureVO openLectureVO) {
-		openLectureMapper.insertPmpDownLog(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureWMV(LectureVO lectureVO){
+        return openLectureMapper.openlectureWMV(lectureVO);
+    }
 
-	public ArrayList<JSONObject> openlectureWMV(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureWMV(openLectureVO);
-	}
-
-	public ArrayList<JSONObject> openlectureDown_Count(OpenLectureVO openLectureVO) {
-		return openLectureMapper.openlectureDown_Count(openLectureVO);
-	}
+    public List<HashMap<String, String>> openlectureDown_Count(LectureVO lectureVO){
+        return openLectureMapper.openlectureDown_Count(lectureVO);
+    }
 }

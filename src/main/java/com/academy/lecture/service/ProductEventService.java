@@ -1,74 +1,121 @@
 package com.academy.lecture.service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.academy.mapper.ProductEventMapper;
 
 /**
  * ProductEvent Service
- * ExamService 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * 상품 이벤트 관리 서비스 (직접 구현)
  */
-@Service
+@Service(value="ProductEventService")
 public class ProductEventService {
 
-	private ProductEventMapper productEventMapper;
+    @Autowired
+    private ProductEventMapper productEventMapper;
 
-	public ProductEventService(ProductEventMapper productEventMapper) {
-		this.productEventMapper = productEventMapper;
-	}
+    // TODO: FreeOrderMapper 생성 후 아래 메서드들 구현 필요
+    // @Autowired
+    // private FreeOrderMapper freeOrderMapper;
 
-	public ArrayList<JSONObject> list(ProductEventVO productEventVO) {
-		return productEventMapper.list(productEventVO);
-	}
+    /**
+     * 이벤트 목록 조회
+     */
+    public List<HashMap<String, String>> list(ProductEventVO vo){
+        return productEventMapper.list(vo);
+    }
 
-	public int listCount(ProductEventVO productEventVO) {
-		return productEventMapper.listCount(productEventVO);
-	}
+    /**
+     * 이벤트 목록 개수 조회
+     */
+    public int listCount(ProductEventVO vo){
+        return productEventMapper.listCount(vo);
+    }
 
-	public JSONObject getOne(ProductEventVO productEventVO) {
-		return productEventMapper.getOne(productEventVO);
-	}
+    /**
+     * 이벤트 단건 조회
+     */
+    public HashMap<String, String> getOne(ProductEventVO vo){
+        return productEventMapper.getOne(vo);
+    }
 
-	public ArrayList<JSONObject> list_prd(ProductEventVO productEventVO) {
-		return productEventMapper.list_prd(productEventVO);
-	}
+    /**
+     * 이벤트 상품 목록 조회
+     */
+    public List<HashMap<String, String>> list_prd(ProductEventVO vo){
+        return productEventMapper.list_prd(vo);
+    }
 
-	public void insert(ProductEventVO productEventVO) {
-		productEventMapper.insert(productEventVO);
-	}
+    /**
+     * 이벤트 등록
+     */
+    public void insert(ProductEventVO vo){
+        productEventMapper.insert(vo);
+    }
 
-	public void update(ProductEventVO productEventVO) {
-		productEventMapper.update(productEventVO);
-	}
+    /**
+     * 이벤트 수정
+     */
+    public void update(ProductEventVO vo){
+        productEventMapper.update(vo);
+    }
 
-	public void lec_insert(ProductEventVO productEventVO) {
-		productEventMapper.lec_insert(productEventVO);
-	}
+    /**
+     * 강의 등록
+     */
+    public void lec_insert(ProductEventVO vo){
+        productEventMapper.lec_insert(vo);
+    }
 
-	public void lec_delete(ProductEventVO productEventVO) {
-		productEventMapper.lec_delete(productEventVO);
-	}
+    /**
+     * 강의 삭제
+     */
+    public void lec_delete(ProductEventVO vo){
+        productEventMapper.lec_delete(vo);
+    }
 
-	public ArrayList<JSONObject> getCaCatCdList(ProductEventVO productEventVO) {
-		return productEventMapper.getCaCatCdList(productEventVO);
-	}
+    // 강의선택 팝업 카테고리 셀렉트박스 리스트
+    // TODO: FreeOrderMapper 생성 후 구현
+    @SuppressWarnings("rawtypes")
+    public List getCaCatCdList(Map keyName){
+        // return freeOrderMapper.getCaCatCdList(keyName);
+        throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
+    }
 
-	public ArrayList<JSONObject> getVwMenuMstTree_lec(ProductEventVO productEventVO) {
-		return productEventMapper.getVwMenuMstTree_lec(productEventVO);
-	}
+    // 강의선택 팝업 학습형태 셀렉트박스 리스트
+    // TODO: FreeOrderMapper 생성 후 구현
+    @SuppressWarnings("rawtypes")
+    public List getVwMenuMstTree_lec(Map keyName){
+        // return freeOrderMapper.getVwMenuMstTree_lec(keyName);
+        throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
+    }
 
-	public ArrayList<JSONObject> getCaSubjectCdList(ProductEventVO productEventVO) {
-		return productEventMapper.getCaSubjectCdList(productEventVO);
-	}
+    // 강의선택 팝업 과목 셀렉트박스 리스트
+    // TODO: FreeOrderMapper 생성 후 구현
+    @SuppressWarnings("rawtypes")
+    public List getCaSubjectCdList(Map keyName){
+        // return freeOrderMapper.getCaSubjectCdList(keyName);
+        throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
+    }
 
-	public ArrayList<JSONObject> getCbLecMstFreeOrderList(ProductEventVO productEventVO) {
-		return productEventMapper.getCbLecMstFreeOrderList(productEventVO);
-	}
+    // 강의선택 팝업  리스트
+    // TODO: FreeOrderMapper 생성 후 구현
+    @SuppressWarnings("rawtypes")
+    public List getCbLecMstFreeOrderList(Map keyName){
+        // return freeOrderMapper.getCbLecMstFreeOrderList(keyName);
+        throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
+    }
 
-	public int getCbLecMstListFreeOrderCount(ProductEventVO productEventVO) {
-		return productEventMapper.getCbLecMstListFreeOrderCount(productEventVO);
-	}
+    // 강의선택 팝업  카운트
+    // TODO: FreeOrderMapper 생성 후 구현
+    @SuppressWarnings("rawtypes")
+    public int getCbLecMstListFreeOrderCount(Map keyName) {
+        // return freeOrderMapper.getCbLecMstListFreeOrderCount(keyName);
+        throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
+    }
 }

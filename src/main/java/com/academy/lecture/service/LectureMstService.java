@@ -1,106 +1,167 @@
 package com.academy.lecture.service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.academy.mapper.LectureMstMapper;
 
 /**
  * LectureMst Service
- * ExamService 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * 강의 마스터 관리 서비스 (직접 구현)
  */
-@Service
+@Service(value="lecturemstservice")
 public class LectureMstService {
 
-	private LectureMstMapper lectureMstMapper;
+    @Autowired
+    private LectureMstMapper lectureMstMapper;
 
-	public LectureMstService(LectureMstMapper lectureMstMapper) {
-		this.lectureMstMapper = lectureMstMapper;
-	}
+    /**
+     * 강의 마스터 목록 조회
+     */
+    public List<HashMap<String, String>> lecturemstList(LectureVO lectureVO){
+        return lectureMstMapper.lecturemstList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lecturemstList(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lecturemstList(lectureMstVO);
-	}
+    /**
+     * 강의 마스터 목록 개수 조회
+     */
+    public int lecturemstListCount(LectureVO lectureVO){
+        return lectureMstMapper.lecturemstListCount(lectureVO);
+    }
 
-	public int lecturemstListCount(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lecturemstListCount(lectureMstVO);
-	}
+    /**
+     * Bridge Mstcode 시퀀스 조회
+     */
+    public List<HashMap<String, String>> getBridgeMstcodeSeq(LectureVO lectureVO){
+        return lectureMstMapper.getBridgeMstcodeSeq(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getBridgeMstcodeSeq(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.getBridgeMstcodeSeq(lectureMstVO);
-	}
+    /**
+     * Bridge Mstcode 조회
+     */
+    public List<HashMap<String, String>> getBridgeMstcode(LectureVO lectureVO){
+        return lectureMstMapper.getBridgeMstcode(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getBridgeMstcode(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.getBridgeMstcode(lectureMstVO);
-	}
+    /**
+     * Mstcode 조회
+     */
+    public List<HashMap<String, String>> getMstcode(LectureVO lectureVO){
+        return lectureMstMapper.getMstcode(lectureVO);
+    }
 
-	public ArrayList<JSONObject> getMstcode(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.getMstcode(lectureMstVO);
-	}
+    /**
+     * 강의 마스터 등록
+     */
+    public void lecturemstInsert(LectureVO lectureVO){
+        lectureMstMapper.lecturemstInsert(lectureVO);
+    }
 
-	public void lecturemstInsert(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lecturemstInsert(lectureMstVO);
-	}
+    /**
+     * 강의 Bridge 등록
+     */
+    public void lectureBridgeInsert(LectureVO lectureVO){
+        lectureMstMapper.lectureBridgeInsert(lectureVO);
+    }
 
-	public void lectureBridgeInsert(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lectureBridgeInsert(lectureMstVO);
-	}
+    /**
+     * 강의 교재 등록2
+     */
+    public void lectureBookInsert2(LectureVO lectureVO){
+        lectureMstMapper.lectureBookInsert2(lectureVO);
+    }
 
-	public void lectureBookInsert2(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lectureBookInsert2(lectureMstVO);
-	}
+    /**
+     * 강의 데이터 메모 상세 목록 조회
+     */
+    public List<HashMap<String, String>> lectureDataMemoViewList(LectureVO lectureVO){
+        return lectureMstMapper.lectureDataMemoViewList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lectureDataMemoViewList(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureDataMemoViewList(lectureMstVO);
-	}
+    /**
+     * 강의 데이터 상세 목록 조회
+     */
+    public List<HashMap<String, String>> lectureDataViewList(LectureVO lectureVO){
+        return lectureMstMapper.lectureDataViewList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lectureDataViewList(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureDataViewList(lectureMstVO);
-	}
+    /**
+     * WMV 강의 조회
+     */
+    public List<HashMap<String, String>> lectureWMV(LectureVO lectureVO){
+        return lectureMstMapper.lectureWMV(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lectureWMV(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureWMV(lectureMstVO);
-	}
+    /**
+     * 강의 다운로드 횟수 조회
+     */
+    public List<HashMap<String, String>> lectureDown_Count(LectureVO lectureVO){
+        return lectureMstMapper.lectureDown_Count(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lectureDown_Count(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureDown_Count(lectureMstVO);
-	}
+    /**
+     * 강의 삭제 체크
+     */
+    public int lectureDeleteCheck(LectureVO lectureVO){
+        return lectureMstMapper.lectureDeleteCheck(lectureVO);
+    }
 
-	public int lectureDeleteCheck(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureDeleteCheck(lectureMstVO);
-	}
+    /**
+     * 강의 상세 조회
+     */
+    public List<HashMap<String, String>> lectureView(LectureVO lectureVO){
+        return lectureMstMapper.lectureView(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lectureView(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureView(lectureMstVO);
-	}
+    /**
+     * 강의 상세 목록 조회
+     */
+    public List<HashMap<String, String>> lectureViewList(LectureVO lectureVO){
+        return lectureMstMapper.lectureViewList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lectureViewList(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureViewList(lectureMstVO);
-	}
+    /**
+     * 강의 교재 목록 조회
+     */
+    public List<HashMap<String, String>> lectureViewBookList(LectureVO lectureVO){
+        return lectureMstMapper.lectureViewBookList(lectureVO);
+    }
 
-	public ArrayList<JSONObject> lectureViewBookList(LectureMstVO lectureMstVO) {
-		return lectureMstMapper.lectureViewBookList(lectureMstVO);
-	}
+    /**
+     * 강의 교재 삭제
+     */
+    public void lectureBookDelete(LectureVO lectureVO){
+        lectureMstMapper.lectureBookDelete(lectureVO);
+    }
 
-	public void lectureBookDelete(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lectureBookDelete(lectureMstVO);
-	}
+    /**
+     * 강의 마스터 수정
+     */
+    public void lecturemstUpdate(LectureVO lectureVO){
+        lectureMstMapper.lecturemstUpdate(lectureVO);
+    }
 
-	public void lecturemstUpdate(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lecturemstUpdate(lectureMstVO);
-	}
+    /**
+     * 강의 교재 등록
+     */
+    public void lectureBookInsert(LectureVO lectureVO){
+        lectureMstMapper.lectureBookInsert(lectureVO);
+    }
 
-	public void lectureBookInsert(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lectureBookInsert(lectureMstVO);
-	}
+    /**
+     * 강의 삭제
+     */
+    public void lectureDelete(LectureVO lectureVO){
+        lectureMstMapper.lectureDelete(lectureVO);
+    }
 
-	public void lectureDelete(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lectureDelete(lectureMstVO);
-	}
-
-	public void lectureBridgeDelete(LectureMstVO lectureMstVO) {
-		lectureMstMapper.lectureBridgeDelete(lectureMstVO);
-	}
+    /**
+     * 강의 Bridge 삭제
+     */
+    public void lectureBridgeDelete(LectureVO lectureVO){
+        lectureMstMapper.lectureBridgeDelete(lectureVO);
+    }
 }
