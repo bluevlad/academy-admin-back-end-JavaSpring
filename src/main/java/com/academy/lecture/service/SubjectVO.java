@@ -1,95 +1,83 @@
 package com.academy.lecture.service;
 
-import java.util.Date;
+import java.io.Serializable;
+
+import com.academy.common.CommonVO;
 
 /**
  * Subject Value Object
  * TB_SUBJECT_INFO 테이블 매핑 VO
  */
-public class SubjectVO {
+public class SubjectVO extends CommonVO implements Serializable {
 
-    private String subjectCd;
-    private String subjectNm;
-    private String subjectShortNm;
-    private String isuse;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private static final long serialVersionUID = 1L;
 
-    // Additional fields for display
-    private String isusenm;
+    // Subject specific fields
+    private String sjtCd;       // SJT_CD - 과목 코드
+    private String sjtNm;       // SJT_NM - 과목 이름
+    private String pSjtCd;      // P_SJT_CD - 부모 과목 코드
+    private Integer sjtDepth;   // SJT_DEPTH - 과목 깊이
+    private Integer sjtOrdr;    // SJT_ORDR - 과목 순서
+    // isUse, regDt, regId, updDt, updId inherited from CommonVO
 
-    public String getSubjectCd() {
-        return subjectCd;
+    // Display fields
+    private String isUseNm;     // ISUSENM - 사용여부명
+    private String pSjtNm;      // P_SJT_NM - 부모 과목명
+
+    public String getSjtCd() {
+        return sjtCd;
     }
 
-    public void setSubjectCd(String subjectCd) {
-        this.subjectCd = subjectCd;
+    public void setSjtCd(String sjtCd) {
+        this.sjtCd = sjtCd;
     }
 
-    public String getSubjectNm() {
-        return subjectNm;
+    public String getSjtNm() {
+        return sjtNm;
     }
 
-    public void setSubjectNm(String subjectNm) {
-        this.subjectNm = subjectNm;
+    public void setSjtNm(String sjtNm) {
+        this.sjtNm = sjtNm;
     }
 
-    public String getSubjectShortNm() {
-        return subjectShortNm;
+    public String getpSjtCd() {
+        return pSjtCd;
     }
 
-    public void setSubjectShortNm(String subjectShortNm) {
-        this.subjectShortNm = subjectShortNm;
+    public void setpSjtCd(String pSjtCd) {
+        this.pSjtCd = pSjtCd;
     }
 
-    public String getIsuse() {
-        return isuse;
+    public Integer getSjtDepth() {
+        return sjtDepth;
     }
 
-    public void setIsuse(String isuse) {
-        this.isuse = isuse;
+    public void setSjtDepth(Integer sjtDepth) {
+        this.sjtDepth = sjtDepth;
     }
 
-    public Date getRegDt() {
-        return regDt;
+    public Integer getSjtOrdr() {
+        return sjtOrdr;
     }
 
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
+    public void setSjtOrdr(Integer sjtOrdr) {
+        this.sjtOrdr = sjtOrdr;
     }
 
-    public String getRegId() {
-        return regId;
+    public String getIsUseNm() {
+        return isUseNm;
     }
 
-    public void setRegId(String regId) {
-        this.regId = regId;
+    public void setIsUseNm(String isUseNm) {
+        this.isUseNm = isUseNm;
     }
 
-    public Date getUpdDt() {
-        return updDt;
+    public String getpSjtNm() {
+        return pSjtNm;
     }
 
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
-    }
-
-    public String getUpdId() {
-        return updId;
-    }
-
-    public void setUpdId(String updId) {
-        this.updId = updId;
-    }
-
-    public String getIsusenm() {
-        return isusenm;
-    }
-
-    public void setIsusenm(String isusenm) {
-        this.isusenm = isusenm;
+    public void setpSjtNm(String pSjtNm) {
+        this.pSjtNm = pSjtNm;
     }
 
     @Override

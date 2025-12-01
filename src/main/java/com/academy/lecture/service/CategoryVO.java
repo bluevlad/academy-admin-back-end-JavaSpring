@@ -1,31 +1,33 @@
 package com.academy.lecture.service;
 
-import java.util.Date;
+import java.io.Serializable;
+
+import com.academy.common.CommonVO;
 
 /**
  * Category Value Object
- * TB_CATEGORY_INFO 테이블 매핑 VO (카테고리용)
+ * TB_CATEGORY_INFO 테이블 매핑 VO
  */
-public class CategoryVO {
+public class CategoryVO extends CommonVO implements Serializable {
 
-    private Integer id;
-    private String code;
-    private String name;
-    private String isuse;
-    private String useOn;
-    private String useOff;
-    private String pCode;
-    private Integer ordr;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private static final long serialVersionUID = 1L;
 
-    // Additional fields for display
-    private String isusenm;
-    private String useOnnm;
-    private String useOffnm;
+    // Category specific fields
+    private Integer id;             // ID - 시퀀스 ID
+    private String code;            // CODE - 카테고리 코드
+    private String name;            // NAME - 카테고리명
+    private String pCode;           // P_CODE - 부모 코드
+    private Integer ordr;           // ORDR - 순서
+    private String useOn;           // USE_ON - 온라인 사용 여부
+    private String useOff;          // USE_OFF - 오프라인 사용 여부
+    // isUse, regDt, regId, updDt, updId inherited from CommonVO
 
+    // Display fields (트리 구조 및 조회용)
+    private Integer level;          // LEVEL - 트리 레벨
+    private String isUseNm;         // ISUSENM - 사용여부명
+    private String pName;           // P_NAME - 부모 카테고리명
+
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
@@ -50,12 +52,20 @@ public class CategoryVO {
         this.name = name;
     }
 
-    public String getIsuse() {
-        return isuse;
+    public String getpCode() {
+        return pCode;
     }
 
-    public void setIsuse(String isuse) {
-        this.isuse = isuse;
+    public void setpCode(String pCode) {
+        this.pCode = pCode;
+    }
+
+    public Integer getOrdr() {
+        return ordr;
+    }
+
+    public void setOrdr(Integer ordr) {
+        this.ordr = ordr;
     }
 
     public String getUseOn() {
@@ -74,76 +84,28 @@ public class CategoryVO {
         this.useOff = useOff;
     }
 
-    public String getpCode() {
-        return pCode;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setpCode(String pCode) {
-        this.pCode = pCode;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
-    public Integer getOrdr() {
-        return ordr;
+    public String getIsUseNm() {
+        return isUseNm;
     }
 
-    public void setOrdr(Integer ordr) {
-        this.ordr = ordr;
+    public void setIsUseNm(String isUseNm) {
+        this.isUseNm = isUseNm;
     }
 
-    public Date getRegDt() {
-        return regDt;
+    public String getpName() {
+        return pName;
     }
 
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
-    }
-
-    public String getRegId() {
-        return regId;
-    }
-
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public Date getUpdDt() {
-        return updDt;
-    }
-
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
-    }
-
-    public String getUpdId() {
-        return updId;
-    }
-
-    public void setUpdId(String updId) {
-        this.updId = updId;
-    }
-
-    public String getIsusenm() {
-        return isusenm;
-    }
-
-    public void setIsusenm(String isusenm) {
-        this.isusenm = isusenm;
-    }
-
-    public String getUseOnnm() {
-        return useOnnm;
-    }
-
-    public void setUseOnnm(String useOnnm) {
-        this.useOnnm = useOnnm;
-    }
-
-    public String getUseOffnm() {
-        return useOffnm;
-    }
-
-    public void setUseOffnm(String useOffnm) {
-        this.useOffnm = useOffnm;
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 
     @Override

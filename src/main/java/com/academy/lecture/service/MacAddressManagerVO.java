@@ -1,29 +1,33 @@
 package com.academy.lecture.service;
 
-import java.util.Date;
+import java.io.Serializable;
+
+import com.academy.common.CommonVO;
 
 /**
  * MacAddressManager Value Object
- * TB_MA_MEMBER 테이블 매핑 VO (MAC 주소 관리용)
+ * TB_USER_INFO 및 관련 MAC 주소 테이블 매핑 VO
  */
-public class MacAddressManagerVO {
+public class MacAddressManagerVO extends CommonVO implements Serializable {
 
-    private String userId;
-    private String userNm;
-    private String email;
-    private String phoneNo;
-    private String macAddress;
-    private String deviceInfo;
-    private String mobileDevice;
-    private String isuse;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private static final long serialVersionUID = 1L;
 
-    // Additional fields
-    private Integer deviceCount;
+    // User 관련 fields
+    private String userId;          // USER_ID - 사용자 ID
+    private String userNm;          // USER_NM - 사용자명
+    private String email;           // EMAIL - 이메일
+    private String phoneNo;         // PHONE_NO - 전화번호
 
+    // MAC Address 관련 fields
+    private String macAddress;      // MAC_ADDRESS - MAC 주소
+    private String deviceType;      // DEVICE_TYPE - 디바이스 타입
+    private String deviceName;      // DEVICE_NAME - 디바이스명
+
+    // Search 관련 fields
+    private String searchType;      // SEARCHTYPE - 검색 타입
+    private String searchText;      // SEARCHTEXT - 검색어
+
+    // Getters and Setters
     public String getUserId() {
         return userId;
     }
@@ -64,68 +68,36 @@ public class MacAddressManagerVO {
         this.macAddress = macAddress;
     }
 
-    public String getDeviceInfo() {
-        return deviceInfo;
+    public String getDeviceType() {
+        return deviceType;
     }
 
-    public void setDeviceInfo(String deviceInfo) {
-        this.deviceInfo = deviceInfo;
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
     }
 
-    public String getMobileDevice() {
-        return mobileDevice;
+    public String getDeviceName() {
+        return deviceName;
     }
 
-    public void setMobileDevice(String mobileDevice) {
-        this.mobileDevice = mobileDevice;
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
     }
 
-    public String getIsuse() {
-        return isuse;
+    public String getSearchType() {
+        return searchType;
     }
 
-    public void setIsuse(String isuse) {
-        this.isuse = isuse;
+    public void setSearchType(String searchType) {
+        this.searchType = searchType;
     }
 
-    public Date getRegDt() {
-        return regDt;
+    public String getSearchText() {
+        return searchText;
     }
 
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
-    }
-
-    public String getRegId() {
-        return regId;
-    }
-
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public Date getUpdDt() {
-        return updDt;
-    }
-
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
-    }
-
-    public String getUpdId() {
-        return updId;
-    }
-
-    public void setUpdId(String updId) {
-        this.updId = updId;
-    }
-
-    public Integer getDeviceCount() {
-        return deviceCount;
-    }
-
-    public void setDeviceCount(Integer deviceCount) {
-        this.deviceCount = deviceCount;
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
     }
 
     @Override

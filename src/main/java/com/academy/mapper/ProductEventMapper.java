@@ -1,42 +1,54 @@
 package com.academy.mapper;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.json.simple.JSONObject;
-
-import com.academy.lecture.service.ProductEventVO;
 
 /**
  * ProductEvent Mapper Interface
- * ExamMapper 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * ProductEvent 관련 XML 매퍼 파일과 연동
  */
 @Mapper
 public interface ProductEventMapper {
 
-	ArrayList<JSONObject> list(ProductEventVO productEventVO);
+    /**
+     * 상품 이벤트 목록 조회
+     */
+    List<HashMap<String, String>> list(HashMap<String, String> params);
 
-	int listCount(ProductEventVO productEventVO);
+    /**
+     * 상품 이벤트 목록 카운트
+     */
+    int listCount(HashMap<String, String> params);
 
-	JSONObject getOne(ProductEventVO productEventVO);
+    /**
+     * 상품 이벤트 단건 조회
+     */
+    HashMap<String, String> getOne(HashMap<String, String> params);
 
-	ArrayList<JSONObject> list_prd(ProductEventVO productEventVO);
+    /**
+     * 상품 목록 조회
+     */
+    List<HashMap<String, String>> list_prd(HashMap<String, String> params);
 
-	void insert(ProductEventVO productEventVO);
+    /**
+     * 상품 이벤트 등록
+     */
+    void insert(HashMap<String, String> params);
 
-	void update(ProductEventVO productEventVO);
+    /**
+     * 상품 이벤트 수정
+     */
+    void update(HashMap<String, String> params);
 
-	void lec_insert(ProductEventVO productEventVO);
+    /**
+     * 강의 등록
+     */
+    void lec_insert(HashMap<String, String> params);
 
-	void lec_delete(ProductEventVO productEventVO);
-
-	ArrayList<JSONObject> getCaCatCdList(ProductEventVO productEventVO);
-
-	ArrayList<JSONObject> getVwMenuMstTree_lec(ProductEventVO productEventVO);
-
-	ArrayList<JSONObject> getCaSubjectCdList(ProductEventVO productEventVO);
-
-	ArrayList<JSONObject> getCbLecMstFreeOrderList(ProductEventVO productEventVO);
-
-	int getCbLecMstListFreeOrderCount(ProductEventVO productEventVO);
+    /**
+     * 강의 삭제
+     */
+    void lec_delete(HashMap<String, String> params);
 }

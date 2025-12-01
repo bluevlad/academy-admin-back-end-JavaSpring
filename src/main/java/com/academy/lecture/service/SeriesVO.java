@@ -1,158 +1,65 @@
 package com.academy.lecture.service;
 
-import java.util.Date;
+import java.io.Serializable;
+
+import com.academy.common.CommonVO;
 
 /**
  * Series Value Object
- * TB_CATEGORY_INFO 테이블 매핑 VO (직렬용)
+ * TB_SERIES_INFO 테이블 매핑 VO
  */
-public class SeriesVO {
+public class SeriesVO extends CommonVO implements Serializable {
 
-    private Integer id;
-    private String code;
-    private String name;
-    private String isuse;
-    private String useOn;
-    private String useOff;
-    private String pCode;
-    private Integer ordr;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private static final long serialVersionUID = 1L;
 
-    // Additional fields for display
-    private String isusenm;
-    private String useOnnm;
-    private String useOffnm;
-    private String pCodeNm;
+    // Series specific fields
+    private String srsCd;       // SRS_CD - 시리즈 코드
+    private String srsNm;       // SRS_NM - 시리즈 이름
+    private String srsDiv;      // SRS_DIV - 시리즈 구분
+    // isUse, regDt, regId, updDt, updId inherited from CommonVO
 
-    public Integer getId() {
-        return id;
+    // Display fields
+    private String srsDivNm;    // SRS_DIVNM - 시리즈 구분명
+    private String isUseNm;     // ISUSENM - 사용여부명
+
+    public String getSrsCd() {
+        return srsCd;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSrsCd(String srsCd) {
+        this.srsCd = srsCd;
     }
 
-    public String getCode() {
-        return code;
+    public String getSrsNm() {
+        return srsNm;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setSrsNm(String srsNm) {
+        this.srsNm = srsNm;
     }
 
-    public String getName() {
-        return name;
+    public String getSrsDiv() {
+        return srsDiv;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSrsDiv(String srsDiv) {
+        this.srsDiv = srsDiv;
     }
 
-    public String getIsuse() {
-        return isuse;
+    public String getSrsDivNm() {
+        return srsDivNm;
     }
 
-    public void setIsuse(String isuse) {
-        this.isuse = isuse;
+    public void setSrsDivNm(String srsDivNm) {
+        this.srsDivNm = srsDivNm;
     }
 
-    public String getUseOn() {
-        return useOn;
+    public String getIsUseNm() {
+        return isUseNm;
     }
 
-    public void setUseOn(String useOn) {
-        this.useOn = useOn;
-    }
-
-    public String getUseOff() {
-        return useOff;
-    }
-
-    public void setUseOff(String useOff) {
-        this.useOff = useOff;
-    }
-
-    public String getpCode() {
-        return pCode;
-    }
-
-    public void setpCode(String pCode) {
-        this.pCode = pCode;
-    }
-
-    public Integer getOrdr() {
-        return ordr;
-    }
-
-    public void setOrdr(Integer ordr) {
-        this.ordr = ordr;
-    }
-
-    public Date getRegDt() {
-        return regDt;
-    }
-
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
-    }
-
-    public String getRegId() {
-        return regId;
-    }
-
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public Date getUpdDt() {
-        return updDt;
-    }
-
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
-    }
-
-    public String getUpdId() {
-        return updId;
-    }
-
-    public void setUpdId(String updId) {
-        this.updId = updId;
-    }
-
-    public String getIsusenm() {
-        return isusenm;
-    }
-
-    public void setIsusenm(String isusenm) {
-        this.isusenm = isusenm;
-    }
-
-    public String getUseOnnm() {
-        return useOnnm;
-    }
-
-    public void setUseOnnm(String useOnnm) {
-        this.useOnnm = useOnnm;
-    }
-
-    public String getUseOffnm() {
-        return useOffnm;
-    }
-
-    public void setUseOffnm(String useOffnm) {
-        this.useOffnm = useOffnm;
-    }
-
-    public String getpCodeNm() {
-        return pCodeNm;
-    }
-
-    public void setpCodeNm(String pCodeNm) {
-        this.pCodeNm = pCodeNm;
+    public void setIsUseNm(String isUseNm) {
+        this.isUseNm = isUseNm;
     }
 
     @Override

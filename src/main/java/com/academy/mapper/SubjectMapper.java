@@ -1,56 +1,114 @@
 package com.academy.mapper;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.json.simple.JSONObject;
-
-import com.academy.lecture.service.SubjectVO;
 
 /**
  * Subject Mapper Interface
- * ExamMapper 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * lectureSubjectSQL.xml 매퍼 파일과 연동
  */
 @Mapper
 public interface SubjectMapper {
 
-    ArrayList<JSONObject> subjectList(SubjectVO subjectVO);
+    /**
+     * 과목 목록 조회
+     */
+    List<HashMap<String, String>> subjectList(HashMap<String, String> params);
 
-    int subjectListCount(SubjectVO subjectVO);
+    /**
+     * 과목 목록 카운트
+     */
+    int subjectListCount(HashMap<String, String> params);
 
-    String subjectGetCode(SubjectVO subjectVO);
+    /**
+     * 과목 코드 생성
+     */
+    String subjectGetCode(HashMap<String, String> params);
 
-    void subjectInsert(SubjectVO subjectVO);
+    /**
+     * 과목 등록
+     */
+    void subjectInsert(HashMap<String, String> params);
 
-    ArrayList<JSONObject> subjectView(SubjectVO subjectVO);
+    /**
+     * 과목 상세 조회
+     */
+    List<HashMap<String, String>> subjectView(HashMap<String, String> params);
 
-    void subjectUpdate(SubjectVO subjectVO);
+    /**
+     * 과목 수정
+     */
+    void subjectUpdate(HashMap<String, String> params);
 
-    void subjectDelete(SubjectVO subjectVO);
+    /**
+     * 과목 삭제
+     */
+    void subjectDelete(HashMap<String, String> params);
 
-    int subjectCheck(SubjectVO subjectVO);
+    /**
+     * 과목 중복 체크
+     */
+    int subjectCheck(HashMap<String, String> params);
 
-    void subjectCategoryInsert(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 등록
+     */
+    void subjectCategoryInsert(HashMap<String, String> params);
 
-    void subjectCategoryDelete(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 삭제
+     */
+    void subjectCategoryDelete(HashMap<String, String> params);
 
-    void subjectCategoryDeleteByCat(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 삭제 (카테고리별)
+     */
+    void subjectCategoryDeleteByCat(HashMap<String, String> params);
 
-    void subjectCategoryOrderInsert(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 순서 등록
+     */
+    void subjectCategoryOrderInsert(HashMap<String, String> params);
 
-    int chkSubjectCategoryOrderCnt(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 순서 개수 체크
+     */
+    int chkSubjectCategoryOrderCnt(HashMap<String, String> params);
 
-    int chkSubjectCategoryCnt(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 개수 체크
+     */
+    int chkSubjectCategoryCnt(HashMap<String, String> params);
 
-    void subjectCategoryOrderDeleteByOnoff(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 순서 인덱스 조회
+     */
+    String getSubjectCategoryOrderIdx(HashMap<String, String> params);
 
-    String getSubjectCategoryOrderIdx(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 순서 삭제 (On/Off별)
+     */
+    void subjectCategoryOrderDeleteByOnoff(HashMap<String, String> params);
 
-    void subjectCategoryOrderDelete(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 순서 삭제
+     */
+    void subjectCategoryOrderDelete(HashMap<String, String> params);
 
-    ArrayList<JSONObject> subjectCategoryView(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 상세 조회
+     */
+    List<HashMap<String, String>> subjectCategoryView(HashMap<String, String> params);
 
-    ArrayList<JSONObject> findSubjectCategoryList(SubjectVO subjectVO);
+    /**
+     * 과목 카테고리 목록 조회
+     */
+    List<HashMap<String, String>> findSubjectCategoryList(HashMap<String, String> params);
 
-    void main_category_subject_order_Insert(SubjectVO subjectVO);
+    /**
+     * 메인 카테고리 과목 순서 등록
+     */
+    void main_category_subject_order_Insert(HashMap<String, String> params);
 }

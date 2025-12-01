@@ -1,25 +1,34 @@
 package com.academy.lecture.service;
 
-import java.util.Date;
+import java.io.Serializable;
+
+import com.academy.common.CommonVO;
 
 /**
- * Form Value Object
+ * Form (Learning Form) Value Object
  * TB_LEARNING_FORM_INFO 테이블 매핑 VO
  */
-public class FormVO {
+public class FormVO extends CommonVO implements Serializable {
 
-    private String lecDiv;
-    private String code;
-    private String name;
-    private String isuse;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private static final long serialVersionUID = 1L;
 
-    // Additional fields for display
-    private String lecDivnm;
-    private String isusenm;
+    // Form specific fields
+    private String lecDiv;      // LEC_DIV - 강좌 구분
+    private String code;        // CODE - 코드
+    private String name;        // NAME - 이름
+    private String seq;         // SEQ - 순서
+    private String pcode;       // PCODE - 부모 코드
+    private String onOffDiv;    // ONOFFDIV - ON/OFF 구분
+    // isUse inherited from CommonVO (ISUSE)
+    // regDt, regId, updDt, updId inherited from CommonVO
+
+    // Display fields
+    private String lecDivNm;    // LEC_DIVNM - 강좌 구분명
+    private String isUseNm;     // ISUSENM - 사용여부명
+
+    // Search fields
+    private String searchPcode;      // SEARCHPCODE - 검색용 부모 코드
+    // searchCodeIsUse inherited from CommonVO
 
     public String getLecDiv() {
         return lecDiv;
@@ -45,60 +54,52 @@ public class FormVO {
         this.name = name;
     }
 
-    public String getIsuse() {
-        return isuse;
+    public String getLecDivNm() {
+        return lecDivNm;
     }
 
-    public void setIsuse(String isuse) {
-        this.isuse = isuse;
+    public void setLecDivNm(String lecDivNm) {
+        this.lecDivNm = lecDivNm;
     }
 
-    public Date getRegDt() {
-        return regDt;
+    public String getIsUseNm() {
+        return isUseNm;
     }
 
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
+    public void setIsUseNm(String isUseNm) {
+        this.isUseNm = isUseNm;
     }
 
-    public String getRegId() {
-        return regId;
+    public String getSeq() {
+        return seq;
     }
 
-    public void setRegId(String regId) {
-        this.regId = regId;
+    public void setSeq(String seq) {
+        this.seq = seq;
     }
 
-    public Date getUpdDt() {
-        return updDt;
+    public String getPcode() {
+        return pcode;
     }
 
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
+    public void setPcode(String pcode) {
+        this.pcode = pcode;
     }
 
-    public String getUpdId() {
-        return updId;
+    public String getOnOffDiv() {
+        return onOffDiv;
     }
 
-    public void setUpdId(String updId) {
-        this.updId = updId;
+    public void setOnOffDiv(String onOffDiv) {
+        this.onOffDiv = onOffDiv;
     }
 
-    public String getLecDivnm() {
-        return lecDivnm;
+    public String getSearchPcode() {
+        return searchPcode;
     }
 
-    public void setLecDivnm(String lecDivnm) {
-        this.lecDivnm = lecDivnm;
-    }
-
-    public String getIsusenm() {
-        return isusenm;
-    }
-
-    public void setIsusenm(String isusenm) {
-        this.isusenm = isusenm;
+    public void setSearchPcode(String searchPcode) {
+        this.searchPcode = searchPcode;
     }
 
     @Override

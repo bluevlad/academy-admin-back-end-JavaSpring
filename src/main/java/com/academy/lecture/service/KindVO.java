@@ -1,149 +1,169 @@
 package com.academy.lecture.service;
 
-import java.util.Date;
+import java.io.Serializable;
+
+import com.academy.common.CommonVO;
 
 /**
- * Kind Value Object
- * TB_CATEGORY_INFO 테이블 매핑 VO (직종용, P_CODE='CLASSCODE')
+ * Kind (Category) Value Object
+ * TB_CATEGORY_INFO 테이블 매핑 VO
  */
-public class KindVO {
+public class KindVO extends CommonVO implements Serializable {
 
-    private Integer id;
-    private String code;
-    private String name;
-    private String isuse;
-    private String useOn;
-    private String useOff;
-    private String pCode;
-    private Integer ordr;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private static final long serialVersionUID = 1L;
 
-    // Additional fields for display
-    private String isusenm;
-    private String useOnnm;
-    private String useOffnm;
+    // Kind specific fields
+    private String catCd;       // CAT_CD - 카테고리 코드
+    private String catDiv;      // CAT_DIV - 카테고리 구분
+    private String catNm;       // CAT_NM - 카테고리 이름
+    private String pCatCd;      // P_CAT_CD - 부모 카테고리 코드
+    private Integer catDepth;   // CAT_DEPTH - 카테고리 깊이
+    private Integer catOrdr;    // CAT_ORDR - 카테고리 순서
+    // isUse, regDt, regId, updDt, updId inherited from CommonVO
 
-    public Integer getId() {
-        return id;
+    // API parameter aliases
+    private String code;        // CODE - alias for catCd
+    private String name;        // NAME - alias for catNm
+    private String seq;         // SEQ - alias for catOrdr
+    private String num;         // NUM - number for sequence update
+    private String codeNm;      // CODE_NM - code name for sequence update
+    private String onOffDiv;    // ONOFFDIV - ON/OFF 구분
+    private String seqUpdate;   // Seq_Update - 순서 업데이트 플래그
+
+    // Display fields
+    private String catDivNm;    // CAT_DIVNM - 카테고리 구분명
+    private String isUseNm;     // ISUSENM - 사용여부명
+    private String pCatNm;      // P_CAT_NM - 부모 카테고리명
+
+    public String getCatCd() {
+        return catCd;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCatCd(String catCd) {
+        this.catCd = catCd;
     }
 
+    public String getCatDiv() {
+        return catDiv;
+    }
+
+    public void setCatDiv(String catDiv) {
+        this.catDiv = catDiv;
+    }
+
+    public String getCatNm() {
+        return catNm;
+    }
+
+    public void setCatNm(String catNm) {
+        this.catNm = catNm;
+    }
+
+    public String getpCatCd() {
+        return pCatCd;
+    }
+
+    public void setpCatCd(String pCatCd) {
+        this.pCatCd = pCatCd;
+    }
+
+    public Integer getCatDepth() {
+        return catDepth;
+    }
+
+    public void setCatDepth(Integer catDepth) {
+        this.catDepth = catDepth;
+    }
+
+    public Integer getCatOrdr() {
+        return catOrdr;
+    }
+
+    public void setCatOrdr(Integer catOrdr) {
+        this.catOrdr = catOrdr;
+    }
+
+    public String getCatDivNm() {
+        return catDivNm;
+    }
+
+    public void setCatDivNm(String catDivNm) {
+        this.catDivNm = catDivNm;
+    }
+
+    public String getIsUseNm() {
+        return isUseNm;
+    }
+
+    public void setIsUseNm(String isUseNm) {
+        this.isUseNm = isUseNm;
+    }
+
+    public String getpCatNm() {
+        return pCatNm;
+    }
+
+    public void setpCatNm(String pCatNm) {
+        this.pCatNm = pCatNm;
+    }
+
+    // API parameter alias getters/setters
     public String getCode() {
-        return code;
+        return code != null ? code : catCd;
     }
 
     public void setCode(String code) {
         this.code = code;
+        this.catCd = code;  // Sync with catCd
     }
 
     public String getName() {
-        return name;
+        return name != null ? name : catNm;
     }
 
     public void setName(String name) {
         this.name = name;
+        this.catNm = name;  // Sync with catNm
     }
 
-    public String getIsuse() {
-        return isuse;
+    public String getSeq() {
+        return seq;
     }
 
-    public void setIsuse(String isuse) {
-        this.isuse = isuse;
+    public void setSeq(String seq) {
+        this.seq = seq;
     }
 
-    public String getUseOn() {
-        return useOn;
+    public String getNum() {
+        return num;
     }
 
-    public void setUseOn(String useOn) {
-        this.useOn = useOn;
+    public void setNum(String num) {
+        this.num = num;
     }
 
-    public String getUseOff() {
-        return useOff;
+    public String getCodeNm() {
+        return codeNm;
     }
 
-    public void setUseOff(String useOff) {
-        this.useOff = useOff;
+    public void setCodeNm(String codeNm) {
+        this.codeNm = codeNm;
     }
 
-    public String getpCode() {
-        return pCode;
+    public String getOnOffDiv() {
+        return onOffDiv;
     }
 
-    public void setpCode(String pCode) {
-        this.pCode = pCode;
+    public void setOnOffDiv(String onOffDiv) {
+        this.onOffDiv = onOffDiv;
     }
 
-    public Integer getOrdr() {
-        return ordr;
+    public String getSeqUpdate() {
+        return seqUpdate;
     }
 
-    public void setOrdr(Integer ordr) {
-        this.ordr = ordr;
-    }
-
-    public Date getRegDt() {
-        return regDt;
-    }
-
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
-    }
-
-    public String getRegId() {
-        return regId;
-    }
-
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public Date getUpdDt() {
-        return updDt;
-    }
-
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
-    }
-
-    public String getUpdId() {
-        return updId;
-    }
-
-    public void setUpdId(String updId) {
-        this.updId = updId;
-    }
-
-    public String getIsusenm() {
-        return isusenm;
-    }
-
-    public void setIsusenm(String isusenm) {
-        this.isusenm = isusenm;
-    }
-
-    public String getUseOnnm() {
-        return useOnnm;
-    }
-
-    public void setUseOnnm(String useOnnm) {
-        this.useOnnm = useOnnm;
-    }
-
-    public String getUseOffnm() {
-        return useOffnm;
-    }
-
-    public void setUseOffnm(String useOffnm) {
-        this.useOffnm = useOffnm;
+    public void setSeqUpdate(String seqUpdate) {
+        this.seqUpdate = seqUpdate;
     }
 
     @Override

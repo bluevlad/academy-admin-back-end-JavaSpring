@@ -1,156 +1,108 @@
 package com.academy.mapper;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.json.simple.JSONObject;
-
-import com.academy.lecture.service.LectureVO;
 
 /**
  * Lecture Mapper Interface
- * ExamMapper 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * lectureLectureSQL.xml 매퍼 파일과 연동
  */
 @Mapper
 public interface LectureMapper {
 
-    ArrayList<JSONObject> lectureList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> oldFreeToNewFree(LectureVO lectureVO);
-
-    int lectureListCount(LectureVO lectureVO);
-
-    ArrayList<JSONObject> bookList(LectureVO lectureVO);
-
-    int bookListCount(LectureVO lectureVO);
-
-    ArrayList<JSONObject> getBridgeLeccodeSeq(LectureVO lectureVO);
-
-    ArrayList<JSONObject> getJongLeccodeSeq(LectureVO lectureVO);
-
-    ArrayList<JSONObject> getLeccode(LectureVO lectureVO);
-
-    ArrayList<JSONObject> getBridgeLeccode(LectureVO lectureVO);
-
-    ArrayList<JSONObject> BridgeLeccode(LectureVO lectureVO);
-
-    void lectureInsert(LectureVO lectureVO);
-
-    void lectureBridgeInsert(LectureVO lectureVO);
-
-    void lectureBookInsert(LectureVO lectureVO);
-
-    void lectureBookInsert2(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureViewList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureView(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureViewBookList(LectureVO lectureVO);
-
-    void lectureBookDelete(LectureVO lectureVO);
-
-    void lectureUpdate(LectureVO lectureVO);
-
-    void Modify_Lecture_On_Off(LectureVO lectureVO);
-
-    void lectureIsUseUpdate(LectureVO lectureVO);
-
-    void lectureDelete(LectureVO lectureVO);
-
-    void lectureBridgeDelete(LectureVO lectureVO);
-
-    void lecMovUpdate(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureSeqList(LectureVO lectureVO);
-
-    void lectureSeqUpdate(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureViewJongList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureJongList(LectureVO lectureVO);
-
-    int lectureJongListCount(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureYearList(LectureVO lectureVO);
-
-    int lectureYearListCount(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureJongSubjectList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureJongView(LectureVO lectureVO);
-
-    int lectureJongSubjectListCount(LectureVO lectureVO);
-
-    void lectureLecJongInsert(LectureVO lectureVO);
-
-    void lectureChoiceJongNoInsert(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureViewLeccodeList(LectureVO lectureVO);
-
-    void lectureLecJongDelete(LectureVO lectureVO);
-
-    void lectureChoiceJongNoDelete(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lecturePayList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureJongPayList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureDataMemoViewList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureDataViewList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureMobileList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureDataMovieViewList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureDataMovieList(LectureVO lectureVO);
-
-    void lectureMovieInsert(LectureVO lectureVO);
-
-    void lectureMovieDelete(LectureVO lectureVO);
-
-    void lectureMovieUpdate(LectureVO lectureVO);
-
-    void lectureMovieFileDelete(LectureVO lectureVO);
-
-    void lectureMovieMemoInsert(LectureVO lectureVO);
-
-    void lectureMovieMemoUpdate(LectureVO lectureVO);
-
-    void lectureMovieMemoDelete(LectureVO lectureVO);
-
-    int lectureDeleteCheck(LectureVO lectureVO);
-
-    ArrayList<JSONObject> playinfo(LectureVO lectureVO);
-
-    ArrayList<JSONObject> getCbMovie4_free_admin(LectureVO lectureVO);
-
-    int getCbMovie4_free_admin_count(LectureVO lectureVO);
-
-    JSONObject lectureOnDetailS(LectureVO lectureVO);
-
-    void insertPmpDownLog(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureWMV(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureDown_Count(LectureVO lectureVO);
-
-    void oldFreeToNewFreeInsert(LectureVO lectureVO);
-
-    void oldBogangFreeToNewBogangFree(LectureVO lectureVO);
-
-    ArrayList<JSONObject> lectureFreePassPayList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> YearIngList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> MyYearIngList(LectureVO lectureVO);
-
-    ArrayList<JSONObject> bookView(LectureVO lectureVO);
-
-    String getRleccode(LectureVO lectureVO);
-
-    void oldTbmovieToNewTbmovieInsert(LectureVO lectureVO);
-
-    void oldBogangFreeToNewFreeBogangInsert(LectureVO lectureVO);
+    // 강의 목록
+    List<HashMap<String, String>> lectureList(HashMap<String, String> params);
+    List<HashMap<String, String>> oldFreeToNewFree(HashMap<String, String> params);
+    List<HashMap<String, String>> oldBogangFreeToNewBogangFree(HashMap<String, String> params);
+    int lectureListCount(HashMap<String, String> params);
+
+    // 교재 목록
+    List<HashMap<String, String>> bookList(HashMap<String, String> params);
+    int bookListCount(HashMap<String, String> params);
+    List<HashMap<String, String>> bookView(HashMap<String, String> params);
+
+    // 강의 코드 관련
+    List<HashMap<String, String>> getBridgeLeccodeSeq(HashMap<String, String> params);
+    List<HashMap<String, String>> getJongLeccodeSeq(HashMap<String, String> params);
+    List<HashMap<String, String>> getLeccode(HashMap<String, String> params);
+    List<HashMap<String, String>> getBridgeLeccode(HashMap<String, String> params);
+    List<HashMap<String, String>> BridgeLeccode(HashMap<String, String> params);
+    String getRleccode(HashMap<String, String> params);
+
+    // 강의 등록
+    void lectureInsert(HashMap<String, String> params);
+    void lectureBridgeInsert(HashMap<String, String> params);
+    void lectureBookInsert(HashMap<String, String> params);
+    void lectureBookInsert2(HashMap<String, String> params);
+    void oldFreeToNewFreeInsert(HashMap<String, String> params);
+    void oldBogangFreeToNewFreeBogangInsert(HashMap<String, String> params);
+    void oldTbmovieToNewTbmovieInsert(HashMap<String, String> params);
+
+    // 강의 조회
+    List<HashMap<String, String>> lectureViewList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureView(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureViewBookList(HashMap<String, String> params);
+    HashMap<String, String> lectureOnDetailS(HashMap<String, String> params);
+
+    // 강의 수정/삭제
+    void lectureUpdate(HashMap<String, String> params);
+    void lectureIsUseUpdate(HashMap<String, String> params);
+    void Modify_Lecture_On_Off(HashMap<String, String> params);
+    void lectureDelete(HashMap<String, String> params);
+    void lectureBridgeDelete(HashMap<String, String> params);
+    void lectureBookDelete(HashMap<String, String> params);
+    void lecMovUpdate(HashMap<String, String> params);
+    int lectureDeleteCheck(HashMap<String, String> params);
+
+    // 강의 순서
+    List<HashMap<String, String>> lectureSeqList(HashMap<String, String> params);
+    void lectureSeqUpdate(HashMap<String, String> params);
+
+    // 종강 관련
+    List<HashMap<String, String>> lectureViewJongList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureJongList(HashMap<String, String> params);
+    int lectureJongListCount(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureYearList(HashMap<String, String> params);
+    int lectureYearListCount(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureJongView(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureJongSubjectList(HashMap<String, String> params);
+    int lectureJongSubjectListCount(HashMap<String, String> params);
+    void lectureLecJongInsert(HashMap<String, String> params);
+    void lectureChoiceJongNoInsert(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureViewLeccodeList(HashMap<String, String> params);
+    void lectureLecJongDelete(HashMap<String, String> params);
+    void lectureChoiceJongNoDelete(HashMap<String, String> params);
+
+    // 결제 관련
+    List<HashMap<String, String>> lecturePayList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureJongPayList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureFreePassPayList(HashMap<String, String> params);
+    List<HashMap<String, String>> YearIngList(HashMap<String, String> params);
+    List<HashMap<String, String>> MyYearIngList(HashMap<String, String> params);
+
+    // 강의 데이터
+    List<HashMap<String, String>> lectureDataMemoViewList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureDataViewList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureMobileList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureDataMovieViewList(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureDataMovieList(HashMap<String, String> params);
+
+    // 동영상 관련
+    void lectureMovieInsert(HashMap<String, String> params);
+    void lectureMovieDelete(HashMap<String, String> params);
+    void lectureMovieUpdate(HashMap<String, String> params);
+    void lectureMovieFileDelete(HashMap<String, String> params);
+    void lectureMovieMemoInsert(HashMap<String, String> params);
+    void lectureMovieMemoUpdate(HashMap<String, String> params);
+    void lectureMovieMemoDelete(HashMap<String, String> params);
+
+    // 재생 정보
+    List<HashMap<String, String>> playinfo(HashMap<String, String> params);
+    List<HashMap<String, String>> getCbMovie4_free_admin(HashMap<String, String> params);
+    int getCbMovie4_free_admin_count(HashMap<String, String> params);
+    void insertPmpDownLog(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureWMV(HashMap<String, String> params);
+    List<HashMap<String, String>> lectureDown_Count(HashMap<String, String> params);
 }

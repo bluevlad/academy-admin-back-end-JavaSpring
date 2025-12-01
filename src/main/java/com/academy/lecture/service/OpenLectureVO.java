@@ -1,49 +1,50 @@
 package com.academy.lecture.service;
 
-import java.util.Date;
+import java.io.Serializable;
+
+import com.academy.common.CommonVO;
 
 /**
  * OpenLecture Value Object
- * TB_OPEN_LEC_MST 테이블 매핑 VO
+ * TB_OPEN_LECTURE 테이블 매핑 VO
  */
-public class OpenLectureVO {
+public class OpenLectureVO extends CommonVO implements Serializable {
 
-    private String openleccode;
-    private String openTitle;
-    private String categoryCd;
-    private String subjectCd;
-    private String teacherCd;
-    private String formCd;
-    private String openContents;
-    private String openFile;
-    private String iconGubn;
-    private String useYn;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private static final long serialVersionUID = 1L;
 
-    // Additional display fields
-    private String categoryNm;
-    private String subjectNm;
-    private String teacherNm;
-    private String formNm;
-    private String iconGubnNm;
+    // OpenLecture specific fields
+    private String openleccode;     // OPENLECCODE - 공개강의 코드
+    private String categoryCd;      // CATEGORY_CD - 카테고리 코드
+    private String openbunru;       // OPENBUNRU - 공개 분류
+    private String openTitle;       // OPEN_TITLE - 제목
+    private String openSjtCd;       // OPEN_SJT_CD - 과목 코드
+    private String openTeacher;     // OPEN_TEACHER - 강사
+    private String openMemo;        // OPEN_MEMO - 메모
+    private String openDesc;        // OPEN_DESC - 설명
+    private String openHimoviePath; // OPEN_HIMOVIE_PATH - 고화질 동영상 경로
+    private String openNormalmoviePath; // OPEN_NOMALMOVIE_PATH - 일반화질 동영상 경로
+    private String openFile;        // OPEN_FILE - 파일
+    private String openPassword;    // OPEN_PASSWORD - 비밀번호
+    private Integer openPoint;      // OPEN_POINT - 포인트
+    private Integer openHit;        // OPEN_HIT - 조회수
 
+    // Display / Search fields
+    private String categoryNm;      // CATEGORY_NM - 카테고리명
+    private String subjectNm;       // SUBJECT_NM - 과목명
+    private String teacherNm;       // TEACHER_NM - 강사명
+    private String searchType;      // SEARCHTYPE - 검색 타입
+    private String searchText;      // SEARCHTEXT - 검색어
+    private String searchKind;      // SEARCHKIND - 검색 종류
+    private String searchForm;      // SEARCHFORM - 검색 형태
+    private String searchYear;      // SEARCHYEAR - 검색 연도
+
+    // Getters and Setters
     public String getOpenleccode() {
         return openleccode;
     }
 
     public void setOpenleccode(String openleccode) {
         this.openleccode = openleccode;
-    }
-
-    public String getOpenTitle() {
-        return openTitle;
-    }
-
-    public void setOpenTitle(String openTitle) {
-        this.openTitle = openTitle;
     }
 
     public String getCategoryCd() {
@@ -54,36 +55,68 @@ public class OpenLectureVO {
         this.categoryCd = categoryCd;
     }
 
-    public String getSubjectCd() {
-        return subjectCd;
+    public String getOpenbunru() {
+        return openbunru;
     }
 
-    public void setSubjectCd(String subjectCd) {
-        this.subjectCd = subjectCd;
+    public void setOpenbunru(String openbunru) {
+        this.openbunru = openbunru;
     }
 
-    public String getTeacherCd() {
-        return teacherCd;
+    public String getOpenTitle() {
+        return openTitle;
     }
 
-    public void setTeacherCd(String teacherCd) {
-        this.teacherCd = teacherCd;
+    public void setOpenTitle(String openTitle) {
+        this.openTitle = openTitle;
     }
 
-    public String getFormCd() {
-        return formCd;
+    public String getOpenSjtCd() {
+        return openSjtCd;
     }
 
-    public void setFormCd(String formCd) {
-        this.formCd = formCd;
+    public void setOpenSjtCd(String openSjtCd) {
+        this.openSjtCd = openSjtCd;
     }
 
-    public String getOpenContents() {
-        return openContents;
+    public String getOpenTeacher() {
+        return openTeacher;
     }
 
-    public void setOpenContents(String openContents) {
-        this.openContents = openContents;
+    public void setOpenTeacher(String openTeacher) {
+        this.openTeacher = openTeacher;
+    }
+
+    public String getOpenMemo() {
+        return openMemo;
+    }
+
+    public void setOpenMemo(String openMemo) {
+        this.openMemo = openMemo;
+    }
+
+    public String getOpenDesc() {
+        return openDesc;
+    }
+
+    public void setOpenDesc(String openDesc) {
+        this.openDesc = openDesc;
+    }
+
+    public String getOpenHimoviePath() {
+        return openHimoviePath;
+    }
+
+    public void setOpenHimoviePath(String openHimoviePath) {
+        this.openHimoviePath = openHimoviePath;
+    }
+
+    public String getOpenNormalmoviePath() {
+        return openNormalmoviePath;
+    }
+
+    public void setOpenNormalmoviePath(String openNormalmoviePath) {
+        this.openNormalmoviePath = openNormalmoviePath;
     }
 
     public String getOpenFile() {
@@ -94,52 +127,28 @@ public class OpenLectureVO {
         this.openFile = openFile;
     }
 
-    public String getIconGubn() {
-        return iconGubn;
+    public String getOpenPassword() {
+        return openPassword;
     }
 
-    public void setIconGubn(String iconGubn) {
-        this.iconGubn = iconGubn;
+    public void setOpenPassword(String openPassword) {
+        this.openPassword = openPassword;
     }
 
-    public String getUseYn() {
-        return useYn;
+    public Integer getOpenPoint() {
+        return openPoint;
     }
 
-    public void setUseYn(String useYn) {
-        this.useYn = useYn;
+    public void setOpenPoint(Integer openPoint) {
+        this.openPoint = openPoint;
     }
 
-    public Date getRegDt() {
-        return regDt;
+    public Integer getOpenHit() {
+        return openHit;
     }
 
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
-    }
-
-    public String getRegId() {
-        return regId;
-    }
-
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public Date getUpdDt() {
-        return updDt;
-    }
-
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
-    }
-
-    public String getUpdId() {
-        return updId;
-    }
-
-    public void setUpdId(String updId) {
-        this.updId = updId;
+    public void setOpenHit(Integer openHit) {
+        this.openHit = openHit;
     }
 
     public String getCategoryNm() {
@@ -166,20 +175,44 @@ public class OpenLectureVO {
         this.teacherNm = teacherNm;
     }
 
-    public String getFormNm() {
-        return formNm;
+    public String getSearchType() {
+        return searchType;
     }
 
-    public void setFormNm(String formNm) {
-        this.formNm = formNm;
+    public void setSearchType(String searchType) {
+        this.searchType = searchType;
     }
 
-    public String getIconGubnNm() {
-        return iconGubnNm;
+    public String getSearchText() {
+        return searchText;
     }
 
-    public void setIconGubnNm(String iconGubnNm) {
-        this.iconGubnNm = iconGubnNm;
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+
+    public String getSearchKind() {
+        return searchKind;
+    }
+
+    public void setSearchKind(String searchKind) {
+        this.searchKind = searchKind;
+    }
+
+    public String getSearchForm() {
+        return searchForm;
+    }
+
+    public void setSearchForm(String searchForm) {
+        this.searchForm = searchForm;
+    }
+
+    public String getSearchYear() {
+        return searchYear;
+    }
+
+    public void setSearchYear(String searchYear) {
+        this.searchYear = searchYear;
     }
 
     @Override

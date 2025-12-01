@@ -1,58 +1,119 @@
 package com.academy.mapper;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.json.simple.JSONObject;
-
-import com.academy.lecture.service.LectureMstVO;
 
 /**
  * LectureMst Mapper Interface
- * ExamMapper 패턴 적용 - ArrayList<JSONObject> 및 VO 사용
+ * lectureMstSQL.xml 매퍼 파일과 연동
  */
 @Mapper
 public interface LectureMstMapper {
 
-    ArrayList<JSONObject> lecturemstList(LectureMstVO lectureMstVO);
+    /**
+     * 강의 마스터 목록 조회
+     */
+    List<HashMap<String, String>> lecturemstList(HashMap<String, String> params);
 
-    int lecturemstListCount(LectureMstVO lectureMstVO);
+    /**
+     * 강의 마스터 목록 카운트
+     */
+    int lecturemstListCount(HashMap<String, String> params);
 
-    ArrayList<JSONObject> getBridgeMstcodeSeq(LectureMstVO lectureMstVO);
+    /**
+     * 브릿지 마스터 코드 시퀀스 조회
+     */
+    List<HashMap<String, String>> getBridgeMstcodeSeq(HashMap<String, String> params);
 
-    ArrayList<JSONObject> getBridgeMstcode(LectureMstVO lectureMstVO);
+    /**
+     * 브릿지 마스터 코드 조회
+     */
+    List<HashMap<String, String>> getBridgeMstcode(HashMap<String, String> params);
 
-    ArrayList<JSONObject> getMstcode(LectureMstVO lectureMstVO);
+    /**
+     * 마스터 코드 조회
+     */
+    List<HashMap<String, String>> getMstcode(HashMap<String, String> params);
 
-    void lecturemstInsert(LectureMstVO lectureMstVO);
+    /**
+     * 강의 마스터 등록
+     */
+    void lecturemstInsert(HashMap<String, String> params);
 
-    void lectureBridgeInsert(LectureMstVO lectureMstVO);
+    /**
+     * 강의 브릿지 등록
+     */
+    void lectureBridgeInsert(HashMap<String, String> params);
 
-    void lectureBookInsert2(LectureMstVO lectureMstVO);
+    /**
+     * 강의 교재 등록2
+     */
+    void lectureBookInsert2(HashMap<String, String> params);
 
-    ArrayList<JSONObject> lectureDataMemoViewList(LectureMstVO lectureMstVO);
+    /**
+     * 강의 데이터 메모 뷰 목록
+     */
+    List<HashMap<String, String>> lectureDataMemoViewList(HashMap<String, String> params);
 
-    ArrayList<JSONObject> lectureDataViewList(LectureMstVO lectureMstVO);
+    /**
+     * 강의 데이터 뷰 목록
+     */
+    List<HashMap<String, String>> lectureDataViewList(HashMap<String, String> params);
 
-    ArrayList<JSONObject> lectureWMV(LectureMstVO lectureMstVO);
+    /**
+     * 강의 WMV
+     */
+    List<HashMap<String, String>> lectureWMV(HashMap<String, String> params);
 
-    ArrayList<JSONObject> lectureDown_Count(LectureMstVO lectureMstVO);
+    /**
+     * 강의 다운로드 카운트
+     */
+    List<HashMap<String, String>> lectureDown_Count(HashMap<String, String> params);
 
-    int lectureDeleteCheck(LectureMstVO lectureMstVO);
+    /**
+     * 강의 삭제 체크
+     */
+    int lectureDeleteCheck(HashMap<String, String> params);
 
-    ArrayList<JSONObject> lectureView(LectureMstVO lectureMstVO);
+    /**
+     * 강의 조회
+     */
+    List<HashMap<String, String>> lectureView(HashMap<String, String> params);
 
-    ArrayList<JSONObject> lectureViewList(LectureMstVO lectureMstVO);
+    /**
+     * 강의 뷰 교재 목록
+     */
+    List<HashMap<String, String>> lectureViewBookList(HashMap<String, String> params);
 
-    ArrayList<JSONObject> lectureViewBookList(LectureMstVO lectureMstVO);
+    /**
+     * 강의 뷰 목록
+     */
+    List<HashMap<String, String>> lectureViewList(HashMap<String, String> params);
 
-    void lectureBookDelete(LectureMstVO lectureMstVO);
+    /**
+     * 강의 교재 삭제
+     */
+    void lectureBookDelete(HashMap<String, String> params);
 
-    void lecturemstUpdate(LectureMstVO lectureMstVO);
+    /**
+     * 강의 마스터 수정
+     */
+    void lecturemstUpdate(HashMap<String, String> params);
 
-    void lectureBookInsert(LectureMstVO lectureMstVO);
+    /**
+     * 강의 교재 등록
+     */
+    void lectureBookInsert(HashMap<String, String> params);
 
-    void lectureDelete(LectureMstVO lectureMstVO);
+    /**
+     * 강의 삭제
+     */
+    void lectureDelete(HashMap<String, String> params);
 
-    void lectureBridgeDelete(LectureMstVO lectureMstVO);
+    /**
+     * 강의 브릿지 삭제
+     */
+    void lectureBridgeDelete(HashMap<String, String> params);
 }
