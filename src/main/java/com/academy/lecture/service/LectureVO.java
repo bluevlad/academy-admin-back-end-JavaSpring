@@ -68,6 +68,30 @@ public class LectureVO extends CommonVO implements Serializable {
     private String lecBaesu;                    // LEC_BAESU - 강의 배수
     // regDt, regId, updDt, updId, isUse inherited from CommonVO
 
+    // Fields from LectureMstVO (integrated)
+    private String mstcode;                     // MSTCODE - 마스터 코드
+    private String bridgeMstcode;               // BRIDGE_MSTCODE - 브릿지 마스터 코드
+    private String subjectCd;                   // SUBJECT_CD - 과목 코드
+    private String teacherCd;                   // TEACHER_CD - 강사 코드
+    private String formCd;                      // FORM_CD - 학습형태 코드
+    private String jseq;                        // JSEQ - J시퀀스
+    private String movIng;                      // MOV_ING - 동영상 진행 중
+    private String mstUseYn;                    // MST_USE_YN - 마스터 사용 여부
+    private String teacherSubject;              // TEACHER_SUBJECT - 강사 과목
+    private String orderno;                     // ORDERNO - 주문 번호
+    private String orderId;                     // ORDERID - 주문 ID
+    private String addBookArea;                 // ADDBOOKAREA - 추가 도서 영역
+    private String addArea;                     // ADDAREA - 추가 영역
+    private String mainBook;                    // MAIN_BOOK - 주교재
+    private String subBook;                     // SUB_BOOK - 부교재
+    private String studentBook;                 // STUDENT_BOOK - 학생교재
+    private String subjectInfo;                 // SUBJECT_INFO - 강의 정보
+    private String contents;                    // CONTENTS - 콘텐츠
+    private String teacherNm;                   // TEACHER_NM - 강사명 (별칭)
+    private String formNm;                      // FORM_NM - 학습형태명
+    private String useYn;                       // USE_YN - 사용 여부
+    private String isOpen;                      // IS_OPEN - 공개 여부
+
     // Additional fields for API
     private String searchType;                  // SEARCHTYPE - 검색 타입
     private String searchText;                  // SEARCHTEXT - 검색 텍스트
@@ -766,6 +790,183 @@ public class LectureVO extends CommonVO implements Serializable {
 
     public void setDelArr(String[] delArr) {
         this.delArr = delArr;
+    }
+
+    // Getters and Setters for fields from LectureMstVO
+    public String getMstcode() {
+        return mstcode;
+    }
+
+    public void setMstcode(String mstcode) {
+        this.mstcode = mstcode;
+    }
+
+    public String getBridgeMstcode() {
+        return bridgeMstcode;
+    }
+
+    public void setBridgeMstcode(String bridgeMstcode) {
+        this.bridgeMstcode = bridgeMstcode;
+    }
+
+    public String getSubjectCd() {
+        return subjectCd;
+    }
+
+    public void setSubjectCd(String subjectCd) {
+        this.subjectCd = subjectCd;
+    }
+
+    public String getTeacherCd() {
+        return teacherCd;
+    }
+
+    public void setTeacherCd(String teacherCd) {
+        this.teacherCd = teacherCd;
+    }
+
+    public String getFormCd() {
+        return formCd;
+    }
+
+    public void setFormCd(String formCd) {
+        this.formCd = formCd;
+    }
+
+    public String getJseq() {
+        return jseq;
+    }
+
+    public void setJseq(String jseq) {
+        this.jseq = jseq;
+    }
+
+    public String getMovIng() {
+        return movIng;
+    }
+
+    public void setMovIng(String movIng) {
+        this.movIng = movIng;
+    }
+
+    public String getMstUseYn() {
+        return mstUseYn;
+    }
+
+    public void setMstUseYn(String mstUseYn) {
+        this.mstUseYn = mstUseYn;
+    }
+
+    public String getTeacherSubject() {
+        return teacherSubject;
+    }
+
+    public void setTeacherSubject(String teacherSubject) {
+        this.teacherSubject = teacherSubject;
+    }
+
+    public String getOrderno() {
+        return orderno;
+    }
+
+    public void setOrderno(String orderno) {
+        this.orderno = orderno;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getAddBookArea() {
+        return addBookArea;
+    }
+
+    public void setAddBookArea(String addBookArea) {
+        this.addBookArea = addBookArea;
+    }
+
+    public String getAddArea() {
+        return addArea;
+    }
+
+    public void setAddArea(String addArea) {
+        this.addArea = addArea;
+    }
+
+    public String getMainBook() {
+        return mainBook;
+    }
+
+    public void setMainBook(String mainBook) {
+        this.mainBook = mainBook;
+    }
+
+    public String getSubBook() {
+        return subBook;
+    }
+
+    public void setSubBook(String subBook) {
+        this.subBook = subBook;
+    }
+
+    public String getStudentBook() {
+        return studentBook;
+    }
+
+    public void setStudentBook(String studentBook) {
+        this.studentBook = studentBook;
+    }
+
+    public String getSubjectInfo() {
+        return subjectInfo;
+    }
+
+    public void setSubjectInfo(String subjectInfo) {
+        this.subjectInfo = subjectInfo;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public String getTeacherNm() {
+        return teacherNm;
+    }
+
+    public void setTeacherNm(String teacherNm) {
+        this.teacherNm = teacherNm;
+    }
+
+    public String getFormNm() {
+        return formNm;
+    }
+
+    public void setFormNm(String formNm) {
+        this.formNm = formNm;
+    }
+
+    public String getUseYn() {
+        return useYn;
+    }
+
+    public void setUseYn(String useYn) {
+        this.useYn = useYn;
+    }
+
+    public String getIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(String isOpen) {
+        this.isOpen = isOpen;
     }
 
     @Override
