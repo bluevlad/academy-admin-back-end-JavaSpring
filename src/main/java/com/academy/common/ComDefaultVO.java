@@ -8,13 +8,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @Class Name : ComDefaultVO.java
  * @Description : ComDefaultVO class
  * @author
- * @since 2014.10.01
+ * @since 2025.11
  * @version 1.0
  * @Modification Information
  * @
  * @  수정일         수정자         수정내용
  * @ ------------    -----------    ---------------------------
- * @ 2014.10.01   miraenet         최초 생성
+ * @ 2025.11   miraenet         최초 생성
  *
  *  @see
  *

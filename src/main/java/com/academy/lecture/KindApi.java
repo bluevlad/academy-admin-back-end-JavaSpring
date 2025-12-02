@@ -39,7 +39,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : list
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 카테고리 목록 조회
 	 * @param kindVO
 	 * @param request
@@ -76,7 +76,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : getSeqUpdateList
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 순서 업데이트용 전체 목록 조회
 	 * @param kindVO
 	 * @param request
@@ -103,7 +103,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : seqUpdate
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 직종 순번 수정
 	 * @param kindVO
 	 * @param request
@@ -142,7 +142,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : codeCheck
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 코드 중복 체크
 	 * @param kindVO
 	 * @param request
@@ -165,7 +165,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : save
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 카테고리 등록
 	 * @param kindVO
 	 * @param request
@@ -189,7 +189,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : view
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 카테고리 상세 조회
 	 * @param kindVO
 	 * @param request
@@ -211,7 +211,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : update
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 카테고리 수정
 	 * @param kindVO
 	 * @param request
@@ -235,7 +235,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : delete
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 카테고리 삭제
 	 * @param kindVO
 	 * @param request
@@ -259,7 +259,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : listDelete
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 카테고리 다중 삭제
 	 * @param kindVO
 	 * @param request
@@ -291,7 +291,7 @@ public class KindApi extends CORSFilter {
 
 	/**
 	 * @Method Name : setSessionInfo
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 세션 정보 설정
 	 * @param kindVO
 	 * @param request

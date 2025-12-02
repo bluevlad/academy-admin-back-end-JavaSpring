@@ -1,17 +1,21 @@
 package com.academy.common.service;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.academy.common.ComDefaultVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.academy.common.ComDefaultCodeVO;
+import com.academy.mapper.CmmUseMapper;
 
 /**
- *
- * 공통코드등 전체 업무에서 공용해서 사용해야 하는 서비스를 정의하기 위한 서비스 인터페이스
- * @author kckim
- * @since 2014. 9. 14.
+ * 공통코드등 전체 업무에서 공용해서 사용해야 하는 서비스 클래스
+ * @author Y.K.KIM
+ * @since 2025.11
  * @version 1.0
  * @see
  *
@@ -20,11 +24,19 @@ import com.academy.common.ComDefaultCodeVO;
  *
  *   수정일      수정자           수정내용
  *  -------    --------    ---------------------------
- *   2014.09.14  kckim          최초 생성
+ *   2025.11  Y.K.KIM          최초 생성
  *
  * </pre>
  */
-public interface CmmUseService {
+@Service
+public class CmmUseService implements Serializable {
+
+    private final CmmUseMapper cmmUseMapper;
+
+    @Autowired
+    public CmmUseService(CmmUseMapper cmmUseMapper) {
+        this.cmmUseMapper = cmmUseMapper;
+    }
 
     /**
      * 공통코드를 조회한다.
@@ -33,34 +45,42 @@ public interface CmmUseService {
      * @return List(코드)
      * @throws Exception
      */
-    public List<CmmnDetailCode> selectCmmCodeDetail(ComDefaultCodeVO vo) throws Exception;
+    public List<CmmnDetailCode> selectCmmCodeDetail(ComDefaultCodeVO vo) throws Exception {
+        return cmmUseMapper.selectCmmCodeDetail(vo);
+    }
 
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
-     * @param searchMap Map<String, Object>
+     * @param searchMap Map<String, String>
      * @return List(코드)
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectCmmCodeMap(Map<String, String> searchMap) throws Exception;
+    public List<HashMap<String, String>> selectCmmCodeMap(Map<String, String> searchMap) throws Exception {
+        return cmmUseMapper.selectCmmCodeMap(searchMap);
+    }
 
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
-     * @param searchMap Map<String, Object>
+     * @param searchMap Map<String, String>
      * @return List(코드)
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectCmmCodeMapSortNum(Map<String, String> searchMap) throws Exception;
+    public List<HashMap<String, String>> selectCmmCodeMapSortNum(Map<String, String> searchMap) throws Exception {
+        return cmmUseMapper.selectCmmCodeMapSortNum(searchMap);
+    }
 
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
-     * @param searchMap Map<String, Object>
+     * @param searchMap Map<String, String>
      * @return List(코드)
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectCmmCodeMapSortStr(Map<String, String> searchMap) throws Exception;
+    public List<HashMap<String, String>> selectCmmCodeMapSortStr(Map<String, String> searchMap) throws Exception {
+        return cmmUseMapper.selectCmmCodeMapSortStr(searchMap);
+    }
 
     /**
      * 공통코드를 조회한다.
@@ -69,7 +89,9 @@ public interface CmmUseService {
      * @return List(코드)
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectCmmCdMultiCondWthList(Map<String, List<String>> searchList) throws Exception;
+    public List<HashMap<String, String>> selectCmmCdMultiCondWthList(Map<String, List<String>> searchList) throws Exception {
+        return cmmUseMapper.selectCmmCdMultiCondWthList(searchList);
+    }
 
     /**
      * 공통코드를 조회한다.
@@ -78,7 +100,9 @@ public interface CmmUseService {
      * @return List(코드)
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectCmmCdMultiCondWthArray(Map<String, String[]> searchArray) throws Exception;
+    public List<HashMap<String, String>> selectCmmCdMultiCondWthArray(Map<String, String[]> searchArray) throws Exception {
+        return cmmUseMapper.selectCmmCdMultiCondWthArray(searchArray);
+    }
 
     /**
      * ComDefaultCodeVO의 리스트를 받아서 여러개의 코드 리스트를 맵에 담아서 리턴한다.
@@ -87,8 +111,19 @@ public interface CmmUseService {
      * @return Map(코드)
      * @throws Exception
      */
+    public Map<String, List<CmmnDetailCode>> selectCmmCodeDetails(List<?> voList) throws Exception {
+        Map<String, List<CmmnDetailCode>> map = new HashMap<>();
 
-    public Map<String, List<CmmnDetailCode>> selectCmmCodeDetails(List<?> voList) throws Exception;
+        for (Object obj : voList) {
+            if (obj instanceof ComDefaultCodeVO) {
+                ComDefaultCodeVO vo = (ComDefaultCodeVO) obj;
+                List<CmmnDetailCode> list = cmmUseMapper.selectCmmCodeDetail(vo);
+                map.put(vo.getSYS_CD(), list);
+            }
+        }
+
+        return map;
+    }
 
     /**
      * 대학정보를 코드형태로 리턴한다.
@@ -97,7 +132,9 @@ public interface CmmUseService {
      * @return 조직정보 List
      * @throws Exception
      */
-    public List<CmmnDetailCode> selectUnivList(ComDefaultCodeVO vo) throws Exception;
+    public List<CmmnDetailCode> selectUnivList(ComDefaultCodeVO vo) throws Exception {
+        return cmmUseMapper.selectUnivList(vo);
+    }
 
     /**
      * 대학정보를 코드형태로 리턴한다.
@@ -106,7 +143,9 @@ public interface CmmUseService {
      * @return 조직정보 List
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectUnivListMap(Map<String, String> searchMap) throws Exception;
+    public List<HashMap<String, String>> selectUnivListMap(Map<String, String> searchMap) throws Exception {
+        return cmmUseMapper.selectUnivListMap(searchMap);
+    }
 
     /**
      * 학과정보를 코드형태로 리턴한다.
@@ -115,7 +154,9 @@ public interface CmmUseService {
      * @return 조직정보 List
      * @throws Exception
      */
-    public List<CmmnDetailCode> selectSubjctList(ComDefaultCodeVO vo) throws Exception;
+    public List<CmmnDetailCode> selectSubjctList(ComDefaultCodeVO vo) throws Exception {
+        return cmmUseMapper.selectSubjctList(vo);
+    }
 
     /**
      * 학과정보를 코드형태로 리턴한다.
@@ -124,24 +165,19 @@ public interface CmmUseService {
      * @return 조직정보 List
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectSubjctListMap(Map<String, String> searchMap) throws Exception;
+    public List<HashMap<String, String>> selectSubjctListMap(Map<String, String> searchMap) throws Exception {
+        return cmmUseMapper.selectSubjctListMap(searchMap);
+    }
 
     /**
-     * 조직정보를 코드형태로 리턴한다.
+     * 코드번호로 공통코드를 조회한다.
      *
-     * @param ComDefaultVO vo
-     * @return 조직정보 List
+     * @param searchMap Map<String, String>
+     * @return HashMap
      * @throws Exception
      */
-    /*public List<CmmnDetailCode> selectOgrnztIdDetail(ComDefaultCodeVO vo) throws Exception;*/
-
-    /**
-     * 그룹정보를 코드형태로 리턴한다.
-     *
-     * @param ComDefaultVO vo
-     * @return 그룹정보 List
-     * @throws Exception
-     */
-    /*public List<CmmnDetailCode> selectGroupIdDetail(ComDefaultCodeVO vo) throws Exception;*/
+    public HashMap<String, String> selectCmmCodeByNo(Map<String, String> searchMap) throws Exception {
+        return cmmUseMapper.selectCmmCodeByNo(searchMap);
+    }
 
 }

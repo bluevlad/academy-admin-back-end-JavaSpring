@@ -257,7 +257,7 @@ public class LockerApi extends CORSFilter {
 
 	/**
 	 * @Method Name : lockerRentOrderProcess
-	 * @작성일 : 2013. 11.12
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 사물함 대여 신청/수정 저장 처리
 	 * ① 사물함 대여(신청) 정보가 1개 이상 존재하면 사물함갯수, 시작번호, 종료번호를 제외한 항목만 수정한다.
 	 * ② 사물함 대여정보가 없다면 대여(신청)정보 테이블(TB_OFF_BOX_NUM)에서 해당 사물함코드를 삭제한 후 새로 생성한다.
@@ -388,7 +388,7 @@ public class LockerApi extends CORSFilter {
 
 	/**
 	 * @Method Name : boxChangePopProcess
-	 * @작성일 : 2013. 11.25
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 사물함 변경 처리
      * - TB_OFF_BOX_NUM 테이블을 업데이트한다. (신규 선택한 곳에 기존 자료를 업데이트한다)
      * - TB_OFF_BOX_NUM 테이블을 업데이트한다. (기존 자료 공간을 초기화 업데이트한다)
@@ -448,7 +448,7 @@ public class LockerApi extends CORSFilter {
 
 	/**
 	 * @Method Name : boxOrderView
-	 * @작성일 : 2013. 11.22
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 사물함 대여 결제 및 환불 내역 보기
 	 * @param model
 	 * @param request

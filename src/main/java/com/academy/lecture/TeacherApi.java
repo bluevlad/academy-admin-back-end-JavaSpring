@@ -52,7 +52,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : list
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강사 목록 조회
 	 * @param request
 	 * @return JSONObject
@@ -103,7 +103,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : view
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강사 상세 조회
 	 * @param request
 	 * @return JSONObject
@@ -145,7 +145,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : idCheck
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강사 ID 중복 확인
 	 * @param request
 	 * @return JSONObject
@@ -172,7 +172,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : save
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강사 등록
 	 * @param request
 	 * @return JSONObject
@@ -204,7 +204,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : update
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강사 수정
 	 * @param request
 	 * @return JSONObject
@@ -240,7 +240,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : delete
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강사 삭제
 	 * @param request
 	 * @return JSONObject
@@ -266,7 +266,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : listDelete
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 목록에서 다중 삭제
 	 * @param request
 	 * @return JSONObject
@@ -293,7 +293,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : seqUpdate
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강사 순번 수정
 	 * @param request
 	 * @return JSONObject
@@ -345,7 +345,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : setSessionInfo
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 세션 정보 설정
 	 * @param vo
 	 * @param request
@@ -407,7 +407,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : lecFileProcess
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 파일처리 프로세스
 	 * @param vo
 	 * @param multipartRequest
@@ -438,7 +438,7 @@ public class TeacherApi extends CORSFilter {
 
 	/**
 	 * @Method Name : deleteOldFiles
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 이전 파일 삭제
 	 * @param vo
 	 * @param rootPath

@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * 공통 코드 모델 클래스(TB_BA_CONFIG_CD)
- * @author kckim
- * @since 2009.04.01
+ * @author Y.K.KIM
+ * @since 2025.11
  * @version 1.0
  * @see
  *
@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  *   수정일      수정자           수정내용
  *  -------    --------    ---------------------------
- *   2014.09.23  kckim          최초 생성
+ *   2025.11  Y.K.KIM          최초 생성
  *
  * </pre>
  */

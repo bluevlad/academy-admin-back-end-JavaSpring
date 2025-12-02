@@ -39,7 +39,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : list
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 학습형태 목록 조회
 	 * @param formVO
 	 * @param request
@@ -75,7 +75,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : view
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 학습형태 상세 조회
 	 * @param formVO
 	 * @param request
@@ -103,7 +103,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : codeCheck
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 코드 중복 체크
 	 * @param formVO
 	 * @param request
@@ -126,7 +126,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : save
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 학습형태 등록
 	 * @param formVO
 	 * @param request
@@ -150,7 +150,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : update
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 학습형태 수정
 	 * @param formVO
 	 * @param request
@@ -174,7 +174,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : delete
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 학습형태 삭제
 	 * @param formVO
 	 * @param request
@@ -198,7 +198,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : listDelete
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 학습형태 다중 삭제
 	 * @param formVO
 	 * @param request
@@ -230,7 +230,7 @@ public class FormApi extends CORSFilter {
 
 	/**
 	 * @Method Name : setSessionInfo
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 세션 정보 설정
 	 * @param formVO
 	 * @param request

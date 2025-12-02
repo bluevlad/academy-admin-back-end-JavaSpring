@@ -53,7 +53,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : list
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 마스터 목록 조회
 	 * @param lectureMstVO
 	 * @param request
@@ -98,7 +98,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : getSubjectTeacherList
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 과목(강사) 검색 목록
 	 * @param lectureMstVO
 	 * @param request
@@ -120,7 +120,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : view
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 마스터 상세 조회
 	 * @param lectureMstVO
 	 * @param request
@@ -148,7 +148,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : getDataViewList
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 데이터 뷰 리스트 조회
 	 * @param lectureMstVO
 	 * @param request
@@ -176,7 +176,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : save
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 마스터 등록
 	 * @param lectureMstVO
 	 * @param request
@@ -265,7 +265,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : update
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 마스터 수정
 	 * @param lectureMstVO
 	 * @param request
@@ -328,7 +328,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : delete
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 마스터 삭제
 	 * @param lectureMstVO
 	 * @param request
@@ -354,7 +354,7 @@ public class LectureMstApi extends CORSFilter {
 
 	/**
 	 * @Method Name : setSessionInfo
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 세션 정보 설정
 	 * @param lectureMstVO
 	 * @param request

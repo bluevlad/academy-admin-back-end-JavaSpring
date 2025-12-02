@@ -33,7 +33,7 @@ public class MacAddressManagerApi extends CORSFilter {
 
     /**
      * @Method Name : list
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : MAC 주소 관리 목록 조회
      * @param macAddressManagerVO
      * @param request
@@ -68,7 +68,7 @@ public class MacAddressManagerApi extends CORSFilter {
 
     /**
      * @Method Name : view
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : MAC 주소 상세 조회
      * @param macAddressManagerVO
      * @param request
@@ -90,7 +90,7 @@ public class MacAddressManagerApi extends CORSFilter {
 
     /**
      * @Method Name : deviceList
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 디바이스 목록 조회
      * @param macAddressManagerVO
      * @param request
@@ -114,7 +114,7 @@ public class MacAddressManagerApi extends CORSFilter {
 
     /**
      * @Method Name : updateMacAddress
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : MAC 주소 업데이트
      * @param macAddressManagerVO
      * @param request
@@ -138,7 +138,7 @@ public class MacAddressManagerApi extends CORSFilter {
 
     /**
      * @Method Name : resetMobile
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 모바일 초기화
      * @param macAddressManagerVO
      * @param request
@@ -162,7 +162,7 @@ public class MacAddressManagerApi extends CORSFilter {
 
     /**
      * @Method Name : setSessionInfo
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 세션 정보 설정
      * @param macAddressManagerVO
      * @param request

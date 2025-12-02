@@ -66,7 +66,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : list
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 공개강의 목록 조회
 	 * @param openLectureVO
 	 * @param request
@@ -111,7 +111,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : getWriteData
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 공개강의 등록을 위한 데이터 조회
 	 * @param openLectureVO
 	 * @param request
@@ -163,7 +163,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : view
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 공개강의 상세 조회
 	 * @param openLectureVO
 	 * @param request
@@ -217,7 +217,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : bookList
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 교재 목록 조회
 	 * @param openLectureVO
 	 * @param request
@@ -262,7 +262,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : save
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 공개강의 등록
 	 * @param openLectureVO
 	 * @param request
@@ -312,7 +312,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : update
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 공개강의 수정
 	 * @param openLectureVO
 	 * @param request
@@ -344,7 +344,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : delete
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 공개강의 삭제
 	 * @param openLectureVO
 	 * @param request
@@ -370,7 +370,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : lecFileProcess
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 파일처리 프로세스
 	 * @param openLectureVO
 	 * @param multipartRequest
@@ -392,7 +392,7 @@ public class OpenLectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : setSessionInfo
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 세션 정보 설정
 	 * @param openLectureVO
 	 * @param request

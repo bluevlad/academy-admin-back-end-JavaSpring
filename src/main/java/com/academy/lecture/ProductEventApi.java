@@ -55,7 +55,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : list
-	 * @작성일 : 2014. 04.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 이벤트 목록 조회
 	 * @param request
 	 * @return JSONObject
@@ -89,7 +89,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : view
-	 * @작성일 : 2014. 04.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 이벤트 상세 조회
 	 * @param request
 	 * @return JSONObject
@@ -112,7 +112,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : insert
-	 * @작성일 : 2014. 04.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 이벤트 등록
 	 * @param request
 	 * @return JSONObject
@@ -135,7 +135,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : update
-	 * @작성일 : 2014. 04.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 이벤트 수정
 	 * @param request
 	 * @return JSONObject
@@ -158,7 +158,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : getSubjectList
-	 * @작성일 : 2014. 04.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 선택을 위한 강의 목록 조회
 	 * @param request
 	 * @return JSONObject
@@ -225,7 +225,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : addLecture
-	 * @작성일 : 2014. 04.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 이벤트에 강의 추가
 	 * @param request
 	 * @return JSONObject
@@ -261,7 +261,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : deleteLecture
-	 * @작성일 : 2014. 04.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 이벤트에서 강의 삭제
 	 * @param request
 	 * @return JSONObject
@@ -297,7 +297,7 @@ public class ProductEventApi extends CORSFilter {
 
 	/**
 	 * @Method Name : setSessionInfo
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 세션 정보 설정
 	 * @param vo
 	 * @param request

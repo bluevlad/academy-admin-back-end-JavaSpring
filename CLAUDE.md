@@ -125,6 +125,32 @@ All API controllers:
    return new JSONObject(jsonObject);
    ```
 
+## Service Class Conventions
+
+All Service classes must:
+1. **Implement `Serializable`** for session serialization support
+2. Use `@Service` annotation
+3. Inject dependencies via constructor injection (preferred over field injection)
+4. Follow naming convention: `<Module>Service.java`
+
+Example:
+```java
+@Service
+public class BookService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private final BookMapper bookMapper;
+
+    @Autowired
+    public BookService(BookMapper bookMapper) {
+        this.bookMapper = bookMapper;
+    }
+
+    // Business logic methods...
+}
+```
+
 ### Standard CRUD Endpoint Patterns
 
 **GET endpoints** (list/detail):
@@ -201,7 +227,7 @@ When adding new API endpoints or modules:
 1. Create VO in `<module>/service/<Module>VO.java` extending `CommonVO`
 2. Create Mapper interface in `com.academy.mapper/<Module>Mapper.java` with `@Mapper`
 3. Create XML mapper in `src/main/resources/mapper/<module>.xml`
-4. Create Service in `<module>/service/<Module>Service.java` with `@Service`
+4. Create Service in `<module>/service/<Module>Service.java` with `@Service` **implementing `Serializable`**
 5. Create API Controller in `<module>/<Module>Api.java` extending `CORSFilter`
 6. Use constructor injection for dependencies (preferred over `@Autowired`)
 

@@ -2094,7 +2094,7 @@ public class BookOrderController {
 
 	/**
 	 * @Method Name : setParam
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 파라미터 SETTING
 	 * @param params
 	 * @param request

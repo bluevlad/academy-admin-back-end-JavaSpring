@@ -39,7 +39,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : list
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 과목 목록 조회
      * @param subjectVO
      * @param request
@@ -74,7 +74,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : view
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 과목 상세 조회
      * @param subjectVO
      * @param request
@@ -98,7 +98,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : codeCheck
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 과목 코드 중복 체크
      * @param subjectVO
      * @param request
@@ -124,7 +124,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : save
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 과목 등록
      * @param subjectVO
      * @param request
@@ -156,7 +156,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : update
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 과목 수정
      * @param subjectVO
      * @param request
@@ -189,7 +189,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : delete
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 과목 삭제
      * @param subjectVO
      * @param request
@@ -214,7 +214,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : listDelete
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 과목 다중 삭제
      * @param subjectVO
      * @param request
@@ -245,7 +245,7 @@ public class SubjectApi extends CORSFilter {
 
     /**
      * @Method Name : setSessionInfo
-     * @작성일 : 2013. 10.
+     * @작성일 : 2025.11
      * @Method 설명 : 세션 정보 설정
      * @param subjectVO
      * @param request

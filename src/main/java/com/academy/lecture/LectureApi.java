@@ -61,7 +61,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : list
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 단과 강의 목록 조회
 	 * @param lectureVO
 	 * @param request
@@ -106,7 +106,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : view
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 상세 조회
 	 * @param lectureVO
 	 * @param request
@@ -152,7 +152,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : bookList
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 교재 목록 조회
 	 * @param lectureVO
 	 * @param request
@@ -197,7 +197,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : bookView
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 교재 상세 조회
 	 * @param lectureVO
 	 * @param request
@@ -219,7 +219,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : getCouponList
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 쿠폰 목록 조회
 	 * @param lectureVO
 	 * @param request
@@ -255,7 +255,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : getMoCouponList
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 모바일 쿠폰 목록 조회
 	 * @param lectureVO
 	 * @param request
@@ -291,7 +291,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : modifyLectureOnOff
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 개설여부 수정
 	 * @param lectureVO
 	 * @param request
@@ -339,7 +339,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : save
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 단과 강의 등록
 	 * @param lectureVO
 	 * @param request
@@ -433,7 +433,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : update
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 단과 강의 수정
 	 * @param lectureVO
 	 * @param request
@@ -502,7 +502,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : delete
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 삭제
 	 * @param lectureVO
 	 * @param request
@@ -528,7 +528,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : listDelete
-	 * @작성일 : 2013. 11.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 강의 다중 삭제
 	 * @param lectureVO
 	 * @param request
@@ -566,7 +566,7 @@ public class LectureApi extends CORSFilter {
 
 	/**
 	 * @Method Name : setSessionInfo
-	 * @작성일 : 2013. 10.
+	 * @작성일 : 2025.11
 	 * @Method 설명 : 세션 정보 설정
 	 * @param lectureVO
 	 * @param request
