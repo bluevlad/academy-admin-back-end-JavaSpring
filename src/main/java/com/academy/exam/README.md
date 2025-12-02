@@ -1,140 +1,70 @@
-# Exam Package
+# Exam (시험) 패키지
 
-시험(Examination) 관리 패키지입니다.
+시험 및 문제은행 관리를 위한 RESTful API를 제공합니다.
 
 ## 패키지 구조
 
 ```
 exam/
-├── ExamApi.java           # REST API Controller
-├── ExamBankApi.java       # Exam Bank REST API Controller
+├── ExamApi.java              # 시험 REST API 컨트롤러
+├── ExamBankApi.java          # 문제은행 REST API 컨트롤러
 └── service/
-    ├── ExamService.java        # Exam Service
-    ├── ExamServiceImpl.java
-    ├── ExamBankService.java    # Exam Bank Service
-    ├── ExamBankServiceImpl.java
-    ├── ExamVO.java             # Exam Value Object
-    └── ExamReqVO.java          # Exam Request Value Object
+    ├── ExamService.java      # 시험 비즈니스 로직 서비스
+    ├── ExamVO.java           # 시험 Value Object
+    ├── ExamBankService.java  # 문제은행 비즈니스 로직 서비스
+    ├── ExamBankVO.java       # 문제은행 Value Object
+    └── ExamReqVO.java        # 시험 요청 Value Object
 ```
 
-## 주요 컴포넌트
+## 주요 기능
 
 ### ExamApi
-
-시험 관리를 위한 REST API 컨트롤러입니다.
-
-**Base URL**: `/api/exam`
-
-**Endpoints**:
-
-| Method | Endpoint | Description | Response |
-|--------|----------|-------------|----------|
-| GET | `/getExamList` | 시험 목록 조회 (페이징) | examList, paginationInfo |
-| POST | `/getExamReq` | 시험 신청 확인 | retMsg (Y/N/조회실패) |
-| GET | `/getExamView` | 시험 상세 조회 | examDetail, QueList |
+- **GET** `/api/exam/list` - 시험 목록 조회
+- **GET** `/api/exam/view` - 시험 상세 조회
+- **POST** `/api/exam/save` - 시험 등록
+- **PUT** `/api/exam/update` - 시험 수정
+- **DELETE** `/api/exam/delete` - 시험 삭제
 
 ### ExamBankApi
+- **GET** `/api/examBank/list` - 문제은행 목록 조회
+- **GET** `/api/examBank/view` - 문제은행 상세 조회
+- **POST** `/api/examBank/save` - 문제 등록
+- **PUT** `/api/examBank/update` - 문제 수정
+- **DELETE** `/api/examBank/delete` - 문제 삭제
 
-시험 문제은행 관리를 위한 REST API 컨트롤러입니다.
+### ExamService & ExamBankService
+- 시험 및 문제은행 CRUD 작업 처리
+- MyBatis Mapper를 통한 데이터베이스 연동
 
-**Base URL**: `/api/exambank`
+## 아키텍처
+
+```
+[Client]
+   ↓
+[ExamApi / ExamBankApi] - REST API Layer
+   ↓
+[ExamService / ExamBankService] - Business Logic Layer
+   ↓
+[ExamMapper / ExamBankMapper] - MyBatis Mapper Interface (com.academy.mapper)
+   ↓
+[examSQL.xml / examBankSQL.xml] - SQL Mapper (resources/mapper)
+   ↓
+[Database]
+```
 
 ## 사용 예시
 
-### 1. 시험 목록 조회
-
-```bash
-GET /api/exam/getExamList?pageIndex=1&pageUnit=10&pageSize=10
-```
-
-**Response**:
-```json
-{
-  "examList": [
-    {
-      "examId": "EXAM001",
-      "examTitle": "중간고사",
-      "examDate": "2024-03-15",
-      "examTime": "90",
-      "totalScore": "100"
-    }
-  ],
-  "paginationInfo": {
-    "currentPageNo": 1,
-    "totalRecordCount": 50,
-    "recordCountPerPage": 10,
-    "pageSize": 10
-  }
-}
-```
-
-### 2. 시험 신청 확인
-
-```bash
-POST /api/exam/getExamReq
-Content-Type: application/x-www-form-urlencoded
-
-userId=user001&examId=EXAM001
-```
-
-**Response**:
-```json
-{
-  "retMsg": "Y"  // Y: 신청완료, N: 미신청, 조회실패: 에러
-}
-```
-
-### 3. 시험 상세 조회
-
-```bash
-GET /api/exam/getExamView?examId=EXAM001
-```
-
-**Response**:
-```json
-{
-  "examDetail": {
-    "examId": "EXAM001",
-    "examTitle": "중간고사",
-    "examDate": "2024-03-15",
-    "examTime": "90",
-    "description": "중간고사 설명"
-  },
-  "QueList": [
-    {
-      "queNo": 1,
-      "queText": "문제 내용",
-      "queType": "객관식",
-      "queScore": 5
-    }
-  ]
-}
-```
-
-## 데이터베이스
-
-### 관련 테이블
-
-- `TB_EXAM` - 시험 기본 정보
-- `TB_EXAM_QUE` - 시험 문제 정보
-- `TB_EXAM_REQ` - 시험 신청 정보
-
-### Mapper
-
-- **Interface**: `com.academy.mapper.ExamMapper`, `com.academy.mapper.ExamBankMapper`
-- **XML**: `src/main/resources/mapper/ExamMapper.xml`, `src/main/resources/mapper/ExamBankMapper.xml`
-
-## 페이징 처리
-
 ```java
-PaginationInfo paginationInfo = new PaginationInfo();
-paginationInfo.setCurrentPageNo(examVO.getPageIndex());
-paginationInfo.setRecordCountPerPage(examVO.getPageUnit());
-paginationInfo.setPageSize(examVO.getPageSize());
+// 시험 목록 조회
+GET /api/exam/list?currentPage=1&pageRow=10&SEARCHTYPE=EXAM_NM&SEARCHTEXT=중간고사
+
+// 문제은행 목록 조회
+GET /api/examBank/list?currentPage=1&pageRow=10&SUBJECT_CD=MATH
 ```
 
-## 의존성
+## 참고사항
 
-- `com.academy.common.CORSFilter` - CORS 설정
-- `com.academy.common.PaginationInfo` - 페이징 처리
-- `com.academy.common.CommonUtil` - 공통 유틸리티
+- 모든 API는 세션 인증이 필요합니다
+- 페이징은 CommonVO를 통해 처리됩니다
+- 트랜잭션은 @Transactional 애노테이션으로 관리됩니다
+- 시험과 문제은행은 별도로 관리됩니다

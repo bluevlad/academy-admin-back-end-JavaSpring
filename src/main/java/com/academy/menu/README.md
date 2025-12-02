@@ -1,39 +1,78 @@
-구현 완료 내용
+# Menu (메뉴) 패키지
 
-1. MenuVO.java
+시스템 메뉴 관리를 위한 RESTful API를 제공합니다.
 
-- 참조 XML의 테이블 구조에 맞춰 필드 추가:
-    - 기본 필드: onoffDiv, menuId, menuNm, menuSeq, menuUrl, pMenuid, isuse,
-      target, menuInfo
-    - Pass 메뉴 추가 필드: code, topImgUrl, leftImgUrl, titlImgUrl,
-      subtitlImgUrl
-    - 등록/수정 정보: regId, regDt, updId, updDt
+## 패키지 구조
 
-2. MenuMapper.java
+```
+menu/
+├── MenuApi.java            # 메뉴 REST API 컨트롤러
+└── service/
+    ├── MenuService.java    # 메뉴 비즈니스 로직 서비스
+    └── MenuVO.java         # 메뉴 Value Object
+```
 
-- CRUD 메서드 인터페이스 추가:
-    - 메뉴 트리 조회: getMenuTree(), getpassMenuTree()
-    - 메뉴 상세 조회: getDetailMenu(), getpassDetailMenu()
-    - 메뉴 등록: menuInsertProcess(), passmenuInsertProcess()
-    - 메뉴 수정: menuUpdateProcess(), passmenuUpdateProcess()
-    - 메뉴 삭제: menuDeleteProcess(), passmenuDeleteProcess()
-    - 유틸리티: menuIdCheck(), getMaxMenuId(), getpassMaxMenuId()
+## 주요 기능
 
-3. menu.xml (MyBatis 매퍼)
+### MenuApi
+- **GET** `/api/menu/list` - 메뉴 목록 조회
+- **GET** `/api/menu/tree` - 메뉴 트리 구조 조회
+- **GET** `/api/menu/view` - 메뉴 상세 조회
+- **POST** `/api/menu/save` - 메뉴 등록
+- **PUT** `/api/menu/update` - 메뉴 수정
+- **DELETE** `/api/menu/delete` - 메뉴 삭제
+- **GET** `/api/menu/userMenuList` - 사용자별 메뉴 조회
 
-- 참조 XML의 SQL 쿼리를 모두 포함:
-    - TB_SG_MENU_MST (일반 메뉴) 및 TB_SG_MENU_MST2 (Pass 메뉴) 대상 쿼리
-    - SELECT, INSERT, UPDATE, DELETE 모든 기능 구현
+### MenuService
+- 메뉴 CRUD 작업 처리
+- 계층형 메뉴 구조 관리
+- 권한별 메뉴 필터링
+- MyBatis MenuMapper를 통한 데이터베이스 연동
 
-4. MenuService.java
+### MenuVO
+- CommonVO를 상속하여 공통 필드 사용
+- 메뉴 관련 데이터 전달 객체
+- 계층 구조 정보 포함
 
-- Mapper의 모든 메서드를 호출하는 서비스 레이어 구현
+## 아키텍처
 
-5. MenuApi.java
+```
+[Client]
+   ↓
+[MenuApi] - REST API Layer
+   ↓
+[MenuService] - Business Logic Layer
+   ↓
+[MenuMapper] - MyBatis Mapper Interface (com.academy.mapper)
+   ↓
+[menuSQL.xml] - SQL Mapper (resources/mapper)
+   ↓
+[Database]
+```
 
-- RESTful API 엔드포인트 추가:
-    - GET: /getMenuTree, /getpassMenuTree, /getDetailMenu, /getpassDetailMenu,
-      /menuIdCheck, /getMaxMenuId, /getpassMaxMenuId
-    - POST: /menuInsertProcess, /passmenuInsertProcess
-    - PUT: /menuUpdateProcess, /passmenuUpdateProcess
-    - DELETE: /menuDeleteProcess, /passmenuDeleteProcess
+## 사용 예시
+
+```java
+// 메뉴 트리 조회
+GET /api/menu/tree
+
+// 사용자별 메뉴 조회
+GET /api/menu/userMenuList?USER_ID=admin
+
+// 메뉴 등록
+POST /api/menu/save
+{
+  "menuNm": "교재 관리",
+  "menuUrl": "/book/list",
+  "upperMenuId": "MENU001",
+  "menuOrder": 1,
+  "useYn": "Y"
+}
+```
+
+## 참고사항
+
+- 모든 API는 세션 인증이 필요합니다
+- 메뉴는 계층형 구조로 관리됩니다
+- 사용자 권한에 따라 메뉴가 필터링됩니다
+- 트랜잭션은 @Transactional 애노테이션으로 관리됩니다

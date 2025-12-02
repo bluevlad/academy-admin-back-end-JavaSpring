@@ -1,73 +1,50 @@
-# BookOrder Package
+# BookOrder (교재 주문) 패키지
 
-교재 주문(Book Order) 관리 패키지입니다.
+교재 주문 관리를 위한 API를 제공합니다.
 
 ## 패키지 구조
 
 ```
 bookOrder/
-├── BookOrderController.java    # Controller (API 아님)
+├── BookOrderController.java        # 교재 주문 컨트롤러
 └── service/
-    ├── BookOrderService.java   # Service class
-    └── BookOrderServiceImpl.java
+    ├── BookOrderService.java       # 교재 주문 서비스 인터페이스
+    └── impl/
+        ├── BookOrderDAO.java       # 교재 주문 DAO
+        └── BookOrderServiceImpl.java # 교재 주문 서비스 구현체
 ```
-
-## 주요 컴포넌트
-
-### BookOrderController
-
-교재 주문 관리를 위한 컨트롤러입니다.
-
-**Note**: RestController가 아닌 일반 Controller를 사용합니다.
-
-### BookOrderService
-
-교재 주문 비즈니스 로직을 처리하는 서비스 클래스입니다.
-
-**주요 기능**:
-- 교재 주문 목록 조회
-- 교재 주문 상세 조회
-- 교재 주문 등록
-- 교재 주문 수정
-- 교재 주문 취소/환불
-
-## 데이터베이스
-
-### 관련 테이블
-
-- `TB_BOOK_ORDER` - 교재 주문 정보
-- `TB_BOOK_ORDER_ITEM` - 교재 주문 상세 정보
-- `TB_BOOK_ORDER_PAY` - 교재 주문 결제 정보
-
-### Mapper
-
-- **Interface**: `com.academy.mapper.BookOrderMapper`
-- **XML**: `src/main/resources/mapper/BookOrderMapper.xml`
 
 ## 주요 기능
 
-### 주문 프로세스
+### BookOrderController
+- **GET** `/bookOrder/list` - 교재 주문 목록 조회
+- **GET** `/bookOrder/view` - 교재 주문 상세 조회
+- **POST** `/bookOrder/save` - 교재 주문 등록
+- **PUT** `/bookOrder/update` - 교재 주문 수정
+- **DELETE** `/bookOrder/delete` - 교재 주문 삭제
 
-1. 주문 정보 생성
-2. 주문 상세 정보 등록
-3. 결제 정보 등록
-4. 배송 정보 등록
+### BookOrderService
+- 교재 주문 CRUD 작업 처리
+- 주문 상태 관리
+- DAO를 통한 데이터베이스 연동
 
-### 주문 상태 관리
+## 아키텍처
 
-- 주문 접수
-- 결제 완료
-- 배송 준비
-- 배송 중
-- 배송 완료
-- 주문 취소
-- 환불 처리
-
-## 의존성
-
-- `com.academy.mapper.BookOrderMapper` - 데이터 접근
+```
+[Client]
+   ↓
+[BookOrderController] - Controller Layer
+   ↓
+[BookOrderServiceImpl] - Service Layer
+   ↓
+[BookOrderDAO] - DAO Layer
+   ↓
+[Database]
+```
 
 ## 참고사항
 
-이 패키지는 REST API가 아닌 일반 MVC 패턴을 사용합니다.
-교재 주문 기능은 별도의 주문 시스템으로 관리됩니다.
+- Legacy 아키텍처 패턴을 사용합니다 (향후 Modern 패턴으로 마이그레이션 예정)
+- 모든 API는 세션 인증이 필요합니다
+- 파일 다운로드 기능을 지원합니다
+- 트랜잭션 관리가 필요한 작업에 적용됩니다
