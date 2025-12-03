@@ -28,13 +28,10 @@ public class OpenLectureVO extends CommonVO implements Serializable {
     private Integer openPoint;      // OPEN_POINT - 포인트
     private Integer openHit;        // OPEN_HIT - 조회수
 
-    // Display / Search fields
+    // Display / Search fields (searchType, searchText, searchKind inherited from CommonVO)
     private String categoryNm;      // CATEGORY_NM - 카테고리명
     private String subjectNm;       // SUBJECT_NM - 과목명
     private String teacherNm;       // TEACHER_NM - 강사명
-    private String searchType;      // SEARCHTYPE - 검색 타입
-    private String searchText;      // SEARCHTEXT - 검색어
-    private String searchKind;      // SEARCHKIND - 검색 종류
     private String searchForm;      // SEARCHFORM - 검색 형태
     private String searchYear;      // SEARCHYEAR - 검색 연도
     private String searchPayyn;     // SEARCHPAYYN - 검색 결제여부
@@ -181,30 +178,6 @@ public class OpenLectureVO extends CommonVO implements Serializable {
 
     public void setTeacherNm(String teacherNm) {
         this.teacherNm = teacherNm;
-    }
-
-    public String getSearchType() {
-        return searchType;
-    }
-
-    public void setSearchType(String searchType) {
-        this.searchType = searchType;
-    }
-
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
-    public String getSearchKind() {
-        return searchKind;
-    }
-
-    public void setSearchKind(String searchKind) {
-        this.searchKind = searchKind;
     }
 
     public String getSearchForm() {

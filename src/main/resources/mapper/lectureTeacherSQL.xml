@@ -12,7 +12,7 @@
        <result column="OFF_LECINFO" property="OFF_LECINFO" javaType="java.lang.String" jdbcType="CLOB"/>
     </resultMap>
 
-    <select id="getKindList" parameterType="hashMap" resultType="hashMap">
+    <select id="getKindList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
         <if test='SEARCHGUBN == "T"'>
             SELECT
                 ID, CODE, NAME, ISUSE, DECODE(ISUSE, 'Y', '활성', 'N', '비활성') ISUSENM
@@ -30,7 +30,7 @@
     </select>
 
     <!-- T:전체 , E:선택된것 제외된 전체 , M:강사가 선택한것만 -->
-    <select id="getSubjectList" parameterType="hashMap" resultType="hashMap">
+    <select id="getSubjectList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
         <if test='SEARCHGUBN == "T"'>
             SELECT
                 A.SUBJECT_CD, A.SUBJECT_NM, A.SUBJECT_SHORT_NM, A.ISUSE
@@ -93,7 +93,7 @@
         </if>
     </select>
 
-    <select id="teacherList" parameterType="hashMap" resultType="hashMap">
+    <select id="teacherList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
         <if test="SEARCHCATEGORY == null or SEARCHCATEGORY == ''">
         SELECT * FROM   (
             SELECT A.*, ROWNUM rnum
@@ -176,7 +176,7 @@
         </if>
     </select>
 
-    <select id="teacherListCount" parameterType="hashMap" resultType="int">
+    <select id="teacherListCount" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
         SELECT COUNT(*) FROM (
             SELECT
                 COUNT(AA.USER_ID)
@@ -226,7 +226,7 @@
         ) TBL
     </select>
 
-    <select id="teacherAllList" parameterType="hashMap" resultType="hashMap">
+    <select id="teacherAllList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
           SELECT * FROM   (
           	<if test='SEARCH_TEACHER == "Y"'>
             SELECT G.*, ROWNUM rnum FROM(
@@ -279,7 +279,7 @@
         </if>
     </select>
     
-    <select id="teacherAllListCount" parameterType="hashMap" resultType="int">
+    <select id="teacherAllListCount" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
         SELECT COUNT(*)
         FROM   (
             SELECT
@@ -313,19 +313,19 @@
         AND DD.CATEGORY_CD = CC.CATEGORY_CODE
     </select>
 
-    <select id="teacherView" parameterType="hashMap" resultMap="teacherMap">
+    <select id="teacherView" parameterType="com.academy.lecture.service.TeacherVO" resultMap="teacherMap">
         SELECT * FROM TB_MA_MEMBER
         WHERE USER_ID = #{USER_ID}
     </select>
 
-    <select id="teacherIdCheck" parameterType="hashMap" resultType="int">
+    <select id="teacherIdCheck" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
         SELECT
             COUNT(USER_ID)
         FROM TB_MA_MEMBER
         WHERE USER_ID = #{USER_ID}
     </select>
 
-    <insert id="teacherInsert" parameterType="hashMap" flushCache="true">
+    <insert id="teacherInsert" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         INSERT INTO TB_MA_MEMBER(
             USER_ID, USER_NM, USER_NICKNM, USER_POSITION
             , USER_ROLE, USER_PWD, BIRTH_DAY
@@ -356,7 +356,7 @@
         )
     </insert>
 
-    <insert id="teacherCategoryInsert" parameterType="hashMap" flushCache="true">
+    <insert id="teacherCategoryInsert" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         INSERT INTO TB_MA_MEMBER_CATEGORY(
             USER_ID, CATEGORY_CODE
             , SEQ
@@ -368,7 +368,7 @@
         )
     </insert>
 
-    <insert id="teacherSubjectInsert" parameterType="hashMap" flushCache="true">
+    <insert id="teacherSubjectInsert" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         INSERT INTO TB_MA_MEMBER_SUBJECT(
             USER_ID, SUBJECT_CD, REG_DT, REG_ID, UPD_DT, UPD_ID
             <if test='USE_ON != null and USE_ON != ""'>
@@ -388,18 +388,18 @@
         )
     </insert>
 	
-	<update id="teacherSubjectUpdate" parameterType="hashMap" flushCache="true">
+	<update id="teacherSubjectUpdate" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         update TB_MA_MEMBER_SUBJECT 
         SET USE_OFF = #{USE_OFF} 
         WHERE USER_ID = #{USER_ID} 
         AND SUBJECT_CD = #{SUBJECT_CD}
     </update>
 	
-	<select id="teacherSubjectCount" parameterType="hashMap" resultType="int">
+	<select id="teacherSubjectCount" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
 	SELECT COUNT(*) FROM TB_MA_MEMBER_SUBJECT WHERE USER_ID = #{USER_ID} AND SUBJECT_CD = #{SUBJECT_CD}
 	</select>
 	
-    <update id="teacherUpdate" parameterType="hashMap">
+    <update id="teacherUpdate" parameterType="com.academy.lecture.service.TeacherVO">
         UPDATE TB_MA_MEMBER
             SET USER_NM = #{USER_NM}
             , USER_NICKNM = #{USER_NICKNM}
@@ -520,24 +520,24 @@
         WHERE USER_ID = #{USER_ID}
     </update>
 
-    <delete id="teacherIsUseUpdate" parameterType="hashMap" flushCache="true">
+    <delete id="teacherIsUseUpdate" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         UPDATE TB_MA_MEMBER SET ISUSE = 'N', ON_OPENYN = 'N', OFF_OPENYN = 'N' WHERE USER_ID = #{USER_ID}
         <!-- DELETE FROM TB_MA_MEMBER WHERE USER_ID = #{USER_ID} -->
     </delete>
 
-    <delete id="teacherDelete" parameterType="hashMap" flushCache="true">
+    <delete id="teacherDelete" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         DELETE FROM TB_MA_MEMBER WHERE USER_ID = #{USER_ID}
     </delete>
 
-    <delete id="teacherCategoryDelete" parameterType="hashMap" flushCache="true">
+    <delete id="teacherCategoryDelete" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         DELETE FROM TB_MA_MEMBER_CATEGORY WHERE USER_ID = #{USER_ID}    AND CATEGORY_CODE = #{DEL_CATEGORY_CODE}
     </delete>
 
-    <delete id="teacherSubjectDelete" parameterType="hashMap" flushCache="true">
+    <delete id="teacherSubjectDelete" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
         DELETE FROM TB_MA_MEMBER_SUBJECT WHERE USER_ID = #{USER_ID}
     </delete>
 
-    <update id="teacherSeqUpdate" parameterType="hashMap">
+    <update id="teacherSeqUpdate" parameterType="com.academy.lecture.service.TeacherVO">
 		<choose>
             <when test="SEARCHCATEGORY == 'main'">
                 UPDATE TB_MA_MEMBER_MAIN_CATEGORY
@@ -566,39 +566,39 @@
         </choose>
     </update>
 
-    <select id="teacherBookLog" parameterType="hashMap" resultMap="teacherMap">
+    <select id="teacherBookLog" parameterType="com.academy.lecture.service.TeacherVO" resultMap="teacherMap">
         SELECT * FROM TB_CA_BOOK WHERE SUBJECT_SJT_CD LIKE '%'||#{USER_ID}||'%'
     </select>
 
-	<insert id="teacherMain_Category_Insert" parameterType="hashMap" flushCache="true">
+	<insert id="teacherMain_Category_Insert" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
 		INSERT INTO TB_MA_MEMBER_MAIN_CATEGORY(USER_ID, CATEGORY_CODE, SEQ, REG_DT, REG_ID, UPD_DT, UPD_ID, SUBJECT_CD)
 		VALUES (#{USER_ID}, 'main', (SELECT NVL(MAX(SEQ), 0) + 1 FROM TB_MA_MEMBER_MAIN_CATEGORY), SYSDATE, #{UPD_ID}, SYSDATE, #{UPD_ID}, #{SUBJECT_CD})
 	</insert>
 
-	<delete id="teacherMain_Category_Delete" parameterType="hashMap" flushCache="true">
+	<delete id="teacherMain_Category_Delete" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
 		DELETE FROM TB_MA_MEMBER_MAIN_CATEGORY WHERE USER_ID = #{USER_ID}
 	</delete>
 	
-	<insert id="teacherIntro_Category_Insert" parameterType="hashMap" flushCache="true">
+	<insert id="teacherIntro_Category_Insert" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
 		INSERT INTO TB_MA_MEMBER_INTRO_CATEGORY(USER_ID, CATEGORY_CODE, SEQ, REG_DT, REG_ID, UPD_DT, UPD_ID, SUBJECT_CD)
 		VALUES (#{USER_ID}, 'intro', (SELECT NVL(MAX(SEQ), 0) + 1 FROM TB_MA_MEMBER_INTRO_CATEGORY), SYSDATE, #{UPD_ID}, SYSDATE, #{UPD_ID}, #{SUBJECT_CD})
 	</insert>
 	
-	<insert id="teacherIntro_F_Category_Insert" parameterType="hashMap" flushCache="true">
+	<insert id="teacherIntro_F_Category_Insert" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
 		INSERT INTO TB_MA_MEMBER_INTRO_F_CATEGORY(USER_ID, CATEGORY_CODE, SEQ, REG_DT, REG_ID, UPD_DT, UPD_ID, SUBJECT_CD)
 		VALUES (#{USER_ID}, 'intro_off', (SELECT NVL(MAX(SEQ), 0) + 1 FROM TB_MA_MEMBER_INTRO_F_CATEGORY), SYSDATE, #{UPD_ID}, SYSDATE, #{UPD_ID}, #{SUBJECT_CD})
 	</insert>
 
-	<delete id="teacherIntro_Category_Delete" parameterType="hashMap" flushCache="true">
+	<delete id="teacherIntro_Category_Delete" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
 		DELETE FROM TB_MA_MEMBER_INTRO_CATEGORY WHERE USER_ID = #{USER_ID}
 	</delete>
 	
-	<delete id="teacherIntro_F_Category_Delete" parameterType="hashMap" flushCache="true">
+	<delete id="teacherIntro_F_Category_Delete" parameterType="com.academy.lecture.service.TeacherVO" flushCache="true">
 		DELETE FROM TB_MA_MEMBER_INTRO_F_CATEGORY WHERE USER_ID = #{USER_ID}
 	</delete>
 	
 
-	<select id="teacherMainListCount" parameterType="hashMap" resultType="int">
+	<select id="teacherMainListCount" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
 		SELECT COUNT(*)
         FROM(
 		SELECT COUNT(A.USER_ID)
@@ -632,7 +632,7 @@
 
 	</select>
 
-	<select id="teacherIntroListCount" parameterType="hashMap" resultType="int">
+	<select id="teacherIntroListCount" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
 		SELECT COUNT(*)
         FROM(
 		SELECT COUNT(A.USER_ID)
@@ -666,7 +666,7 @@
 
 	</select>
 	
-	<select id="teacherIntro_offListCount" parameterType="hashMap" resultType="int">
+	<select id="teacherIntro_offListCount" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
 		SELECT COUNT(*)
         FROM(
 		SELECT COUNT(A.USER_ID)
@@ -701,7 +701,7 @@
 	</select>
 
 
-	<select id="teacherMainList" parameterType="hashMap" resultType="hashMap">
+	<select id="teacherMainList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
 
 		SELECT A.USER_ID, B.USER_NM, B.ISUSE, B.EMAIL, B.PHONE_NO
                    , DECODE(B.ISUSE, 'Y', '공개', 'N', '비공개') ISUSENM
@@ -748,7 +748,7 @@
             ORDER BY MIN(D.IDX), C.SUBJECT_CD, A.SEQ
 	</select>
 
-	<select id="teacherIntroList" parameterType="hashMap" resultType="hashMap">
+	<select id="teacherIntroList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
 
 		SELECT A.USER_ID, B.USER_NM, B.ISUSE, B.EMAIL, B.PHONE_NO
                    , DECODE(B.ISUSE, 'Y', '공개', 'N', '비공개') ISUSENM
@@ -795,7 +795,7 @@
             ORDER BY MIN(D.IDX), C.SUBJECT_CD, A.SEQ
 	</select>
 
-	<select id="teacherIntro_offList" parameterType="hashMap" resultType="hashMap">
+	<select id="teacherIntro_offList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
 
 		SELECT A.USER_ID, B.USER_NM, B.ISUSE, B.EMAIL, B.PHONE_NO
                    , DECODE(B.ISUSE, 'Y', '공개', 'N', '비공개') ISUSENM
@@ -842,7 +842,7 @@
             ORDER BY MIN(D.IDX), C.SUBJECT_CD, A.SEQ
 	</select>
 
-    <select id="findTeacherList" parameterType="hashMap" resultType="hashMap">
+    <select id="findTeacherList" parameterType="com.academy.lecture.service.TeacherVO" resultType="hashMap">
         SELECT *
         FROM (
             SELECT
@@ -886,19 +886,19 @@
         ORDER BY USER_NM
     </select>
     
-    <select id="teacherMain_Category_Subject" parameterType="hashMap" resultType="int">
+    <select id="teacherMain_Category_Subject" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
 		SELECT COUNT(*) FROM TB_MA_MEMBER_MAIN_CATEGORY
 		WHERE USER_ID = #{USER_ID}
 		AND SUBJECT_CD = #{SUBJECT_CD}
 	</select>
 	
-    <select id="teacherIntro_Category_Subject" parameterType="hashMap" resultType="int">
+    <select id="teacherIntro_Category_Subject" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
 		SELECT COUNT(*) FROM TB_MA_MEMBER_INTRO_CATEGORY
 		WHERE USER_ID = #{USER_ID}
 		AND SUBJECT_CD = #{SUBJECT_CD}
 	</select>	
 	
-	<select id="teacherIntro_F_Category_Subject" parameterType="hashMap" resultType="int">
+	<select id="teacherIntro_F_Category_Subject" parameterType="com.academy.lecture.service.TeacherVO" resultType="int">
 		SELECT COUNT(*) FROM TB_MA_MEMBER_INTRO_F_CATEGORY
 		WHERE USER_ID = #{USER_ID}
 		AND SUBJECT_CD = #{SUBJECT_CD}

@@ -82,8 +82,8 @@ public class OpenLectureService {
         return openLectureMapper.openlectureViewBookList(lectureVO);
     }
 
-    public void openlectureBookDelete(LectureVO lectureVO){
-        openLectureMapper.openlectureBookDelete(lectureVO);
+    public void openlectureBookDelete(OpenLectureVO openLectureVO){
+        openLectureMapper.openlectureBookDelete(openLectureVO);
     }
 
     public void openlectureUpdate(LectureVO lectureVO){
@@ -94,12 +94,12 @@ public class OpenLectureService {
         openLectureMapper.openlectureIsUseUpdate(lectureVO);
     }
 
-    public void openlectureDelete(LectureVO lectureVO){
-        openLectureMapper.openlectureDelete(lectureVO);
+    public void openlectureDelete(OpenLectureVO openLectureVO){
+        openLectureMapper.openlectureDelete(openLectureVO);
     }
 
-    public void openlectureBridgeDelete(LectureVO lectureVO){
-        openLectureMapper.openlectureBridgeDelete(lectureVO);
+    public void openlectureBridgeDelete(OpenLectureVO openLectureVO){
+        openLectureMapper.openlectureBridgeDelete(openLectureVO);
     }
 
     public void lecMovUpdate(LectureVO lectureVO){

@@ -74,6 +74,15 @@ public class TeacherVO extends CommonVO implements Serializable {
     private String[] professorUserId; // PROFESSOR_USER_ID - 교수 사용자 ID 배열
     // isUse, regDt, regId, updDt, updId inherited from CommonVO
 
+    // Single value fields for mapper operations
+    private String categoryCode;    // CATEGORY_CODE - 카테고리 코드 (단일)
+    private String delCategoryCode; // DEL_CATEGORY_CODE - 삭제할 카테고리 코드
+    private String subjectCdSingle; // SUBJECT_CD - 과목 코드 (단일)
+    private String useOn;           // USE_ON - 온라인 사용 여부
+    private String useOff;          // USE_OFF - 오프라인 사용 여부
+    private String numSingle;       // NUM - 번호 (단일)
+    private String seqSingle;       // SEQ - 순서 (단일)
+
     // Display fields
     private String isUseNm;         // ISUSENM - 사용여부명
     private String memTypeNm;       // MEM_TYPENM - 회원 유형명
@@ -556,6 +565,62 @@ public class TeacherVO extends CommonVO implements Serializable {
 
     public void setProfessorUserId(String[] professorUserId) {
         this.professorUserId = professorUserId;
+    }
+
+    public String getCategoryCode() {
+        return categoryCode;
+    }
+
+    public void setCategoryCode(String categoryCode) {
+        this.categoryCode = categoryCode;
+    }
+
+    public String getDelCategoryCode() {
+        return delCategoryCode;
+    }
+
+    public void setDelCategoryCode(String delCategoryCode) {
+        this.delCategoryCode = delCategoryCode;
+    }
+
+    public String getSubjectCdSingle() {
+        return subjectCdSingle;
+    }
+
+    public void setSubjectCdSingle(String subjectCdSingle) {
+        this.subjectCdSingle = subjectCdSingle;
+    }
+
+    public String getUseOn() {
+        return useOn;
+    }
+
+    public void setUseOn(String useOn) {
+        this.useOn = useOn;
+    }
+
+    public String getUseOff() {
+        return useOff;
+    }
+
+    public void setUseOff(String useOff) {
+        this.useOff = useOff;
+    }
+
+    public String getNumSingle() {
+        return numSingle;
+    }
+
+    public void setNumSingle(String numSingle) {
+        this.numSingle = numSingle;
+    }
+
+    public String getSeqSingle() {
+        return seqSingle;
+    }
+
+    public void setSeqSingle(String seqSingle) {
+        this.seqSingle = seqSingle;
     }
 
     @Override

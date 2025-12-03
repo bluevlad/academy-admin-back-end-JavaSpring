@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.academy.mapper.MacAddressManagerMapper">
 
-	<select id="macaddressmanagerList" parameterType="hashMap" resultType="hashMap">
+	<select id="macaddressmanagerList" parameterType="com.academy.lecture.service.MacAddressManagerVO" resultType="hashMap">
 		SELECT * FROM 	(
 			SELECT A.*, ROWNUM rnum
 		  	FROM (
@@ -37,7 +37,7 @@
 			)
 		WHERE rnum &gt; #{startNo}
 	</select>
-	<select id="devicelist" parameterType="hashMap" resultType="hashMap">
+	<select id="devicelist" parameterType="com.academy.lecture.service.MacAddressManagerVO" resultType="hashMap">
 					SELECT 
 					A.USER_ID, A.DEVICE_ID, A.DEVICE_GUBUN, 
 					   A.PC_USEYN, A.PC_REG_DT, A.MOBILE_REG_DT, A.PC_CANCEL_DT, A.MOBILE_CANCEL_DT,
@@ -66,7 +66,7 @@
 				 	ORDER BY A.PC_REG_DT, A.MOBILE_REG_DT
 	</select>
 	
-	<select id="macaddressView" parameterType="hashMap" resultType="hashMap">
+	<select id="macaddressView" parameterType="com.academy.lecture.service.MacAddressManagerVO" resultType="hashMap">
 		SELECT 
 					A.USER_ID, A.DEVICE_ID, A.DEVICE_GUBUN, 
 					   A.PC_USEYN, A.PC_REG_DT,A.MOBILE_REG_DT, A.PC_CANCEL_DT, A.MOBILE_CANCEL_DT,
@@ -77,7 +77,7 @@
 	</select>
 	
 
-	<select id="macaddressmanagerListCount" parameterType="hashMap" resultType="int">
+	<select id="macaddressmanagerListCount" parameterType="com.academy.lecture.service.MacAddressManagerVO" resultType="int">
 		SELECT COUNT(*) FROM 	(
 			SELECT A.*, ROWNUM rnum
 		  	FROM (
@@ -114,13 +114,13 @@
 
 
 
-	<update id="macaddressmanagerUpdate" parameterType="hashMap">
+	<update id="macaddressmanagerUpdate" parameterType="com.academy.lecture.service.MacAddressManagerVO">
 		UPDATE TM_DEVICE_HISTORY
 		SET
 			PC_USEYN = 'N',PC_CANCEL_DT = SYSDATE
 		WHERE SEQ = #{SEQ}
 	</update>
-	<update id="macaddressmanagerUpdate1" parameterType="hashMap">
+	<update id="macaddressmanagerUpdate1" parameterType="com.academy.lecture.service.MacAddressManagerVO">
 		UPDATE TM_DEVICE_HISTORY
 		SET
 			MOBILE_USEYN = 'N', MOBILE_CANCEL_DT = SYSDATE

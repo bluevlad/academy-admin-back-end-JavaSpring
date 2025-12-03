@@ -23,9 +23,7 @@ public class MacAddressManagerVO extends CommonVO implements Serializable {
     private String deviceType;      // DEVICE_TYPE - 디바이스 타입
     private String deviceName;      // DEVICE_NAME - 디바이스명
 
-    // Search 관련 fields
-    private String searchType;      // SEARCHTYPE - 검색 타입
-    private String searchText;      // SEARCHTEXT - 검색어
+    // Search 관련 fields (searchType, searchText inherited from CommonVO)
 
     // Getters and Setters
     public String getUserId() {
@@ -82,22 +80,6 @@ public class MacAddressManagerVO extends CommonVO implements Serializable {
 
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
-    }
-
-    public String getSearchType() {
-        return searchType;
-    }
-
-    public void setSearchType(String searchType) {
-        this.searchType = searchType;
-    }
-
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
     }
 
     @Override

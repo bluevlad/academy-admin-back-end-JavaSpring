@@ -1,5 +1,6 @@
 package com.academy.lecture.service;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import com.academy.mapper.SubjectMapper;
  * 과목 관리 서비스 (직접 구현)
  */
 @Service(value="subjectservice")
-public class SubjectService {
+public class SubjectService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Autowired
     private SubjectMapper subjectMapper;

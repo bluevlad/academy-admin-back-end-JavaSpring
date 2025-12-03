@@ -3,7 +3,6 @@ package com.academy.lecture;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -28,26 +27,23 @@ import com.academy.common.file.FileUtil;
 import com.academy.lecture.service.TeacherService;
 import com.academy.lecture.service.TeacherVO;
 
-import egovframework.rte.fdl.property.EgovPropertyService;
-
 @RestController
 @RequestMapping("/api/teacher")
 public class TeacherApi extends CORSFilter {
 
-    @Resource(name="propertiesService")
-    protected EgovPropertyService propertiesService;
+	@Value("${pageUnit:10}")
+	private int pageUnit;
 
 	@Value("${file.upload.path:C:/upload/}")
 	private String uploadPath;
 
-	@Resource(name="fileUtil")
-	private FileUtil fileUtil;
-
-	private TeacherService teacherservice;
+	private final FileUtil fileUtil;
+	private final TeacherService teacherservice;
 
 	@Autowired
-	public TeacherApi(TeacherService teacherservice) {
+	public TeacherApi(TeacherService teacherservice, FileUtil fileUtil) {
 		this.teacherservice = teacherservice;
+		this.fileUtil = fileUtil;
 	}
 
 	/**
@@ -362,7 +358,7 @@ public class TeacherApi extends CORSFilter {
 		}
 
 		vo.setCurrentPage(Integer.parseInt(CommonUtil.isNull(request.getParameter("currentPage"), "1")));
-		vo.setPageRow(Integer.parseInt(CommonUtil.isNull(request.getParameter("pageRow"), propertiesService.getInt("pageUnit")+"")));
+		vo.setPageRow(Integer.parseInt(CommonUtil.isNull(request.getParameter("pageRow"), String.valueOf(pageUnit))));
         vo.setSearchCategory(CommonUtil.isNull(request.getParameter("SEARCHCATEGORY"), ""));
 		vo.setSearchType(CommonUtil.isNull(request.getParameter("SEARCHTYPE"), ""));
 		vo.setSearchText(CommonUtil.isNull(request.getParameter("SEARCHTEXT"), ""));

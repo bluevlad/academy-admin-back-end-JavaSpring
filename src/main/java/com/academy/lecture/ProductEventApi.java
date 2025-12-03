@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,19 +30,17 @@ import com.academy.lecture.service.ProductEventService;
 import com.academy.lecture.service.ProductEventVO;
 import com.academy.lecture.service.TeacherService;
 
-import egovframework.rte.fdl.property.EgovPropertyService;
-
 @RestController
 @RequestMapping("/api/productevent")
 public class ProductEventApi extends CORSFilter {
 
-    @Resource(name="propertiesService")
-    protected EgovPropertyService propertiesService;
+	@Value("${pageUnit:10}")
+	private int pageUnit;
 
-	private ProductEventService productevent;
-	private LectureService lectureservice;
-	private BookService bookservice;
-	private TeacherService teacherservice;
+	private final ProductEventService productevent;
+	private final LectureService lectureservice;
+	private final BookService bookservice;
+	private final TeacherService teacherservice;
 
 	@Autowired
 	public ProductEventApi(ProductEventService productevent, LectureService lectureservice,
@@ -169,7 +167,7 @@ public class ProductEventApi extends CORSFilter {
 		String keyword = CommonUtil.isNull(request.getParameter("keyword"), "");
 
 		int currentPage = Integer.parseInt(CommonUtil.isNull(request.getParameter("currentPage"), "1"));
-		int pageRow = Integer.parseInt(CommonUtil.isNull(request.getParameter("pageRow"), propertiesService.getInt("pageUnit")+""));
+		int pageRow = Integer.parseInt(CommonUtil.isNull(request.getParameter("pageRow"), String.valueOf(pageUnit)));
 
 		String s_cat_cd = CommonUtil.isNull(request.getParameter("s_cat_cd"), "");
 		String s_sjt_cd = CommonUtil.isNull(request.getParameter("s_sjt_cd"), "");
@@ -315,7 +313,7 @@ public class ProductEventApi extends CORSFilter {
 
 		vo.setEventId(CommonUtil.isNull(request.getParameter("EVENT_ID"), ""));
 		vo.setCurrentPage(Integer.parseInt(CommonUtil.isNull(request.getParameter("currentPage"), "1")));
-		vo.setPageRow(Integer.parseInt(CommonUtil.isNull(request.getParameter("pageRow"), propertiesService.getInt("pageUnit")+"")));
+		vo.setPageRow(Integer.parseInt(CommonUtil.isNull(request.getParameter("pageRow"), String.valueOf(pageUnit))));
 		vo.setEventNm(CommonUtil.isNull(request.getParameter("EVENT_NM"), ""));
 		vo.setEventType(CommonUtil.isNull(request.getParameter("EVENT_TYPE"), ""));
 

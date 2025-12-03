@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.academy.mapper.SeriesMapper">
 
-  <select id="seriesList" parameterType="hashMap" resultType="hashMap">
+  <select id="seriesList" parameterType="com.academy.lecture.service.SeriesVO" resultType="hashMap">
     SELECT * FROM   (
         SELECT A.*, ROWNUM rnum
         FROM (
@@ -38,7 +38,7 @@
     WHERE rnum &gt; #{startNo}
   </select>
 
-  <select id="seriesListCount" parameterType="hashMap" resultType="int">
+  <select id="seriesListCount" parameterType="com.academy.lecture.service.SeriesVO" resultType="int">
     SELECT
       COUNT(SRS_CD)
     FROM TB_SERIES_INFO
@@ -61,7 +61,7 @@
     </if>
   </select>
 
-  <insert id="seriesInsert" parameterType="hashMap" flushCache="true">
+  <insert id="seriesInsert" parameterType="com.academy.lecture.service.SeriesVO" flushCache="true">
     INSERT INTO TB_CATEGORY_INFO (
         ID
         , CODE
@@ -87,7 +87,7 @@
     )
   </insert>
 
-  <select id="seriesView" parameterType="hashMap" resultType="hashMap">
+  <select id="seriesView" parameterType="com.academy.lecture.service.SeriesVO" resultType="hashMap">
     SELECT
         CODE, NAME, ISUSE, DECODE(ISUSE, 'Y', '활성', 'N', '비활성') ISUSENM
         , USE_ON, USE_OFF, REG_DT, REG_ID, UPD_DT, UPD_ID
@@ -98,7 +98,7 @@
     WHERE CODE = #{CODE}
   </select>
 
-  <update id="seriesUpdate" parameterType="hashMap">
+  <update id="seriesUpdate" parameterType="com.academy.lecture.service.SeriesVO">
     UPDATE TB_CATEGORY_INFO
     SET
       NAME = #{NAME}
@@ -111,17 +111,17 @@
     WHERE CODE = #{CODE}
   </update>
 
-  <delete id="categoryDelete" parameterType="hashMap">
+  <delete id="categoryDelete" parameterType="com.academy.lecture.service.SeriesVO">
     DELETE FROM TB_CATEGORY_INFO
     WHERE P_CODE = #{CODE}
   </delete>
 
-  <delete id="seriesDelete" parameterType="hashMap">
+  <delete id="seriesDelete" parameterType="com.academy.lecture.service.SeriesVO">
     DELETE FROM TB_CATEGORY_INFO
     WHERE CODE = #{CODE}
   </delete>
 
-  <select id="seriesCheck" parameterType="hashMap" resultType="int">
+  <select id="seriesCheck" parameterType="com.academy.lecture.service.SeriesVO" resultType="int">
     SELECT
       COUNT(CODE)
     FROM CODE
