@@ -1,11 +1,11 @@
 package com.academy.common.file.web;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -65,13 +65,15 @@ public class FileDownloadController implements ApplicationContextAware {
 	}
 
 	@RequestMapping("imgFileView.do")
-	public ResponseEntity<byte[]>  imgFileView(@RequestParam("path")String path) throws Exception{
+	public ResponseEntity<byte[]> imgFileView(@RequestParam("path") String path) throws IOException {
 		String rootPath = uploadPath;
+		File file = new File(rootPath + path);
 
-		FileInputStream fin = new FileInputStream(new File(rootPath + path));
-	    final HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.IMAGE_PNG);
-	    return new ResponseEntity<byte[]>(IOUtils.toByteArray(fin), headers, HttpStatus.CREATED);
+		byte[] imageBytes = Files.readAllBytes(file.toPath());
+
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
 	}
 
 

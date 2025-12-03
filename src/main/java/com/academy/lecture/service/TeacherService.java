@@ -1,5 +1,6 @@
 package com.academy.lecture.service;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import com.academy.mapper.TeacherMapper;
  * 강사 관리 서비스 (직접 구현)
  */
 @Service(value="teacherservice")
-public class TeacherService {
+public class TeacherService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Autowired
     private TeacherMapper teacherMapper;
@@ -70,18 +73,17 @@ public class TeacherService {
     /**
      * Teacher 등록 (배열 처리 포함)
      */
-    @SuppressWarnings("unchecked")
-    public void teacherInsert(Object obj){
+    public void teacherInsert(TeacherVO teacherVO){
 
-        teacherMapper.teacherInsert(obj);
+        teacherMapper.teacherInsert(teacherVO);
 
-        String[] ORI_CATEGORY_CODE = (String[])((HashMap<String, Object>)obj).get("ORI_CATEGORY_CODE");
-        String[] CETCARR = (String[])((HashMap<String, Object>)obj).get("CETCARR");
+        String[] ORI_CATEGORY_CODE = teacherVO.getOriCategoryCode();
+        String[] CETCARR = teacherVO.getCetcarr();
 
         if(ORI_CATEGORY_CODE == null) { // 등록
             for(int i=0; i<CETCARR.length; i++){
-                ((HashMap<String, String>)obj).put("CATEGORY_CODE", CETCARR[i]);
-                teacherMapper.teacherCategoryInsert(obj);
+                teacherVO.setCategoryCode(CETCARR[i]);
+                teacherMapper.teacherCategoryInsert(teacherVO);
             }
         } else {    // 수정
             for(int i=0; i<ORI_CATEGORY_CODE.length;i++){
@@ -92,8 +94,8 @@ public class TeacherService {
                     }
                 }
                 if(isDel) {
-                    ((HashMap<String, String>)obj).put("DEL_CATEGORY_CODE", ORI_CATEGORY_CODE[i]);
-                    teacherMapper.teacherCategoryDelete(obj);
+                    teacherVO.setDelCategoryCode(ORI_CATEGORY_CODE[i]);
+                    teacherMapper.teacherCategoryDelete(teacherVO);
                 }
             }
 
@@ -105,38 +107,38 @@ public class TeacherService {
                     }
                 }
                 if(isIns) {
-                    ((HashMap<String, String>)obj).put("CATEGORY_CODE", CETCARR[i]);
-                    teacherMapper.teacherCategoryInsert(obj);
+                    teacherVO.setCategoryCode(CETCARR[i]);
+                    teacherMapper.teacherCategoryInsert(teacherVO);
                 }
             }
         }
 
-        teacherMapper.teacherSubjectDelete(obj);
+        teacherMapper.teacherSubjectDelete(teacherVO);
 
-        String[] SETCARR = (String[])((HashMap<String, Object>)obj).get("SETCARR");
+        String[] SETCARR = teacherVO.getSetcarr();
         if(SETCARR != null){
             for(int i=0; i<SETCARR.length; i++){
-                ((HashMap<String, String>)obj).put("SUBJECT_CD", SETCARR[i]);
-                int teacherMain_Category_Subject = teacherMapper.teacherMain_Category_Subject(obj);
-                int teacherIntro_Category_Subject = teacherMapper.teacherIntro_Category_Subject(obj);
-                teacherMapper.teacherSubjectInsert(obj);
+                teacherVO.setSubjectCdSingle(SETCARR[i]);
+                int teacherMain_Category_Subject = teacherMapper.teacherMain_Category_Subject(teacherVO);
+                int teacherIntro_Category_Subject = teacherMapper.teacherIntro_Category_Subject(teacherVO);
+                teacherMapper.teacherSubjectInsert(teacherVO);
 
                 if(ORI_CATEGORY_CODE == null) {
-                    teacherMapper.teacherMain_Category_Insert(obj);
-                    teacherMapper.teacherIntro_Category_Insert(obj);
-                    teacherMapper.teacherIntro_F_Category_Insert(obj);
+                    teacherMapper.teacherMain_Category_Insert(teacherVO);
+                    teacherMapper.teacherIntro_Category_Insert(teacherVO);
+                    teacherMapper.teacherIntro_F_Category_Insert(teacherVO);
                 }else{
 
                     if(teacherMain_Category_Subject == 0){
 
-                        teacherMapper.teacherMain_Category_Insert(obj);
+                        teacherMapper.teacherMain_Category_Insert(teacherVO);
                     }else{
 
                     }
                     if(teacherIntro_Category_Subject == 0){
 
-                        teacherMapper.teacherIntro_Category_Insert(obj);
-                        teacherMapper.teacherIntro_F_Category_Insert(obj);
+                        teacherMapper.teacherIntro_Category_Insert(teacherVO);
+                        teacherMapper.teacherIntro_F_Category_Insert(teacherVO);
                     }else{
 
                     }
@@ -155,17 +157,16 @@ public class TeacherService {
     /**
      * Teacher 수정 (배열 처리 포함)
      */
-    @SuppressWarnings("unchecked")
-    public void teacherUpdate(Object obj){
-        teacherMapper.teacherUpdate(obj);
+    public void teacherUpdate(TeacherVO teacherVO){
+        teacherMapper.teacherUpdate(teacherVO);
 
-        String[] ORI_CATEGORY_CODE = (String[])((HashMap<String, Object>)obj).get("ORI_CATEGORY_CODE");
-        String[] CETCARR = (String[])((HashMap<String, Object>)obj).get("CETCARR");
+        String[] ORI_CATEGORY_CODE = teacherVO.getOriCategoryCode();
+        String[] CETCARR = teacherVO.getCetcarr();
 
         if(ORI_CATEGORY_CODE == null) { // 등록
             for(int i=0; i<CETCARR.length; i++){
-                ((HashMap<String, String>)obj).put("CATEGORY_CODE", CETCARR[i]);
-                teacherMapper.teacherCategoryInsert(obj);
+                teacherVO.setCategoryCode(CETCARR[i]);
+                teacherMapper.teacherCategoryInsert(teacherVO);
             }
         } else {    // 수정
             for(int i=0; i<ORI_CATEGORY_CODE.length;i++){
@@ -176,8 +177,8 @@ public class TeacherService {
                     }
                 }
                 if(isDel) {
-                    ((HashMap<String, String>)obj).put("DEL_CATEGORY_CODE", ORI_CATEGORY_CODE[i]);
-                    teacherMapper.teacherCategoryDelete(obj);
+                    teacherVO.setDelCategoryCode(ORI_CATEGORY_CODE[i]);
+                    teacherMapper.teacherCategoryDelete(teacherVO);
                 }
             }
 
@@ -189,91 +190,91 @@ public class TeacherService {
                     }
                 }
                 if(isIns) {
-                    ((HashMap<String, String>)obj).put("CATEGORY_CODE", CETCARR[i]);
-                    teacherMapper.teacherCategoryInsert(obj);
+                    teacherVO.setCategoryCode(CETCARR[i]);
+                    teacherMapper.teacherCategoryInsert(teacherVO);
                 }
             }
         }
 
-        teacherMapper.teacherSubjectDelete(obj);
-        teacherMapper.teacherMain_Category_Delete(obj);
-        teacherMapper.teacherIntro_Category_Delete(obj);
-        teacherMapper.teacherIntro_F_Category_Delete(obj);
+        teacherMapper.teacherSubjectDelete(teacherVO);
+        teacherMapper.teacherMain_Category_Delete(teacherVO);
+        teacherMapper.teacherIntro_Category_Delete(teacherVO);
+        teacherMapper.teacherIntro_F_Category_Delete(teacherVO);
 
-        String[] SETCARR = (String[])((HashMap<String, Object>)obj).get("SETCARR");
-        String[] OFF_SETCARR = (String[])((HashMap<String, Object>)obj).get("OFF_SETCARR");
+        String[] SETCARR = teacherVO.getSetcarr();
+        String[] OFF_SETCARR = teacherVO.getOffSetcarr();
         String ON_SBJ = "";
         if(SETCARR != null && SETCARR.length > 0){
             for(int i=0; i<SETCARR.length; i++){
-                ((HashMap<String, String>)obj).put("SUBJECT_CD", SETCARR[i]);
-                ((HashMap<String, String>)obj).put("USE_ON", "Y");
-                ((HashMap<String, String>)obj).put("USE_OFF", "N");
-                teacherMapper.teacherSubjectInsert(obj);
+                teacherVO.setSubjectCdSingle(SETCARR[i]);
+                teacherVO.setUseOn("Y");
+                teacherVO.setUseOff("N");
+                teacherMapper.teacherSubjectInsert(teacherVO);
 
                 if(ORI_CATEGORY_CODE == null) {
-                    teacherMapper.teacherMain_Category_Insert(obj);
-                    teacherMapper.teacherIntro_Category_Insert(obj);
-                    teacherMapper.teacherIntro_F_Category_Insert(obj);
+                    teacherMapper.teacherMain_Category_Insert(teacherVO);
+                    teacherMapper.teacherIntro_Category_Insert(teacherVO);
+                    teacherMapper.teacherIntro_F_Category_Insert(teacherVO);
                 }else{
-                    int teacherMain_Category_Subject = teacherMapper.teacherMain_Category_Subject(obj);
-                    int teacherIntro_Category_Subject = teacherMapper.teacherIntro_Category_Subject(obj);
-                    int teacherIntro_F_Category_Subject = teacherMapper.teacherIntro_F_Category_Subject(obj);
+                    int teacherMain_Category_Subject = teacherMapper.teacherMain_Category_Subject(teacherVO);
+                    int teacherIntro_Category_Subject = teacherMapper.teacherIntro_Category_Subject(teacherVO);
+                    int teacherIntro_F_Category_Subject = teacherMapper.teacherIntro_F_Category_Subject(teacherVO);
                     if(teacherMain_Category_Subject == 0){
 
-                        teacherMapper.teacherMain_Category_Insert(obj);
+                        teacherMapper.teacherMain_Category_Insert(teacherVO);
 
                     }
                     if(teacherIntro_Category_Subject == 0){
-                        teacherMapper.teacherIntro_Category_Insert(obj);
+                        teacherMapper.teacherIntro_Category_Insert(teacherVO);
                     }
                     if(teacherIntro_F_Category_Subject == 0){
-                        teacherMapper.teacherIntro_F_Category_Insert(obj);
+                        teacherMapper.teacherIntro_F_Category_Insert(teacherVO);
                     }
 
                 }
                 ON_SBJ += SETCARR[i]+",";
           }
        }
-        ((HashMap<String, String>)obj).put("USE_ON", "");
-        ((HashMap<String, String>)obj).put("USE_OFF", "");
+        teacherVO.setUseOn("");
+        teacherVO.setUseOff("");
 
         if(OFF_SETCARR != null && OFF_SETCARR.length > 0){
             for(int j=0; j<OFF_SETCARR.length; j++){
                 if(ON_SBJ.contains(OFF_SETCARR[j])){
-                    ((HashMap<String, String>)obj).put("USE_OFF", "Y");
-                    teacherMapper.teacherSubjectUpdate(obj);
+                    teacherVO.setUseOff("Y");
+                    teacherMapper.teacherSubjectUpdate(teacherVO);
                 }else{
-                    ((HashMap<String, String>)obj).put("SUBJECT_CD", OFF_SETCARR[j]);
-                    ((HashMap<String, String>)obj).put("USE_ON", "N");
-                    ((HashMap<String, String>)obj).put("USE_OFF", "Y");
-                    int sbjCnt = teacherMapper.teacherSubjectCount(obj);
+                    teacherVO.setSubjectCdSingle(OFF_SETCARR[j]);
+                    teacherVO.setUseOn("N");
+                    teacherVO.setUseOff("Y");
+                    int sbjCnt = teacherMapper.teacherSubjectCount(teacherVO);
                     if(sbjCnt==0){
-                        teacherMapper.teacherSubjectInsert(obj);
+                        teacherMapper.teacherSubjectInsert(teacherVO);
 
                         if(ORI_CATEGORY_CODE == null && (SETCARR == null || SETCARR.length < 1)) {
-                            teacherMapper.teacherMain_Category_Insert(obj);
-                            teacherMapper.teacherIntro_Category_Insert(obj);
-                            teacherMapper.teacherIntro_F_Category_Insert(obj);
+                            teacherMapper.teacherMain_Category_Insert(teacherVO);
+                            teacherMapper.teacherIntro_Category_Insert(teacherVO);
+                            teacherMapper.teacherIntro_F_Category_Insert(teacherVO);
                         }else{
-                            int teacherMain_Category_Subject = teacherMapper.teacherMain_Category_Subject(obj);
-                            int teacherIntro_Category_Subject = teacherMapper.teacherIntro_Category_Subject(obj);
-                            int teacherIntro_F_Category_Subject = teacherMapper.teacherIntro_F_Category_Subject(obj);
+                            int teacherMain_Category_Subject = teacherMapper.teacherMain_Category_Subject(teacherVO);
+                            int teacherIntro_Category_Subject = teacherMapper.teacherIntro_Category_Subject(teacherVO);
+                            int teacherIntro_F_Category_Subject = teacherMapper.teacherIntro_F_Category_Subject(teacherVO);
                             if(teacherMain_Category_Subject == 0){
 
-                                teacherMapper.teacherMain_Category_Insert(obj);
+                                teacherMapper.teacherMain_Category_Insert(teacherVO);
 
                             }
                             if(teacherIntro_Category_Subject == 0){
-                                teacherMapper.teacherIntro_Category_Insert(obj);
+                                teacherMapper.teacherIntro_Category_Insert(teacherVO);
                             }
                             if(teacherIntro_F_Category_Subject == 0){
-                                teacherMapper.teacherIntro_F_Category_Insert(obj);
+                                teacherMapper.teacherIntro_F_Category_Insert(teacherVO);
                             }
                         }
                     }
                 }
-                ((HashMap<String, String>)obj).put("USE_ON", "");
-                ((HashMap<String, String>)obj).put("USE_OFF", "");
+                teacherVO.setUseOn("");
+                teacherVO.setUseOff("");
             }
         }
     }
@@ -295,15 +296,13 @@ public class TeacherService {
     /**
      * Teacher 사용 여부 수정 (배열 처리 포함)
      */
-    @SuppressWarnings("unchecked")
-    public void teacherIsUseUpdate(Object obj){
-        String[] DEL_ARR = (String[])((HashMap<String, Object>)obj).get("DEL_ARR");
+    public void teacherIsUseUpdate(TeacherVO teacherVO){
+        String[] DEL_ARR = teacherVO.getDelArr();
         if(DEL_ARR != null && DEL_ARR.length > 0){
             for(int i=0; i<DEL_ARR.length; i++){
-                HashMap<String, String> params = new  HashMap<String, String>();
-                params.put("USER_ID", DEL_ARR[i]);
-
-                teacherMapper.teacherIsUseUpdate(params);
+                TeacherVO paramVO = new TeacherVO();
+                paramVO.setUserId(DEL_ARR[i]);
+                teacherMapper.teacherIsUseUpdate(paramVO);
             }
         }
     }
@@ -332,24 +331,23 @@ public class TeacherService {
     /**
      * Teacher 순서 수정 (배열 처리 포함)
      */
-    @SuppressWarnings("unchecked")
-    public void teacherSeqUpdate(Object obj){
-        String[] NUM = (String[])((HashMap<String, Object>)obj).get("NUM");
-        String[] SEQARR = (String[])((HashMap<String, Object>)obj).get("SEQ");
-        String[] PROFESSOR_USER_IDARR = (String[])((HashMap<String, Object>)obj).get("USER_ID");
-        String[] SUBJECT_CD = (String[])((HashMap<String, Object>)obj).get("SUBJECT_CD");
+    public void teacherSeqUpdate(TeacherVO teacherVO){
+        String[] NUM = teacherVO.getNum();
+        String[] SEQARR = teacherVO.getSeq();
+        String[] PROFESSOR_USER_IDARR = teacherVO.getProfessorUserId();
+        String[] SUBJECT_CD = teacherVO.getSubjectCd();
 
         if(SEQARR != null && SEQARR.length > 0){
             for(int i=0; i<SEQARR.length; i++){
-                HashMap<String, String> params = new  HashMap<String, String>();
-                params.put("NUM", NUM[i]);
-                params.put("SEQ", SEQARR[i]);
-                params.put("USER_ID", PROFESSOR_USER_IDARR[i]);
-                params.put("SUBJECT_CD", SUBJECT_CD[i]);
-                params.put("ONOFFDIV", ((HashMap<String, Object>)obj).get("ONOFFDIV").toString());
-                params.put("SEARCHCATEGORY", ((HashMap<String, Object>)obj).get("SEARCHCATEGORY").toString());
+                TeacherVO paramVO = new TeacherVO();
+                paramVO.setNumSingle(NUM[i]);
+                paramVO.setSeqSingle(SEQARR[i]);
+                paramVO.setUserId(PROFESSOR_USER_IDARR[i]);
+                paramVO.setSubjectCdSingle(SUBJECT_CD[i]);
+                paramVO.setOnoffdiv(teacherVO.getOnoffdiv());
+                paramVO.setSearchCategory(teacherVO.getSearchCategory());
 
-                teacherMapper.teacherSeqUpdate(params);
+                teacherMapper.teacherSeqUpdate(paramVO);
             }
         }
     }

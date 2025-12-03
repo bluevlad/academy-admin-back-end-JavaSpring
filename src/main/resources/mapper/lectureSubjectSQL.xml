@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.academy.mapper.SubjectMapper">
 
-	<select id="subjectList" parameterType="hashMap" resultType="hashMap">
+	<select id="subjectList" parameterType="com.academy.lecture.service.SubjectVO" resultType="hashMap">
 		SELECT * FROM 	(
 			SELECT A.*, ROWNUM rnum
 		  	FROM (
@@ -40,7 +40,7 @@
 		WHERE rnum &gt; #{startNo}
 	</select>
 
-	<select id="subjectListCount" parameterType="hashMap" resultType="int">
+	<select id="subjectListCount" parameterType="com.academy.lecture.service.SubjectVO" resultType="int">
 		SELECT
 			COUNT(SUBJECT_CD)
 		FROM TB_SUBJECT_INFO
@@ -63,31 +63,31 @@
 		</if>
 	</select>
 
-	<select id="subjectGetCode" parameterType="hashMap" resultType="String">
+	<select id="subjectGetCode" parameterType="com.academy.lecture.service.SubjectVO" resultType="String">
 		SELECT
 			REPLACE(TO_CHAR(NVL(MAX(SUBJECT_CD),1000)+1 ,'0000'),' ','') CODE
 		FROM TB_SUBJECT_INFO
 	</select>
 
-	<insert id="subjectInsert" parameterType="hashMap" flushCache="true">
+	<insert id="subjectInsert" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		INSERT INTO TB_SUBJECT_INFO(SUBJECT_CD, SUBJECT_NM, SUBJECT_SHORT_NM, ISUSE, REG_DT, REG_ID, UPD_DT, UPD_ID)
 		VALUES (#{SUBJECT_CD}, #{SUBJECT_NM}, #{SUBJECT_SHORT_NM}, #{ISUSE}, SYSDATE, #{REG_ID}, SYSDATE, #{UPD_ID})
 	</insert>
 
-	<insert id="subjectCategoryInsert" parameterType="hashMap" flushCache="true">
+	<insert id="subjectCategoryInsert" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		INSERT INTO TB_SUBJECT_CATEGORY(SUBJECT_CD, CATEGORY_CODE)
 		VALUES (#{SUBJECT_CD}, #{CATEGORY_CODE})
 	</insert>
 
-	<update id="subjectCategoryDelete" parameterType="hashMap" flushCache="true">
+	<update id="subjectCategoryDelete" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		DELETE FROM TB_SUBJECT_CATEGORY WHERE SUBJECT_CD = #{SUBJECT_CD}
 	</update>
 	
-	<delete id="subjectCategoryDeleteByCat" parameterType="hashMap" flushCache="true">
+	<delete id="subjectCategoryDeleteByCat" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		DELETE FROM TB_SUBJECT_CATEGORY WHERE SUBJECT_CD = #{SUBJECT_CD} AND CATEGORY_CODE = #{CATEGORY_CODE}
 	</delete>
 	
-	<insert id="subjectCategoryOrderInsert" parameterType="hashMap" flushCache="true">
+	<insert id="subjectCategoryOrderInsert" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		INSERT INTO TB_CATEGORY_SUBJECT_ORDER(ONOFF_DIV, CATEGORY_CODE, SUBJECT_CD, IDX)
 		VALUES (#{ONOFF_DIV}, #{CATEGORY_CODE}, #{SUBJECT_CD} 
 		<choose>
@@ -102,7 +102,7 @@
 		)
 	</insert>
 	
-	<select id="chkSubjectCategoryOrderCnt" parameterType="hashMap" resultType="int">
+	<select id="chkSubjectCategoryOrderCnt" parameterType="com.academy.lecture.service.SubjectVO" resultType="int">
 		SELECT 
 			COUNT(*)  
 		FROM TB_CATEGORY_SUBJECT_ORDER			
@@ -114,7 +114,7 @@
 		AND SUBJECT_CD = #{SUBJECT_CD}
 	</select>
 	
-	<select id="chkSubjectCategoryCnt" parameterType="hashMap" resultType="int">
+	<select id="chkSubjectCategoryCnt" parameterType="com.academy.lecture.service.SubjectVO" resultType="int">
 		SELECT 
 			COUNT(*)  
 		FROM TB_SUBJECT_CATEGORY			
@@ -123,7 +123,7 @@
 		AND SUBJECT_CD = #{SUBJECT_CD}
 	</select>
 	
-	<select id="getSubjectCategoryOrderIdx" parameterType="hashMap" resultType="String">
+	<select id="getSubjectCategoryOrderIdx" parameterType="com.academy.lecture.service.SubjectVO" resultType="String">
 		SELECT 
 			NVL(MIN(IDX),
 			(SELECT NVL(MAX(G.IDX)+1,1) 
@@ -137,11 +137,11 @@
 		GROUP BY ONOFF_DIV,SUBJECT_CD,CATEGORY_CODE
 	</select>
 	
-	<update id="subjectCategoryOrderDelete" parameterType="hashMap" flushCache="true">
+	<update id="subjectCategoryOrderDelete" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		DELETE FROM TB_CATEGORY_SUBJECT_ORDER WHERE SUBJECT_CD = #{SUBJECT_CD}
 	</update>
 	
-	<delete id="subjectCategoryOrderDeleteByOnoff" parameterType="hashMap" flushCache="true">
+	<delete id="subjectCategoryOrderDeleteByOnoff" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		DELETE FROM TB_CATEGORY_SUBJECT_ORDER 
 		WHERE ONOFF_DIV = #{ONOFF_DIV}
 		AND SUBJECT_CD = #{SUBJECT_CD}
@@ -150,7 +150,7 @@
         </if>
 	</delete>
 
-	<select id="subjectView" parameterType="hashMap" resultType="hashMap">
+	<select id="subjectView" parameterType="com.academy.lecture.service.SubjectVO" resultType="hashMap">
 		SELECT
 			SUBJECT_CD, SUBJECT_NM, SUBJECT_SHORT_NM, ISUSE
 			, DECODE(ISUSE, 'Y', '활성', 'N', '비활성') ISUSENM
@@ -159,7 +159,7 @@
 		WHERE SUBJECT_CD = #{SUBJECT_CD}
 	</select>
 
-	<select id="subjectCategoryView" parameterType="hashMap" resultType="hashMap">
+	<select id="subjectCategoryView" parameterType="com.academy.lecture.service.SubjectVO" resultType="hashMap">
 		SELECT
             AA.SUBJECT_CD, AA.CATEGORY_CODE
         FROM TB_SUBJECT_CATEGORY AA,(  SELECT SUBJECT_CD,CATEGORY_CODE
@@ -173,7 +173,7 @@
         AND AA.SUBJECT_CD = #{SUBJECT_CD}
 	</select>
 
-	<update id="subjectUpdate" parameterType="hashMap">
+	<update id="subjectUpdate" parameterType="com.academy.lecture.service.SubjectVO">
 		UPDATE TB_SUBJECT_INFO
 		SET
 			SUBJECT_NM = #{SUBJECT_NM}
@@ -184,7 +184,7 @@
 		WHERE SUBJECT_CD = #{SUBJECT_CD}
 	</update>
 
-	<delete id="subjectDelete" parameterType="hashMap">
+	<delete id="subjectDelete" parameterType="com.academy.lecture.service.SubjectVO">
 		UPDATE TB_SUBJECT_INFO
 		SET ISUSE = 'N'
 		WHERE SUBJECT_CD = #{SUBJECT_CD}
@@ -194,7 +194,7 @@
 		-->
 	</delete>
 
-    <select id="findSubjectCategoryList" parameterType="hashMap" resultType="hashMap">
+    <select id="findSubjectCategoryList" parameterType="com.academy.lecture.service.SubjectVO" resultType="hashMap">
         SELECT
             C.CODE AS CATEGORY_CODE, C.NAME AS CATEGORY_NM
             , A.SUBJECT_CD, A.SUBJECT_NM, A.SUBJECT_SHORT_NM, A.ISUSE
@@ -210,7 +210,7 @@
         ORDER BY A.SUBJECT_CD
     </select>
     
-	<select id="subjectCheck" parameterType="hashMap" resultType="int">
+	<select id="subjectCheck" parameterType="com.academy.lecture.service.SubjectVO" resultType="int">
 		SELECT 
 			COUNT(SUBJECT_CD)  
 		FROM TB_SUBJECT_INFO			
@@ -223,7 +223,7 @@
 		</if>		
 	</select>	
 	
-	<insert id="main_category_subject_order_Insert" parameterType="hashMap" flushCache="true">
+	<insert id="main_category_subject_order_Insert" parameterType="com.academy.lecture.service.SubjectVO" flushCache="true">
 		INSERT INTO TB_MAIN_CATEGORY_SUBJECT_ORDER(ONOFF_DIV, CATEGORY_CODE, SUBJECT_CD, IDX) 
 		VALUES ('M', 'main', #{SUBJECT_CD}, (SELECT NVL(MAX(IDX)+1,1) FROM TB_MAIN_CATEGORY_SUBJECT_ORDER))	
 	</insert>

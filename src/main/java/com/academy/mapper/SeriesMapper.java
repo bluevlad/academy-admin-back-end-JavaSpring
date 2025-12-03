@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.academy.lecture.service.SeriesVO;
+
 /**
  * Series Mapper Interface
  * lectureSeriesSQL.xml 매퍼 파일과 연동
@@ -15,40 +17,40 @@ public interface SeriesMapper {
     /**
      * 시리즈 목록 조회
      */
-    List<HashMap<String, String>> seriesList(Object obj);
+    List<HashMap<String, String>> seriesList(SeriesVO seriesVO);
 
     /**
      * 시리즈 목록 카운트
      */
-    int seriesListCount(Object obj);
+    int seriesListCount(SeriesVO seriesVO);
 
     /**
      * 시리즈 등록
      */
-    void seriesInsert(Object obj);
+    int seriesInsert(SeriesVO seriesVO);
 
     /**
      * 시리즈 상세 조회
      */
-    List<HashMap<String, String>> seriesView(Object obj);
+    HashMap<String, Object> seriesView(SeriesVO seriesVO);
 
     /**
      * 시리즈 수정
      */
-    void seriesUpdate(Object obj);
+    void seriesUpdate(SeriesVO seriesVO);
 
     /**
      * 시리즈 삭제
      */
-    void seriesDelete(Object obj);
+    int seriesDelete(SeriesVO seriesVO);
 
     /**
      * 시리즈 중복 체크
      */
-    int seriesCheck(Object obj);
+    int seriesCheck(SeriesVO seriesVO);
 
     /**
      * 카테고리 삭제
      */
-    void categoryDelete(Object obj);
+    void categoryDelete(SeriesVO seriesVO);
 }

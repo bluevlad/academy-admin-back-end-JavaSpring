@@ -70,7 +70,7 @@ public class LectureVO extends CommonVO implements Serializable {
 
     // Fields from LectureMstVO (integrated)
     private String mstcode;                     // MSTCODE - 마스터 코드
-    private String bridgeMstcode;               // BRIDGE_MSTCODE - 브릿지 마스터 코드
+    private String bridgeLeccode;               // BRIDGE_LECCODE - 브릿지 마스터 코드
     private String subjectCd;                   // SUBJECT_CD - 과목 코드
     private String teacherCd;                   // TEACHER_CD - 강사 코드
     private String formCd;                      // FORM_CD - 학습형태 코드
@@ -92,22 +92,17 @@ public class LectureVO extends CommonVO implements Serializable {
     private String useYn;                       // USE_YN - 사용 여부
     private String isOpen;                      // IS_OPEN - 공개 여부
 
-    // Additional fields for API
-    private String searchType;                  // SEARCHTYPE - 검색 타입
-    private String searchText;                  // SEARCHTEXT - 검색 텍스트
+    // Additional fields for API (searchType, searchText, searchKind, searchGubn, updateFlag inherited from CommonVO)
     private String searchPayYn;                 // SEARCHPAYYN - 검색 결제 여부
     private String searchPayType;               // SEARCHPAYTYPE - 검색 결제 타입
-    private String searchKind;                  // SEARCHKIND - 검색 종류
     private String searchForm;                  // SEARCHFORM - 검색 형태
     private String searchYear;                  // SEARCHYEAR - 검색 연도
     private String searchOpenPage;              // SEARCHOPENPAGE - 검색 오픈 페이지
-    private String searchGubn;                  // SEARCHGUBN - 검색 구분
     private String searchCodeIsuse;             // SEARCHCODEISUSE - 검색 코드 사용여부
     private String rscId;                       // RSC_ID - 리소스 ID
     private String prefix;                      // PREFIX - 접두어
     private String flag;                        // FLAG - 플래그
     private String flag2;                       // FLAG2 - 플래그2
-    private String updateFlag;                  // UPDATE_FLAG - 업데이트 플래그
     private String bridgeLec;                   // BRIDGE_LEC - 브릿지 강의
     private String getCode;                     // GET_CODE - 코드 조회
     private String rcode;                       // RCODE - R코드
@@ -599,23 +594,7 @@ public class LectureVO extends CommonVO implements Serializable {
         this.isUseNm = isUseNm;
     }
 
-    // Additional fields getters and setters
-    public String getSearchType() {
-        return searchType;
-    }
-
-    public void setSearchType(String searchType) {
-        this.searchType = searchType;
-    }
-
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
+    // Additional fields getters and setters (searchType, searchText, searchKind, searchGubn, updateFlag inherited from CommonVO)
     public String getSearchPayYn() {
         return searchPayYn;
     }
@@ -630,14 +609,6 @@ public class LectureVO extends CommonVO implements Serializable {
 
     public void setSearchPayType(String searchPayType) {
         this.searchPayType = searchPayType;
-    }
-
-    public String getSearchKind() {
-        return searchKind;
-    }
-
-    public void setSearchKind(String searchKind) {
-        this.searchKind = searchKind;
     }
 
     public String getSearchForm() {
@@ -662,14 +633,6 @@ public class LectureVO extends CommonVO implements Serializable {
 
     public void setSearchOpenPage(String searchOpenPage) {
         this.searchOpenPage = searchOpenPage;
-    }
-
-    public String getSearchGubn() {
-        return searchGubn;
-    }
-
-    public void setSearchGubn(String searchGubn) {
-        this.searchGubn = searchGubn;
     }
 
     public String getSearchCodeIsuse() {
@@ -710,14 +673,6 @@ public class LectureVO extends CommonVO implements Serializable {
 
     public void setFlag2(String flag2) {
         this.flag2 = flag2;
-    }
-
-    public String getUpdateFlag() {
-        return updateFlag;
-    }
-
-    public void setUpdateFlag(String updateFlag) {
-        this.updateFlag = updateFlag;
     }
 
     public String getBridgeLec() {
@@ -799,14 +754,6 @@ public class LectureVO extends CommonVO implements Serializable {
 
     public void setMstcode(String mstcode) {
         this.mstcode = mstcode;
-    }
-
-    public String getBridgeMstcode() {
-        return bridgeMstcode;
-    }
-
-    public void setBridgeMstcode(String bridgeMstcode) {
-        this.bridgeMstcode = bridgeMstcode;
     }
 
     public String getSubjectCd() {

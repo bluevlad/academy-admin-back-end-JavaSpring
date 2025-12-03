@@ -13,13 +13,9 @@ public class ProductOrderVO extends CommonVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // 페이징 및 검색 관련
-    private int currentPage = 1;
-    private int pageRow = 10;
-    private int startNo;
-    private int endNo;
-    private String searchText;
-    private String searchType;
+    // 페이징 및 검색 관련 (int 타입 - CommonVO의 String 타입과 별도 사용)
+    private int startNoInt;
+    private int endNoInt;
     private String schtype;
     private String keyword;
     private String searchkey;
@@ -56,10 +52,8 @@ public class ProductOrderVO extends CommonVO implements Serializable {
     private String zipCode;
     private String address1;
     private String address2;
-    private Date regDt;
-    private String regId;
-    private Date updDt;
-    private String updId;
+    private Date regDtDate;
+    private Date updDtDate;
 
     // 결제 정보
     private Integer price;
@@ -209,36 +203,20 @@ public class ProductOrderVO extends CommonVO implements Serializable {
         this.address2 = address2;
     }
 
-    public Date getRegDt() {
-        return regDt;
+    public Date getRegDtDate() {
+        return regDtDate;
     }
 
-    public void setRegDt(Date regDt) {
-        this.regDt = regDt;
+    public void setRegDtDate(Date regDtDate) {
+        this.regDtDate = regDtDate;
     }
 
-    public String getRegId() {
-        return regId;
+    public Date getUpdDtDate() {
+        return updDtDate;
     }
 
-    public void setRegId(String regId) {
-        this.regId = regId;
-    }
-
-    public Date getUpdDt() {
-        return updDt;
-    }
-
-    public void setUpdDt(Date updDt) {
-        this.updDt = updDt;
-    }
-
-    public String getUpdId() {
-        return updId;
-    }
-
-    public void setUpdId(String updId) {
-        this.updId = updId;
+    public void setUpdDtDate(Date updDtDate) {
+        this.updDtDate = updDtDate;
     }
 
     public Integer getPrice() {
@@ -657,53 +635,21 @@ public class ProductOrderVO extends CommonVO implements Serializable {
         this.priceSts = priceSts;
     }
 
-    // 페이징 및 검색 관련 getter/setter
-    public int getCurrentPage() {
-        return currentPage;
+    // 페이징 및 검색 관련 getter/setter (int 타입 별도 사용)
+    public int getStartNoInt() {
+        return startNoInt;
     }
 
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
+    public void setStartNoInt(int startNoInt) {
+        this.startNoInt = startNoInt;
     }
 
-    public int getPageRow() {
-        return pageRow;
+    public int getEndNoInt() {
+        return endNoInt;
     }
 
-    public void setPageRow(int pageRow) {
-        this.pageRow = pageRow;
-    }
-
-    public int getStartNo() {
-        return startNo;
-    }
-
-    public void setStartNo(int startNo) {
-        this.startNo = startNo;
-    }
-
-    public int getEndNo() {
-        return endNo;
-    }
-
-    public void setEndNo(int endNo) {
-        this.endNo = endNo;
-    }
-
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
-    }
-
-    public String getSearchType() {
-        return searchType;
-    }
-
-    public void setSearchType(String searchType) {
-        this.searchType = searchType;
+    public void setEndNoInt(int endNoInt) {
+        this.endNoInt = endNoInt;
     }
 
     public String getSchtype() {

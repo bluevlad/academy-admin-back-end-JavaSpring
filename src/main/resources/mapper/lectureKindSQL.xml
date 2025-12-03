@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.academy.mapper.KindMapper">
 
-  <select id="kindList" parameterType="hashMap" resultType="hashMap">
+  <select id="kindList" parameterType="com.academy.lecture.service.KindVO" resultType="hashMap">
     SELECT * FROM   (
       SELECT A.*, ROWNUM rnum
         FROM (
@@ -46,7 +46,7 @@
     WHERE rnum &gt; #{startNo}
   </select>
 
-  <select id="kindListCount" parameterType="hashMap" resultType="int">
+  <select id="kindListCount" parameterType="com.academy.lecture.service.KindVO" resultType="int">
     SELECT
       COUNT(CODE)
     FROM TB_CATEGORY_INFO
@@ -74,7 +74,7 @@
     </if>
   </select>
 
-  <insert id="kindInsert" parameterType="hashMap" flushCache="true">
+  <insert id="kindInsert" parameterType="com.academy.lecture.service.KindVO" flushCache="true">
     INSERT INTO TB_CATEGORY_INFO(
         ID, CODE, NAME, ISUSE, USE_ON, USE_OFF
         , REG_DT, REG_ID, UPD_DT, UPD_ID
@@ -96,7 +96,7 @@
     )
   </insert>
 
-  <select id="kindView" parameterType="hashMap" resultType="hashMap">
+  <select id="kindView" parameterType="com.academy.lecture.service.KindVO" resultType="hashMap">
     SELECT
       ID, CODE, NAME, ISUSE, DECODE(ISUSE, 'Y', '활성', 'N', '비활성') ISUSENM
       , USE_ON, USE_OFF
@@ -108,7 +108,7 @@
     AND P_CODE = 'CLASSCODE'
   </select>
 
-  <update id="kindUpdate" parameterType="hashMap">
+  <update id="kindUpdate" parameterType="com.academy.lecture.service.KindVO">
     UPDATE TB_CATEGORY_INFO
     SET
       NAME = #{NAME}
@@ -121,7 +121,7 @@
     WHERE CODE = #{CODE}
   </update>
 
-  <delete id="kindDelete" parameterType="hashMap">
+  <delete id="kindDelete" parameterType="com.academy.lecture.service.KindVO">
     UPDATE TB_CATEGORY_INFO
     SET ISUSE = 'N'
     WHERE CODE = #{CODE}
@@ -131,7 +131,7 @@
     -->
   </delete>
 
-  <select id="kindCheck" parameterType="hashMap" resultType="int">
+  <select id="kindCheck" parameterType="com.academy.lecture.service.KindVO" resultType="int">
     SELECT
       COUNT(CODE)
     FROM TB_CATEGORY_INFO
@@ -141,14 +141,14 @@
     </if>
   </select>
     
-	<update id="SeqUpdate" parameterType="hashMap">  
+	<update id="SeqUpdate" parameterType="com.academy.lecture.service.KindVO">  
 
 			UPDATE TB_CATEGORY_INFO 
 			SET ORDR = #{NUM} WHERE NAME = #{CODE_NM} AND CODE = #{CODE}
 				
 	</update>
     
-    <select id="selectKindCode" parameterType="hashMap" resultType="hashMap">
+    <select id="selectKindCode" parameterType="com.academy.lecture.service.KindVO" resultType="hashMap">
         SELECT
             CODE, NAME
         FROM TB_CATEGORY_INFO
@@ -179,14 +179,14 @@
         CONNECT BY PRIOR CODE = P_CODE
     </select>
 
-    <select id="getMaxOrdr" parameterType="hashMap" resultType="hashMap">
+    <select id="getMaxOrdr" parameterType="com.academy.lecture.service.KindVO" resultType="hashMap">
     SELECT
         ( SELECT (NVL(MAX(ORDR), 0) + 1)  ORDR FROM TB_CATEGORY_INFO WHERE P_CODE=#{CODE}) AS ORDR
         , ( SELECT NAME FROM TB_CATEGORY_INFO WHERE CODE=#{CODE}) AS P_NAME
     FROM DUAL
     </select>
 
-    <select id="getKindList" parameterType="hashMap" resultType="hashMap">
+    <select id="getKindList" parameterType="com.academy.lecture.service.KindVO" resultType="hashMap">
         <if test='SEARCHGUBN == "T"'>
             SELECT
                 ID, CODE, NAME, ISUSE, DECODE(ISUSE, 'Y', '활성', 'N', '비활성') ISUSENM

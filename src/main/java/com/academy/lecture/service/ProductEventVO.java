@@ -25,9 +25,7 @@ public class ProductEventVO extends CommonVO implements Serializable {
     // Lecture 관련 fields
     private String leccode;         // LECCODE - 강의 코드
 
-    // Search 관련 fields
-    private String searchType;      // SEARCHTYPE - 검색 타입
-    private String searchKeyword;   // SEARCHKEYWORD - 검색어
+    // Search 관련 fields (searchType, searchKeyword inherited from CommonVO)
     private String catCd;           // CAT_CD - 카테고리 코드
     private String sCatCd;          // S_CAT_CD - 카테고리 코드
     private String sjtCd;           // SJT_CD - 과목 코드
@@ -103,22 +101,6 @@ public class ProductEventVO extends CommonVO implements Serializable {
 
     public void setLeccode(String leccode) {
         this.leccode = leccode;
-    }
-
-    public String getSearchType() {
-        return searchType;
-    }
-
-    public void setSearchType(String searchType) {
-        this.searchType = searchType;
-    }
-
-    public String getSearchKeyword() {
-        return searchKeyword;
-    }
-
-    public void setSearchKeyword(String searchKeyword) {
-        this.searchKeyword = searchKeyword;
     }
 
     public String getCatCd() {
