@@ -8,7 +8,7 @@
 <mapper namespace="com.academy.mapper.BoardMapper">
 
 	<!-- 게시판 리스트 -->
-	<select id="selectBoardList">
+	<select id="selectBoardList" resultType="org.json.simple.JSONObject">
 		SELECT 
 			BOARD_MNG_SEQ, BOARD_SEQ, PARENT_BOARD_SEQ, SUBJECT, CONTENT, FILE_PATH, FILE_NAME, REAL_FILE_NAME, 
 			NOTICE_TOP_YN, OPEN_YN, IS_USE, HITS, 
@@ -27,7 +27,7 @@
 	</select>
 
 	<!-- 게시판 하나 가져오기 -->
-	<select id="getBoardDetail">
+	<select id="getBoardDetail" resultType="org.json.simple.JSONObject">
 		SELECT
 			BOARD_MNG_SEQ, BOARD_SEQ, PARENT_BOARD_SEQ, SUBJECT, CONTENT, FILE_PATH, FILE_NAME, REAL_FILE_NAME, 
 			NOTICE_TOP_YN, OPEN_YN, IS_USE, HITS, 
@@ -134,14 +134,14 @@
 			IS_USE = #{isUse},
 			UPD_DT = now(),
 			UPD_ID = #{updId}
-		WHERE BOARD_MNG_SEQ = #{boardMngSeq}}
+		WHERE BOARD_MNG_SEQ = #{boardMngSeq}
 		AND BOARD_SEQ = #{boardSeq}
 	</update>
 
 	<!-- 게시판 비활성화 -->
 	<update id="deleteBoard">
-		DELETE acm_board
-		WHERE BOARD_MNG_SEQ = #{boardMngSeq}}
+		DELETE FROM acm_board
+		WHERE BOARD_MNG_SEQ = #{boardMngSeq}
 		AND BOARD_SEQ = #{boardSeq}
 	</update>
 

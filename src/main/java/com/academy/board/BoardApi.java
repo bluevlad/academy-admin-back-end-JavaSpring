@@ -86,7 +86,7 @@ public class BoardApi extends CORSFilter {
 
 	/**
 	 * 게시물 정보를 업데이트 한다.
-	 * @param lockerVO
+	 * @param boardVO
 	 * @throws Exception
 	 */
 	@PostMapping(value="/updateBoard")
@@ -109,10 +109,7 @@ public class BoardApi extends CORSFilter {
 
 	/**
 	 * 사물함정보를 변경한다.
-	 * @param ExamVO
-	 * @param commandMap
-	 * @param bindingResult
-	 * @param model
+	 * @param boardVO
 	 * @throws Exception
 	 */
 	@PostMapping(value="/deleteBoard")
