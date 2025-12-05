@@ -8,7 +8,7 @@
 menu/
 ├── MenuApi.java            # 메뉴 REST API 컨트롤러
 └── service/
-    ├── MenuService.java    # 메뉴 비즈니스 로직 서비스
+    ├── MenuService.java    # 메뉴 비즈니스 로직 서비스 (@Service)
     └── MenuVO.java         # 메뉴 Value Object
 ```
 

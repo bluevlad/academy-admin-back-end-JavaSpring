@@ -8,8 +8,7 @@
 locker/
 ├── LockerApi.java           # REST API Controller
 └── service/
-    ├── LockerService.java   # Service class
-    ├── LockerServiceImpl.java
+    ├── LockerService.java   # Service class (@Service)
     ├── LockerVO.java        # Locker Value Object
     └── OrdersVO.java        # Orders Value Object
 ```

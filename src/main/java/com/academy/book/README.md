@@ -8,7 +8,7 @@
 book/
 ├── BookApi.java            # 교재 REST API 컨트롤러
 └── service/
-    ├── BookService.java    # 교재 비즈니스 로직 서비스
+    ├── BookService.java    # 교재 비즈니스 로직 서비스 (@Service)
     └── BookVO.java         # 교재 Value Object
 ```
 

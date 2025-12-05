@@ -8,7 +8,7 @@
 bookCmmt/
 ├── BookCmmtApi.java           # 교재 구매 후기 REST API 컨트롤러
 └── service/
-    ├── BookCmmtService.java   # 교재 구매 후기 비즈니스 로직 서비스
+    ├── BookCmmtService.java   # 교재 구매 후기 비즈니스 로직 서비스 (@Service)
     └── BookCmmtVO.java        # 교재 구매 후기 Value Object
 ```
 

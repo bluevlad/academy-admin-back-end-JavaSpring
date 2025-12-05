@@ -8,7 +8,7 @@
 member/
 ├── MemberApi.java            # 회원 REST API 컨트롤러
 └── service/
-    ├── MemberService.java    # 회원 비즈니스 로직 서비스
+    ├── MemberService.java    # 회원 비즈니스 로직 서비스 (@Service)
     └── MemberVO.java         # 회원 Value Object
 ```
 

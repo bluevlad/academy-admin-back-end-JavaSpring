@@ -9,9 +9,9 @@ exam/
 ├── ExamApi.java              # 시험 REST API 컨트롤러
 ├── ExamBankApi.java          # 문제은행 REST API 컨트롤러
 └── service/
-    ├── ExamService.java      # 시험 비즈니스 로직 서비스
+    ├── ExamService.java      # 시험 비즈니스 로직 서비스 (@Service)
     ├── ExamVO.java           # 시험 Value Object
-    ├── ExamBankService.java  # 문제은행 비즈니스 로직 서비스
+    ├── ExamBankService.java  # 문제은행 비즈니스 로직 서비스 (@Service)
     ├── ExamBankVO.java       # 문제은행 Value Object
     └── ExamReqVO.java        # 시험 요청 Value Object
 ```

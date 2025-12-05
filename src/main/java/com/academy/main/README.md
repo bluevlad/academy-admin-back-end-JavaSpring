@@ -8,8 +8,8 @@
 main/
 ├── MainApi.java           # REST API Controller
 └── service/
-    ├── MainService.java   # Service class
-    └── MainServiceImpl.java
+    ├── MainService.java   # Service class (@Service)
+    └── MenuVO.java        # Menu Value Object
 ```
 
 ## 주요 컴포넌트

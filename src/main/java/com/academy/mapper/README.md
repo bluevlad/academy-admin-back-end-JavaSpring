@@ -9,19 +9,27 @@ mapper/
 ├── BoardMapper.java              # 게시판 매퍼
 ├── BookMapper.java               # 교재 매퍼
 ├── BookCmmtMapper.java           # 교재 구매 후기 매퍼
+├── BookOrderMapper.java          # 교재 주문 매퍼
 ├── CategoryMapper.java           # 카테고리 매퍼
 ├── CategorySeriesMapper.java     # 카테고리 시리즈 매퍼
+├── CmmUseMapper.java             # 공통 사용 매퍼
+├── CouponMngMapper.java          # 쿠폰 관리 매퍼
+├── DashBoardMapper.java          # 대시보드 매퍼
 ├── ExamMapper.java               # 시험 매퍼
 ├── ExamBankMapper.java           # 문제은행 매퍼
 ├── FormMapper.java               # 학습형태 매퍼
 ├── KindMapper.java               # 종류 매퍼
 ├── LectureMapper.java            # 강의 매퍼
 ├── LectureMstMapper.java         # 강의 마스터 매퍼
+├── LockerMapper.java             # 사물함 매퍼
+├── LoginMapper.java              # 로그인 매퍼
 ├── MacAddressManagerMapper.java  # MAC 주소 관리 매퍼
+├── MainMapper.java               # 메인 매퍼
 ├── MemberMapper.java             # 회원 매퍼
 ├── MenuMapper.java               # 메뉴 매퍼
 ├── OpenLectureMapper.java        # 오프라인 강의 매퍼
 ├── ProductEventMapper.java       # 상품 이벤트 매퍼
+├── ProductOrderMapper.java       # 상품 주문 매퍼
 ├── SeriesMapper.java             # 시리즈 매퍼
 ├── SubjectMapper.java            # 과목 매퍼
 └── TeacherMapper.java            # 강사 매퍼

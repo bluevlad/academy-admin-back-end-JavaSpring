@@ -8,7 +8,7 @@
 board/
 ├── BoardApi.java           # 게시판 REST API 컨트롤러
 └── service/
-    ├── BoardService.java   # 게시판 비즈니스 로직 서비스
+    ├── BoardService.java   # 게시판 비즈니스 로직 서비스 (@Service)
     └── BoardVO.java        # 게시판 Value Object
 ```
 

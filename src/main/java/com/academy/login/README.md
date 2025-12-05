@@ -8,8 +8,7 @@
 login/
 ├── LoginApi.java           # REST API Controller
 └── service/
-    ├── LoginService.java   # Service class
-    ├── LoginServiceImpl.java
+    ├── LoginService.java   # Service class (@Service)
     └── MemberVO.java       # Member Value Object
 ```
 

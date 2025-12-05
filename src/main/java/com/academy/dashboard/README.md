@@ -8,8 +8,7 @@
 dashboard/
 ├── DashBoardApi.java           # REST API Controller
 └── service/
-    ├── DashBoardService.java   # Service class
-    └── DashBoardServiceImpl.java
+    └── DashBoardService.java   # Service class (@Service)
 ```
 
 ## 주요 컴포넌트
