@@ -14,6 +14,11 @@ import com.academy.board.service.BoardVO;
 import com.academy.common.CORSFilter;
 import com.academy.common.PaginationInfo;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Board", description = "게시판 관리 API")
 @RestController
 @RequestMapping("/api/board")
 public class BoardApi extends CORSFilter {
@@ -24,6 +29,7 @@ public class BoardApi extends CORSFilter {
         this.boardService = boardService;
     }
 
+	@Operation(summary = "게시판 목록 조회", description = "페이징 처리된 게시판 목록을 조회합니다.")
 	@GetMapping(value = "/getBoardList")
 	public JSONObject getBoardList(@ModelAttribute("BoardVO") BoardVO boardVO) throws Exception { 
 		
@@ -50,6 +56,7 @@ public class BoardApi extends CORSFilter {
 		return jObject;
 	}
 
+	@Operation(summary = "게시판 상세 조회", description = "게시판 상세 정보를 조회합니다.")
 	@GetMapping(value = "/getBoardDetail")
 	public JSONObject getBoardDetail(@ModelAttribute("BoardVO") BoardVO boardVO) throws Exception { 
 
@@ -62,10 +69,7 @@ public class BoardApi extends CORSFilter {
 		return jObject;
 	}
 
-	/**
-	 * 게시물 등록화면.
-	 * @throws Exception
-	 */
+	@Operation(summary = "게시물 등록", description = "새로운 게시물을 등록합니다.")
 	@PostMapping(value = "/insertBoard")
 	public JSONObject insertBoard(@ModelAttribute("BoardVO") BoardVO boardVO) throws Exception { 
 
@@ -84,11 +88,7 @@ public class BoardApi extends CORSFilter {
 		return jObject;
 	}
 
-	/**
-	 * 게시물 정보를 업데이트 한다.
-	 * @param boardVO
-	 * @throws Exception
-	 */
+	@Operation(summary = "게시물 수정", description = "게시물 정보를 수정합니다.")
 	@PostMapping(value="/updateBoard")
 	public JSONObject updateBoard(@ModelAttribute("BoardVO") BoardVO boardVO) throws Exception {
 		
@@ -107,11 +107,7 @@ public class BoardApi extends CORSFilter {
 		return jObject;
 	}
 
-	/**
-	 * 사물함정보를 변경한다.
-	 * @param boardVO
-	 * @throws Exception
-	 */
+	@Operation(summary = "게시물 삭제", description = "게시물을 삭제합니다.")
 	@PostMapping(value="/deleteBoard")
 	public JSONObject deleteBoard(@ModelAttribute("BoardVO") BoardVO boardVO) throws Exception {
 

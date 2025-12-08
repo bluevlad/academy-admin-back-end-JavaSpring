@@ -49,6 +49,22 @@
         WHERE MENU_ID = #{menuId}
     </update>
 
+    <update id="sgMenuUpdateProcess" parameterType="com.academy.menu.service.MenuVO">
+        UPDATE TB_SG_MENU_MST
+        SET
+            MENU_NM = #{menuNm},
+            MENU_SEQ = #{menuSeq},
+            MENU_URL = #{menuUrl},
+            P_MENUID = #{pMenuid},
+            ISUSE = #{isuse},
+            TARGET = #{target},
+            MENU_INFO = #{menuInfo},
+            UPD_ID = #{updId},
+            UPD_DT = NOW()
+        WHERE ONOFF_DIV = #{onoffDiv}
+          AND MENU_ID = #{menuId}
+    </update>
+
     <update id="passmenuUpdateProcess" parameterType="com.academy.menu.service.MenuVO">
         UPDATE ACM_MENU_MST2
         SET
