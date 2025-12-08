@@ -10,6 +10,7 @@ Small Online Academy backend service - A comprehensive educational platform mana
 - **Database**: MySQL 8.x
 - **JWT**: JJWT 0.11.5
 - **Jakarta EE**: jakarta.servlet.*
+- **API Documentation**: SpringDoc OpenAPI 2.3.0 (Swagger UI)
 
 ## Quick Start
 
@@ -33,6 +34,21 @@ java -jar target/academy-0.0.1-SNAPSHOT.jar
 ```
 
 Server runs on: `http://localhost:8080`
+
+### API Documentation (Swagger UI)
+
+After starting the server, access the API documentation:
+
+| URL | Description |
+|-----|-------------|
+| http://localhost:8080/swagger-ui.html | Swagger UI - Interactive API documentation |
+| http://localhost:8080/v3/api-docs | OpenAPI 3.0 JSON specification |
+
+**Features:**
+- Browse all API endpoints grouped by module
+- Test APIs directly in browser
+- View request/response schemas
+- Export OpenAPI specification
 
 ### Database Setup
 
@@ -217,19 +233,23 @@ com.academy/
 │   ├── SubjectMapper.java
 │   └── TeacherMapper.java
 │
-└── common/                            # Common utilities
-    ├── CORSFilter.java               # Base class for all API controllers
-    ├── JwtUtil.java                  # JWT token utilities
-    ├── PaginationInfo.java           # Pagination helper
-    ├── CommonUtil.java               # Common utility methods
-    ├── DBUtil.java                   # Database utilities
-    ├── Configurations.java           # Spring configuration beans
-    ├── CommonVO.java                 # Common value object
-    ├── ComDefaultVO.java             # Default value object
-    ├── ComDefaultCodeVO.java         # Default code value object
-    └── service/
-        ├── CmmUseService.java        # Common service
-        └── CmmnDetailCode.java       # Common detail code
+├── common/                            # Common utilities
+│   ├── ApiInfoApi.java               # API information endpoint
+│   ├── CORSFilter.java               # Base class for all API controllers
+│   ├── JwtUtil.java                  # JWT token utilities
+│   ├── PaginationInfo.java           # Pagination helper
+│   ├── CommonUtil.java               # Common utility methods
+│   ├── DBUtil.java                   # Database utilities
+│   ├── Configurations.java           # Spring configuration beans
+│   ├── CommonVO.java                 # Common value object
+│   ├── ComDefaultVO.java             # Default value object
+│   ├── ComDefaultCodeVO.java         # Default code value object
+│   └── service/
+│       ├── CmmUseService.java        # Common service
+│       └── CmmnDetailCode.java       # Common detail code
+│
+└── config/                            # Configuration classes
+    └── OpenApiConfig.java            # Swagger/OpenAPI configuration
 ```
 
 ## API Modules
@@ -256,6 +276,13 @@ com.academy/
 | **login** | Authentication | 1 API | Session-based authentication |
 | **main** | Main page | 1 API | Landing page content |
 | **menu** | Menu management | 1 API | Navigation menu configuration |
+
+### System & Utility Modules
+
+| Module | Description | API Endpoints | Key Features |
+|--------|-------------|---------------|--------------|
+| **common/ApiInfo** | API Information | 2 APIs | List all APIs, API summary by module |
+| **config** | Configuration | - | OpenAPI/Swagger configuration |
 
 ### Lecture Module (Most Complex)
 
@@ -446,6 +473,105 @@ Location: `src/main/resources/mapper/[Module]Mapper.xml`
 | Update | `[module]Update` | Update existing record |
 | Delete | `[module]Delete` | Delete record |
 
+## API Documentation (SpringDoc OpenAPI)
+
+### Swagger UI Access
+
+After starting the application, access the interactive API documentation:
+
+- **Swagger UI**: http://localhost:8080/swagger-ui.html
+- **OpenAPI JSON**: http://localhost:8080/v3/api-docs
+
+### Configuration
+
+The OpenAPI configuration is defined in `com.academy.config.OpenApiConfig`:
+
+```java
+@Configuration
+public class OpenApiConfig {
+    @Bean
+    public OpenAPI openAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Academy Backend API")
+                        .description("Small Online Academy Backend Service API Documentation")
+                        .version("1.0.0"));
+    }
+}
+```
+
+### Adding Swagger Annotations
+
+To document your APIs, use these annotations:
+
+**Controller Level:**
+```java
+@Tag(name = "Board", description = "게시판 관리 API")
+@RestController
+@RequestMapping("/api/board")
+public class BoardApi extends CORSFilter {
+    // ...
+}
+```
+
+**Method Level:**
+```java
+@Operation(summary = "게시판 목록 조회", description = "페이징 처리된 게시판 목록을 조회합니다.")
+@GetMapping("/getBoardList")
+public JSONObject getBoardList(@ModelAttribute BoardVO boardVO) {
+    // ...
+}
+```
+
+**Parameter Level:**
+```java
+@Parameter(description = "게시판 ID", required = true)
+@RequestParam String boardId
+```
+
+### API Info Endpoints
+
+The system provides built-in API discovery endpoints:
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/info/getApiList` | GET | Get all API endpoints list |
+| `/api/info/getApiList?module=board` | GET | Filter APIs by module |
+| `/api/info/getApiSummary` | GET | Get API count summary by module |
+
+**Example Response (`/api/info/getApiList`):**
+```json
+{
+  "totalCount": 25,
+  "retMsg": "OK",
+  "apiList": [
+    {
+      "url": "/api/board/getBoardList",
+      "httpMethod": "GET",
+      "controller": "BoardApi",
+      "method": "getBoardList",
+      "package": "board"
+    }
+  ]
+}
+```
+
+**Example Response (`/api/info/getApiSummary`):**
+```json
+{
+  "totalCount": 25,
+  "moduleCount": 12,
+  "retMsg": "OK",
+  "summary": [
+    {
+      "module": "board",
+      "count": 5,
+      "apis": [...]
+    }
+  ]
+}
+```
+
 ## Common Utilities
 
 ### CORSFilter
@@ -580,6 +706,13 @@ pageUnit=10
 # File Upload
 spring.servlet.multipart.max-file-size=10MB
 spring.servlet.multipart.max-request-size=10MB
+
+# SpringDoc OpenAPI (Swagger)
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.api-docs.path=/v3/api-docs
+springdoc.swagger-ui.tags-sorter=alpha
+springdoc.swagger-ui.operations-sorter=alpha
+springdoc.packages-to-scan=com.academy
 ```
 
 ### Property Injection Pattern
@@ -691,6 +824,7 @@ mvn test
 ### API Testing
 
 Use tools like:
+- **Swagger UI** (recommended): http://localhost:8080/swagger-ui.html
 - Postman
 - curl
 - HTTPie
@@ -740,8 +874,9 @@ DDL scripts available in `ddls/` directory.
 | Login | `/api/login/*` | 1 API |
 | Main | `/api/main/*` | 1 API |
 | Menu | `/api/menu/*` | 1 API |
+| API Info | `/api/info/*` | 2 APIs (getApiList, getApiSummary) |
 
-**Total**: 23 REST API Controllers
+**Total**: 25 REST API Controllers
 
 ## Troubleshooting
 
