@@ -33,16 +33,16 @@ mvn spring-boot:run
 java -jar target/academy-0.0.1-SNAPSHOT.jar
 ```
 
-Server runs on: `http://localhost:8080`
+Server runs on: `http://www.unmong.com:8080`
 
 ### API Documentation (Swagger UI)
 
 After starting the server, access the API documentation:
 
-| URL | Description |
-|-----|-------------|
-| http://localhost:8080/swagger-ui.html | Swagger UI - Interactive API documentation |
-| http://localhost:8080/v3/api-docs | OpenAPI 3.0 JSON specification |
+| URL                                        | Description |
+|--------------------------------------------|-------------|
+| http://www.unmong.com:8080/swagger-ui.html | Swagger UI - Interactive API documentation |
+| http://www.unmong.com:8080/v3/api-docs     | OpenAPI 3.0 JSON specification |
 
 **Features:**
 - Browse all API endpoints grouped by module
@@ -1085,9 +1085,9 @@ For issues and questions, please refer to the project issue tracker.
 
 ## Copyright
 
-<img src="UM_CI.png" alt="UM Systems" width="10%">
+<a href="http://www.unmong.com"><img src="UM_CI.png" alt="UM Systems" width="10%"></a>
 
-**Copyright (c) 2021 운몽시스템즈(UM Systems). All rights reserved.**
+**Copyright (c) 2021 <a href="http://www.unmong.com">운몽시스템즈(UM Systems)</a>. All rights reserved.**
 
 이 소프트웨어는 운몽시스템즈(UM Systems)의 독점 소유이며, 저작권법에 의해 보호됩니다.
 본 소프트웨어의 무단 복제, 배포, 수정, 재배포는 법적으로 금지되어 있습니다.
