@@ -208,7 +208,6 @@
 		A.REAL_FILE_NAME,
 		A.NOTICE_TOP_YN,
 		A.OPEN_YN,
-		A.IS_USE,
 		A.HITS,
 		DATE_FORMAT(A.REG_DT, '%Y-%m-%d %H:%i:%s') AS REG_DT,
 		A.REG_ID,
