@@ -1,4 +1,3 @@
-/.gitignore
 /target/
 /src/main/resources/application.properties
 /.classpath
@@ -8,3 +7,8 @@
 /.claude/settings.local.json
 /CLAUDE.local.md
 /.env
+.claude/
+logs*.txt
+.idea/
+*.iml
+/actions-runner/
