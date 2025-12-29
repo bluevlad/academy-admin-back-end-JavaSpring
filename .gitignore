@@ -1,4 +1,3 @@
-/.gitignore
 /target/
 /src/main/resources/application.properties
 /.classpath
@@ -11,4 +10,6 @@
 logs*.*
 /actions-runner/
 /.claude/
+/.idea/
 .gitignore
+*.iml
