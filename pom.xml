@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>com.academy</groupId>
-	<artifactId>academy</artifactId>
+	<artifactId>academy-admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>academy</name>
-	<description>Small Academy project for Spring Boot</description>
+	<name>academy-admin</name>
+	<description>Small Academy Admin project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Small Online Academy Backend Service built with Spring Boot 3.x, MyBatis, and MySQL. Provides REST APIs for managing an online academy system including boards, members, lectures, books, exams, lockers, and dashboards.
+Small Online Academy Admin Backend Service built with Spring Boot 3.x, MyBatis, and MySQL. Provides REST APIs for managing an online academy admin system including boards, members, lectures, books, exams, lockers, and dashboards.
 
 **Tech Stack:**
 - Java 17
@@ -30,7 +30,7 @@ mvn spring-boot:run
 
 **Run built JAR:**
 ```bash
-java -jar target/academy-0.0.1-SNAPSHOT.jar
+java -jar target/academy-admin-0.0.1-SNAPSHOT.jar
 ```
 
 **Run tests:**
