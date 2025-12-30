@@ -25,17 +25,14 @@ public class LoginApi extends CORSFilter {
 
 	/**
 	 * 일반(세션) 로그인을 처리한다
-	 * @param vo - 아이디, 비밀번호가 담긴 LoginVO
+	 * @param MemberVO - 아이디, 비밀번호가 담긴 LoginVO
 	 * @return ResponseEntity - 로그인결과(세션정보)
 	 * @exception Exception
 	 */
 	@PostMapping(value = "/sign-in")
-	public JSONObject actionLogin(@ModelAttribute("MemberVO") MemberVO memberVO, @RequestParam HashMap<?, ?> commandMap) throws Exception {
+	public JSONObject actionLogin(@ModelAttribute("MemberVO") MemberVO memberVO) throws Exception {
 
 		HashMap<String,Object> jsonObject = new HashMap<String,Object>();
-
-		memberVO.setUserId((String)commandMap.get("id"));
-		memberVO.setUserPwd((String)commandMap.get("password"));
 
 		try {
 			// userId 값 검증 (null 방지)
