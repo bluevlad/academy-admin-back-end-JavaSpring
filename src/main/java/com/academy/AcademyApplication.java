@@ -22,7 +22,7 @@ public class AcademyApplication {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void openBrowser() {
-		String url = "http://localhost:" + serverPort;
+		String url = "http://localhost:" + serverPort + "/swagger-ui/index.html";
 		String os = System.getProperty("os.name").toLowerCase();
 
 		try {
