@@ -22,19 +22,19 @@ public class AcademyApplication {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void openBrowser() {
-		String url = "http://localhost:" + serverPort + "/swagger-ui/index.html";
+		String url = "http://localhost:" + serverPort;
 		String os = System.getProperty("os.name").toLowerCase();
 
 		try {
 			if (os.contains("win")) {
 				// Windows - Chrome 브라우저 실행
-				Runtime.getRuntime().exec(new String[]{"cmd", "/c", "start", "chrome", url});
+				Runtime.getRuntime().exec(new String[] { "cmd", "/c", "start", "chrome", url });
 			} else if (os.contains("mac")) {
 				// macOS
-				Runtime.getRuntime().exec(new String[]{"open", "-a", "Google Chrome", url});
+				Runtime.getRuntime().exec(new String[] { "open", "-a", "Google Chrome", url });
 			} else if (os.contains("nix") || os.contains("nux")) {
 				// Linux
-				Runtime.getRuntime().exec(new String[]{"google-chrome", url});
+				Runtime.getRuntime().exec(new String[] { "google-chrome", url });
 			} else {
 				// 기본 브라우저 사용
 				if (Desktop.isDesktopSupported()) {
