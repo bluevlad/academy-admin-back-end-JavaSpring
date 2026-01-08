@@ -15,3 +15,5 @@ logs*.*
 *.iml
 /src/main/resources/application-local.yml
 /logs/
+mvnw.cmd
+.mvn/
