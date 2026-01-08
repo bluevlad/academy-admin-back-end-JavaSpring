@@ -28,13 +28,13 @@ public class AcademyApplication {
 		try {
 			if (os.contains("win")) {
 				// Windows - Chrome 브라우저 실행
-				Runtime.getRuntime().exec(new String[]{"cmd", "/c", "start", "chrome", url});
+				Runtime.getRuntime().exec(new String[] { "cmd", "/c", "start", "chrome", url });
 			} else if (os.contains("mac")) {
 				// macOS
-				Runtime.getRuntime().exec(new String[]{"open", "-a", "Google Chrome", url});
+				Runtime.getRuntime().exec(new String[] { "open", "-a", "Google Chrome", url });
 			} else if (os.contains("nix") || os.contains("nux")) {
 				// Linux
-				Runtime.getRuntime().exec(new String[]{"google-chrome", url});
+				Runtime.getRuntime().exec(new String[] { "google-chrome", url });
 			} else {
 				// 기본 브라우저 사용
 				if (Desktop.isDesktopSupported()) {
