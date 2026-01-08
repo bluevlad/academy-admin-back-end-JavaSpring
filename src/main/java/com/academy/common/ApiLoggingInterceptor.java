@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Enumeration;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +26,8 @@ public class ApiLoggingInterceptor implements HandlerInterceptor {
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
 
         // OPTIONS 요청은 로깅 제외
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
@@ -74,7 +74,8 @@ public class ApiLoggingInterceptor implements HandlerInterceptor {
                 } else {
                     sb.append("[");
                     for (int i = 0; i < values.length; i++) {
-                        if (i > 0) sb.append(", ");
+                        if (i > 0)
+                            sb.append(", ");
                         sb.append(maskSensitiveData(entry.getKey(), values[i]));
                     }
                     sb.append("]");
@@ -130,7 +131,7 @@ public class ApiLoggingInterceptor implements HandlerInterceptor {
         // 비밀번호 등 민감한 정보 마스킹
         String lowerKey = key.toLowerCase();
         if (lowerKey.contains("password") || lowerKey.contains("pwd") ||
-            lowerKey.contains("secret") || lowerKey.contains("token")) {
+                lowerKey.contains("secret") || lowerKey.contains("token")) {
             return "********";
         }
         return value;

@@ -1,7 +1,6 @@
 package com.academy.board;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,17 +22,19 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * 게시판 관리 API 컨트롤러
+ * 
  * @author rainend
  * @version 1.0
  * @see
- * <pre>
+ * 
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *    수정일           수정자                수정내용
  *  ---------------    --------------    ---------------------------
  *  2025.11            rainend           게시판 등록
  *  2025.12.10         system            게시판 관리 기능 확장 (게시판 관리, FAQ, 강사용, 미응답, 첨부파일, 코멘트)
- * </pre>
+ *      </pre>
  */
 @Tag(name = "Board", description = "게시판 관리 API")
 @RestController
@@ -737,7 +738,8 @@ public class BoardApi extends CORSFilter {
 
     @Operation(summary = "게시판 코멘트 목록 조회", description = "페이징 처리된 게시판 코멘트 목록을 조회합니다.")
     @GetMapping(value = "/getBoardCommentList")
-    public JSONObject getBoardCommentList(@ModelAttribute("BoardCommentVO") BoardCommentVO boardCommentVO) throws Exception {
+    public JSONObject getBoardCommentList(@ModelAttribute("BoardCommentVO") BoardCommentVO boardCommentVO)
+            throws Exception {
 
         HashMap<String, Object> jsonObject = new HashMap<String, Object>();
 
@@ -764,7 +766,8 @@ public class BoardApi extends CORSFilter {
 
     @Operation(summary = "게시판 코멘트 등록", description = "게시물에 코멘트를 등록합니다.")
     @PostMapping(value = "/insertBoardComment")
-    public JSONObject insertBoardComment(@ModelAttribute("BoardCommentVO") BoardCommentVO boardCommentVO) throws Exception {
+    public JSONObject insertBoardComment(@ModelAttribute("BoardCommentVO") BoardCommentVO boardCommentVO)
+            throws Exception {
 
         HashMap<String, Object> jsonObject = new HashMap<String, Object>();
 
@@ -783,7 +786,8 @@ public class BoardApi extends CORSFilter {
 
     @Operation(summary = "게시판 코멘트 삭제", description = "게시물의 코멘트를 삭제합니다.")
     @PostMapping(value = "/deleteBoardComment")
-    public JSONObject deleteBoardComment(@ModelAttribute("BoardCommentVO") BoardCommentVO boardCommentVO) throws Exception {
+    public JSONObject deleteBoardComment(@ModelAttribute("BoardCommentVO") BoardCommentVO boardCommentVO)
+            throws Exception {
 
         HashMap<String, Object> jsonObject = new HashMap<String, Object>();
 

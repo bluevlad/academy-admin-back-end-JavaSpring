@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,7 +54,8 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @GetMapping("/list")
-    public JSONObject list(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap) throws Exception {
+    public JSONObject list(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap)
+            throws Exception {
 
         /* 페이징 */
         int currentPage = bookVO.getCurrentPage();
@@ -94,22 +92,23 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @GetMapping("/view")
-    public JSONObject view(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap) throws Exception {
+    public JSONObject view(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap)
+            throws Exception {
 
         List<HashMap<String, String>> view = bookService.bookView(bookVO);
         List<HashMap<String, String>> viewlist = bookService.bookViewList(bookVO);
-        String rdelyn = "Y";        // 현재 선택글 삭제가능여부
-        String sdelyn = "Y";        // 관련글 삭제 가능여부
+        String rdelyn = "Y"; // 현재 선택글 삭제가능여부
+        String sdelyn = "Y"; // 관련글 삭제 가능여부
 
         int checkCnt = bookService.bookUseCheck(bookVO);
-        if(checkCnt > 0)
+        if (checkCnt > 0)
             rdelyn = "N";
 
         BookVO checkVO = new BookVO();
         for (int j = 0; j < viewlist.size(); j++) {
             checkVO.setRscId(viewlist.get(j).get("RSC_ID"));
             checkCnt = bookService.bookUseCheck(checkVO);
-            if(checkCnt > 0)
+            if (checkCnt > 0)
                 sdelyn = "N";
         }
 
@@ -142,7 +141,8 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @GetMapping("/writeData")
-    public JSONObject writeData(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap) throws Exception {
+    public JSONObject writeData(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap)
+            throws Exception {
 
         TeacherVO teacherVO = new TeacherVO();
         List<HashMap<String, String>> kindlist = teacherService.getKindList(teacherVO);
@@ -169,23 +169,23 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @PostMapping("/save")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
     public JSONObject save(@ModelAttribute("BookVO") BookVO bookVO,
-                           @RequestParam Map<?, ?> commandMap,
-                           @RequestParam(value = "SUBJECT_SJT_CD", required = false) String[] SUBJECT_SJT_CD_ARR,
-                           @RequestParam(value = "CATEGORY_CD", required = false) String[] CATEGORY_CD_ARR,
-                           @RequestParam(value = "LEARNING_CD", required = false) String[] LEARNING_CD_ARR) throws Exception {
+            @RequestParam Map<?, ?> commandMap,
+            @RequestParam(value = "SUBJECT_SJT_CD", required = false) String[] SUBJECT_SJT_CD_ARR,
+            @RequestParam(value = "CATEGORY_CD", required = false) String[] CATEGORY_CD_ARR,
+            @RequestParam(value = "LEARNING_CD", required = false) String[] LEARNING_CD_ARR) throws Exception {
 
         bookVO.setSeq(bookService.getCaBookSeq(bookVO));
-        for(int j=0; j<CATEGORY_CD_ARR.length; j++){
+        for (int j = 0; j < CATEGORY_CD_ARR.length; j++) {
             bookVO.setCategoryCd(CATEGORY_CD_ARR[j]);
 
-            for(int k=0; k<LEARNING_CD_ARR.length; k++){
+            for (int k = 0; k < LEARNING_CD_ARR.length; k++) {
                 bookVO.setLearningCd(LEARNING_CD_ARR[k]);
                 String SUBJECT_SJT_CD = "";
 
-                for(int i=0; i<SUBJECT_SJT_CD_ARR.length; i++){
-                    if(!"".equals(SUBJECT_SJT_CD)){
+                for (int i = 0; i < SUBJECT_SJT_CD_ARR.length; i++) {
+                    if (!"".equals(SUBJECT_SJT_CD)) {
                         SUBJECT_SJT_CD += ",";
                     }
                     SUBJECT_SJT_CD += SUBJECT_SJT_CD_ARR[i];
@@ -214,16 +214,16 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @PutMapping("/update")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
     public JSONObject update(@ModelAttribute("BookVO") BookVO bookVO,
-                             @RequestParam Map<?, ?> commandMap,
-                             @RequestParam(value = "SUBJECT_SJT_CD", required = false) String[] SUBJECT_SJT_CD_ARR,
-                             @RequestParam(value = "UPDATE_FLAG", required = false) String updateFlag) throws Exception {
+            @RequestParam Map<?, ?> commandMap,
+            @RequestParam(value = "SUBJECT_SJT_CD", required = false) String[] SUBJECT_SJT_CD_ARR,
+            @RequestParam(value = "UPDATE_FLAG", required = false) String updateFlag) throws Exception {
 
         bookVO.setUpdateFlag(CommonUtil.isNull(updateFlag, ""));
         String SUBJECT_SJT_CD = "";
-        for(int i=0; i<SUBJECT_SJT_CD_ARR.length; i++){
-            if(!"".equals(SUBJECT_SJT_CD)){
+        for (int i = 0; i < SUBJECT_SJT_CD_ARR.length; i++) {
+            if (!"".equals(SUBJECT_SJT_CD)) {
                 SUBJECT_SJT_CD += ",";
             }
             SUBJECT_SJT_CD += SUBJECT_SJT_CD_ARR[i];
@@ -249,8 +249,9 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @DeleteMapping("/delete")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
-    public JSONObject delete(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap) throws Exception {
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public JSONObject delete(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap)
+            throws Exception {
 
         bookService.bookDelete(bookVO);
 
@@ -272,8 +273,9 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @DeleteMapping("/deleteAll")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
-    public JSONObject deleteAll(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap) throws Exception {
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public JSONObject deleteAll(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap)
+            throws Exception {
 
         bookVO.setGubn("all");
         bookService.bookDelete(bookVO);
@@ -296,7 +298,8 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @GetMapping("/sellList")
-    public JSONObject sellList(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap) throws Exception {
+    public JSONObject sellList(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap)
+            throws Exception {
 
         /* 페이징 */
         int currentPage = bookVO.getCurrentPage();
@@ -330,7 +333,8 @@ public class BookApi extends CORSFilter {
      * @throws Exception
      */
     @GetMapping("/sellListExcel")
-    public JSONObject sellListExcel(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap) throws Exception {
+    public JSONObject sellListExcel(@ModelAttribute("BookVO") BookVO bookVO, @RequestParam Map<?, ?> commandMap)
+            throws Exception {
 
         /* 페이징 */
         int currentPage = bookVO.getCurrentPage();

@@ -1,7 +1,6 @@
 package com.academy.banner;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +20,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * 배너 관리 API Controller
+ * 
  * @author system
  * @version 1.0
  * @see
- * <pre>
+ * 
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *    수정일           수정자                수정내용
  *  ---------------    --------------    ---------------------------
  *  2025.12.11         system            배너 관리 신규 생성
- * </pre>
+ *      </pre>
  */
 @Tag(name = "Banner", description = "배너 관리 API")
 @RestController
@@ -348,7 +349,8 @@ public class BannerApi extends CORSFilter {
      */
     @Operation(summary = "배너 아이템 초기화", description = "배너 아이템 정보를 초기화합니다.")
     @PostMapping(value = "/updateBannerItemReset")
-    public JSONObject updateBannerItemReset(@ModelAttribute("BannerItemVO") BannerItemVO bannerItemVO) throws Exception {
+    public JSONObject updateBannerItemReset(@ModelAttribute("BannerItemVO") BannerItemVO bannerItemVO)
+            throws Exception {
 
         HashMap<String, Object> jsonObject = new HashMap<String, Object>();
 

@@ -7,8 +7,6 @@ import java.util.Map;
 
 import com.academy.book.service.BookVO;
 import com.academy.productorder.service.ProductOrderVO;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +67,7 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/list")
+	@GetMapping(value = "/list")
 	public JSONObject list(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		/* 페이징 */
@@ -87,7 +85,7 @@ public class LectureApi extends CORSFilter {
 		SubjectVO subjectVO = new SubjectVO();
 		subjectVO.setIsUse("Y");
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 
 		List<HashMap<String, String>> formlist = bookservice.getLearningFormList(bookVO);
 
@@ -114,7 +112,7 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/view")
+	@GetMapping(value = "/view")
 	public JSONObject view(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		List<HashMap<String, String>> view = lectureservice.lectureView(lectureVO);
@@ -127,15 +125,15 @@ public class LectureApi extends CORSFilter {
 		SubjectVO subjectVO = new SubjectVO();
 		subjectVO.setIsUse("Y");
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 		List<HashMap<String, String>> formlist = bookservice.getLearningFormList(bookVO);
 
 		List<HashMap<String, String>> subjectteacherlist = bookservice.getCaSubjectTeacherList(bookVO);
 		int lectureOrderCount = lectureservice.lectureDeleteCheck(lectureVO);
 
-        Map<String, String> vo = new HashMap<String, String>();
-        vo.put("SYS_CD", "ICON_GUBUN");
-        List<HashMap<String, String>> ICON_GUBUNs = cmmUseService.selectCmmCodeMap(vo);
+		Map<String, String> vo = new HashMap<String, String>();
+		vo.put("SYS_CD", "ICON_GUBUN");
+		List<HashMap<String, String>> ICON_GUBUNs = cmmUseService.selectCmmCodeMap(vo);
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("lectureOrderCount", lectureOrderCount);
@@ -159,7 +157,7 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/bookList")
+	@GetMapping(value = "/bookList")
 	public JSONObject bookList(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		/* 페이징 */
@@ -177,7 +175,7 @@ public class LectureApi extends CORSFilter {
 		SubjectVO subjectVO = new SubjectVO();
 		subjectVO.setIsUse("Y");
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 
 		List<HashMap<String, String>> formlist = bookservice.getLearningFormList(bookVO);
 
@@ -204,7 +202,7 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/bookView")
+	@GetMapping(value = "/bookView")
 	public JSONObject bookView(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		List<HashMap<String, String>> view = lectureservice.bookView(lectureVO);
@@ -224,7 +222,7 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/couponList")
+	@GetMapping(value = "/couponList")
 	public JSONObject getCouponList(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		/* 페이징 */
@@ -237,7 +235,7 @@ public class LectureApi extends CORSFilter {
 		lectureVO.setEndNo(String.valueOf(endNo));
 		/* 페이징 */
 
-        ProductOrderVO productOrderVO = new ProductOrderVO();
+		ProductOrderVO productOrderVO = new ProductOrderVO();
 
 		List<HashMap<String, Object>> list = productOrderService.getTmCouponList(productOrderVO);
 		int listCount = productOrderService.getTmCouponCount(productOrderVO);
@@ -260,7 +258,7 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/moCouponList")
+	@GetMapping(value = "/moCouponList")
 	public JSONObject getMoCouponList(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		/* 페이징 */
@@ -273,7 +271,7 @@ public class LectureApi extends CORSFilter {
 		lectureVO.setEndNo(String.valueOf(endNo));
 		/* 페이징 */
 
-        ProductOrderVO productOrderVO = new ProductOrderVO();
+		ProductOrderVO productOrderVO = new ProductOrderVO();
 
 		List<HashMap<String, Object>> list = productOrderService.getTmMoCouponList(productOrderVO);
 		int listCount = productOrderService.getTmMoCouponCount(productOrderVO);
@@ -296,32 +294,32 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PutMapping(value="/onOffStatus")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PutMapping(value = "/onOffStatus")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject modifyLectureOnOff(@RequestBody LectureVO lectureVO) throws Exception {
 
 		String flag = lectureVO.getFlag() != null ? lectureVO.getFlag() : "";
 		String flag2 = lectureVO.getFlag2() != null ? lectureVO.getFlag2() : "";
 
-		if(flag.equals("ON")){
+		if (flag.equals("ON")) {
 			lectureVO.setFlag("Y");
-		}else{
+		} else {
 			lectureVO.setFlag("N");
 		}
 
-		if(flag2.equals("list")){  // 단과 강의관리 리스트에서 개설여부 수정시
+		if (flag2.equals("list")) { // 단과 강의관리 리스트에서 개설여부 수정시
 			List<HashMap<String, String>> BridgeLeccode = lectureservice.BridgeLeccode(lectureVO);
 
-			if(BridgeLeccode.size() > 0){
-				for(int i = 0; i < BridgeLeccode.size(); i++){
+			if (BridgeLeccode.size() > 0) {
+				for (int i = 0; i < BridgeLeccode.size(); i++) {
 					String GET_CODE = String.valueOf(BridgeLeccode.get(i)).substring(9, 19);
 					lectureVO.setGetCode(GET_CODE);
 					lectureservice.Modify_Lecture_On_Off(lectureVO);
 				}
 			}
-		}else if(flag2.equals("jlist") || flag2.equals("ylist")){ // 종합반,패키지,연회원패키지 강의관리 리스트에서 개설여부 수정시
+		} else if (flag2.equals("jlist") || flag2.equals("ylist")) { // 종합반,패키지,연회원패키지 강의관리 리스트에서 개설여부 수정시
 			lectureservice.Modify_Lecture_On_Off(lectureVO);
-		}else{  // 단과 강의관리 상세페이지에서 개설여부 수정시
+		} else { // 단과 강의관리 상세페이지에서 개설여부 수정시
 			lectureservice.Modify_Lecture_On_Off(lectureVO);
 		}
 
@@ -342,8 +340,8 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PostMapping(value="/save")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PostMapping(value = "/save")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject save(@RequestBody LectureVO lectureVO) throws Exception {
 
 		Calendar cal = Calendar.getInstance();
@@ -357,10 +355,10 @@ public class LectureApi extends CORSFilter {
 		String SEQ = "";
 
 		List<HashMap<String, String>> getBridgeLeccodeSeqList = lectureservice.getBridgeLeccodeSeq(lectureVO);
-		if(getBridgeLeccodeSeqList.size() > 0){
+		if (getBridgeLeccodeSeqList.size() > 0) {
 			SEQ = getBridgeLeccodeSeqList.get(0).get("SEQ");
 			lectureVO.setSeq(Integer.parseInt(getBridgeLeccodeSeqList.get(0).get("SEQ")));
-		}else{
+		} else {
 			SEQ = "1";
 			lectureVO.setSeq(1);
 		}
@@ -369,7 +367,7 @@ public class LectureApi extends CORSFilter {
 		lectureVO.setPrefix(prefix);
 		List<HashMap<String, String>> getBridgeLeccodeList = lectureservice.getBridgeLeccode(lectureVO);
 
-		if(getBridgeLeccodeList.size() > 0)
+		if (getBridgeLeccodeList.size() > 0)
 			BRIDGE_LECCODE = prefix + getBridgeLeccodeList.get(0).get("BRIDGE_LECCODE");
 		else
 			BRIDGE_LECCODE = prefix + "00001";
@@ -377,14 +375,14 @@ public class LectureApi extends CORSFilter {
 
 		prefix = lectureVO.getLecTypeChoice() + cal.get(Calendar.YEAR);
 		lectureVO.setPrefix(prefix);
-		for(int i=0; i<CATEGORY_CD_ARR.length; i++){
+		for (int i = 0; i < CATEGORY_CD_ARR.length; i++) {
 			lectureVO.setCategoryCd(CATEGORY_CD_ARR[i]);
 
-			for(int j=0; j<LEARNING_CD_ARR.length; j++){
+			for (int j = 0; j < LEARNING_CD_ARR.length; j++) {
 				lectureVO.setLearningCd(LEARNING_CD_ARR[j]);
 
 				List<HashMap<String, String>> getLeccodeList = lectureservice.getLeccode(lectureVO);
-				if(getLeccodeList.size() > 0)
+				if (getLeccodeList.size() > 0)
 					LECCODE = prefix + getLeccodeList.get(0).get("LECCODE");
 				else
 					LECCODE = prefix + "00001";
@@ -394,22 +392,22 @@ public class LectureApi extends CORSFilter {
 				lectureVO.setSeq(Integer.parseInt(SEQ));
 				lectureservice.lectureBridgeInsert(lectureVO);
 
-				if(JU_RSC_ID_ARR != null){
-					for(int k=0; k<JU_RSC_ID_ARR.length; k++){
+				if (JU_RSC_ID_ARR != null) {
+					for (int k = 0; k < JU_RSC_ID_ARR.length; k++) {
 						lectureVO.setRscId(JU_RSC_ID_ARR[k]);
 						lectureVO.setFlag("J");
 						lectureservice.lectureBookInsert2(lectureVO);
 					}
 				}
-				if(BU_RSC_ID_ARR != null){
-					for(int k=0; k<BU_RSC_ID_ARR.length; k++){
+				if (BU_RSC_ID_ARR != null) {
+					for (int k = 0; k < BU_RSC_ID_ARR.length; k++) {
 						lectureVO.setRscId(BU_RSC_ID_ARR[k]);
 						lectureVO.setFlag("B");
 						lectureservice.lectureBookInsert2(lectureVO);
 					}
 				}
-				if(SU_RSC_ID_ARR != null){
-					for(int k=0; k<SU_RSC_ID_ARR.length; k++){
+				if (SU_RSC_ID_ARR != null) {
+					for (int k = 0; k < SU_RSC_ID_ARR.length; k++) {
 						lectureVO.setRscId(SU_RSC_ID_ARR[k]);
 						lectureVO.setFlag("S");
 						lectureservice.lectureBookInsert2(lectureVO);
@@ -434,12 +432,12 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PutMapping(value="/update")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PutMapping(value = "/update")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject update(@RequestBody LectureVO lectureVO) throws Exception {
 
 		String SUBJECT_DESC = lectureVO.getSubjectDesc();
-		if(SUBJECT_DESC != null) {
+		if (SUBJECT_DESC != null) {
 			SUBJECT_DESC = SUBJECT_DESC.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", "\"");
 			lectureVO.setSubjectDesc(SUBJECT_DESC);
 		}
@@ -451,35 +449,35 @@ public class LectureApi extends CORSFilter {
 		String[] BU_RSC_ID_ARR = lectureVO.getBuRscIdArr();
 		String[] SU_RSC_ID_ARR = lectureVO.getSuRscIdArr();
 
-		if(JU_RSC_ID_ARR != null){
-			for(int k=0; k<JU_RSC_ID_ARR.length; k++){
+		if (JU_RSC_ID_ARR != null) {
+			for (int k = 0; k < JU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(JU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("J");
-				if("ALL".equals(lectureVO.getUpdateFlag())){
+				if ("ALL".equals(lectureVO.getUpdateFlag())) {
 					lectureservice.lectureBookInsert(lectureVO);
-				}else{
+				} else {
 					lectureservice.lectureBookInsert2(lectureVO);
 				}
 			}
 		}
-		if(BU_RSC_ID_ARR != null){
-			for(int k=0; k<BU_RSC_ID_ARR.length; k++){
+		if (BU_RSC_ID_ARR != null) {
+			for (int k = 0; k < BU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(BU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("B");
-				if("ALL".equals(lectureVO.getUpdateFlag())){
+				if ("ALL".equals(lectureVO.getUpdateFlag())) {
 					lectureservice.lectureBookInsert(lectureVO);
-				}else{
+				} else {
 					lectureservice.lectureBookInsert2(lectureVO);
 				}
 			}
 		}
-		if(SU_RSC_ID_ARR != null){
-			for(int k=0; k<SU_RSC_ID_ARR.length; k++){
+		if (SU_RSC_ID_ARR != null) {
+			for (int k = 0; k < SU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(SU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("S");
-				if("ALL".equals(lectureVO.getUpdateFlag())){
+				if ("ALL".equals(lectureVO.getUpdateFlag())) {
 					lectureservice.lectureBookInsert(lectureVO);
-				}else{
+				} else {
 					lectureservice.lectureBookInsert2(lectureVO);
 				}
 			}
@@ -501,8 +499,8 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@DeleteMapping(value="/delete")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@DeleteMapping(value = "/delete")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject delete(@RequestBody LectureVO lectureVO) throws Exception {
 
 		lectureservice.lectureDelete(lectureVO);
@@ -525,13 +523,13 @@ public class LectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@DeleteMapping(value="/listDelete")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@DeleteMapping(value = "/listDelete")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject listDelete(@RequestBody LectureVO lectureVO) throws Exception {
 
 		String[] DEL_ARR = lectureVO.getDelArr();
-		if(DEL_ARR != null){
-			for(int i=0; i<DEL_ARR.length; i++){
+		if (DEL_ARR != null) {
+			for (int i = 0; i < DEL_ARR.length; i++) {
 				String Lcode = DEL_ARR[i].split("/")[0];
 				String Bcode = DEL_ARR[i].split("/")[1];
 
