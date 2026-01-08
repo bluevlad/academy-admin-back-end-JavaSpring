@@ -1,6 +1,5 @@
 package com.academy.lecture.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -8,7 +7,7 @@ import com.academy.common.CommonVO;
  * Category Value Object
  * TB_CATEGORY_INFO 테이블 매핑 VO
  */
-public class CategoryVO extends CommonVO implements Serializable {
+public class CategoryVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

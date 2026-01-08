@@ -1,6 +1,5 @@
 package com.academy.lecture.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -8,7 +7,7 @@ import com.academy.common.CommonVO;
  * MacAddressManager Value Object
  * TB_USER_INFO 및 관련 MAC 주소 테이블 매핑 VO
  */
-public class MacAddressManagerVO extends CommonVO implements Serializable {
+public class MacAddressManagerVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

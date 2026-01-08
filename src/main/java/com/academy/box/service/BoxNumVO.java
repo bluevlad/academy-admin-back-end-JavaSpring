@@ -1,6 +1,5 @@
 package com.academy.box.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -17,7 +16,7 @@ import com.academy.common.CommonVO;
  *  2025.12.11         system            사물함 세부정보 관리 신규 생성
  * </pre>
  */
-public class BoxNumVO extends CommonVO implements Serializable {
+public class BoxNumVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

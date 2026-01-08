@@ -1,6 +1,5 @@
 package com.academy.board.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -17,7 +16,7 @@ import com.academy.common.CommonVO;
  *  2025.12.10         system            게시판 첨부파일 등록
  * </pre>
  */
-public class BoardFileVO extends CommonVO implements Serializable {
+public class BoardFileVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

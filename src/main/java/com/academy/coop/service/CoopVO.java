@@ -1,6 +1,5 @@
 package com.academy.coop.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -17,7 +16,7 @@ import com.academy.common.CommonVO;
  *  2025.12.11         system            제휴사 관리 신규 생성
  * </pre>
  */
-public class CoopVO extends CommonVO implements Serializable {
+public class CoopVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

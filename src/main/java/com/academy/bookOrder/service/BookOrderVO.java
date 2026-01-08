@@ -1,6 +1,5 @@
 package com.academy.bookOrder.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -8,7 +7,7 @@ import com.academy.common.CommonVO;
  * BookOrder Value Object
  * 교재 배송/매출 관리 VO
  */
-public class BookOrderVO extends CommonVO implements Serializable {
+public class BookOrderVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

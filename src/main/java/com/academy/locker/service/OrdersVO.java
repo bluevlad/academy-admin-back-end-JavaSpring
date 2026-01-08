@@ -1,6 +1,5 @@
 package com.academy.locker.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -19,7 +18,7 @@ import com.academy.common.CommonVO;
 * </pre>
 */
 
-public class OrdersVO extends CommonVO implements Serializable {
+public class OrdersVO extends CommonVO {
 
 	private static final long serialVersionUID = 638950577710720796L;
 

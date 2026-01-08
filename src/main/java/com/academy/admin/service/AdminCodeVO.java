@@ -1,23 +1,23 @@
 package com.academy.admin.service;
 
-import java.io.Serializable;
-
 import com.academy.common.CommonVO;
 
 /**
  * 공통코드 VO 클래스 - TB_BA_CONFIG_CD 테이블
+ * 
  * @author system
  * @version 1.0
  * @see
- * <pre>
+ * 
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *     수정일           수정자                수정내용
  *  ---------------    --------------    ---------------------------
  *  2025.12.10         system            최초 생성
- * </pre>
+ *      </pre>
  */
-public class AdminCodeVO extends CommonVO implements Serializable {
+public class AdminCodeVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,6 +49,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public String getSysCd() {
         return sysCd;
     }
+
     public void setSysCd(String sysCd) {
         this.sysCd = sysCd;
     }
@@ -56,6 +57,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public String getSysNm() {
         return sysNm;
     }
+
     public void setSysNm(String sysNm) {
         this.sysNm = sysNm;
     }
@@ -63,6 +65,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public Integer getCodeNo() {
         return codeNo;
     }
+
     public void setCodeNo(Integer codeNo) {
         this.codeNo = codeNo;
     }
@@ -70,6 +73,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public String getCodeCd() {
         return codeCd;
     }
+
     public void setCodeCd(String codeCd) {
         this.codeCd = codeCd;
     }
@@ -77,6 +81,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public String getCodeNm() {
         return codeNm;
     }
+
     public void setCodeNm(String codeNm) {
         this.codeNm = codeNm;
     }
@@ -84,6 +89,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public String getCodeVal() {
         return codeVal;
     }
+
     public void setCodeVal(String codeVal) {
         this.codeVal = codeVal;
     }
@@ -91,6 +97,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public String getCodeInfo() {
         return codeInfo;
     }
+
     public void setCodeInfo(String codeInfo) {
         this.codeInfo = codeInfo;
     }
@@ -98,6 +105,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public Integer getCodeSeq() {
         return codeSeq;
     }
+
     public void setCodeSeq(Integer codeSeq) {
         this.codeSeq = codeSeq;
     }
@@ -105,6 +113,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public Integer getLevel() {
         return level;
     }
+
     public void setLevel(Integer level) {
         this.level = level;
     }
@@ -112,6 +121,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public Integer getDetailCodeNo() {
         return detailCodeNo;
     }
+
     public void setDetailCodeNo(Integer detailCodeNo) {
         this.detailCodeNo = detailCodeNo;
     }
@@ -119,6 +129,7 @@ public class AdminCodeVO extends CommonVO implements Serializable {
     public String getDeleteIds() {
         return deleteIds;
     }
+
     public void setDeleteIds(String deleteIds) {
         this.deleteIds = deleteIds;
     }
