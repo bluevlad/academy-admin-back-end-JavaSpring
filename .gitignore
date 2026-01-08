@@ -15,3 +15,7 @@ logs*.*
 *.iml
 /src/main/resources/application-local.yml
 /logs/
+mvnw.cmd
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.gitignore
