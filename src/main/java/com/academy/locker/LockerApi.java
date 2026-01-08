@@ -430,7 +430,8 @@ public class LockerApi extends CORSFilter {
 		lockerVO.setBoxNum(CommonUtil.parseInt(usedBoxNum));
 		lockerVO.setRentSeq(CommonUtil.parseInt(rentSeq));
 
-		JSONObject boxNumChange = lockerService.selectLockerNumRentDetail(lockerVO);
+		// 사물함 대여 정보 조회 (데이터 검증용, 반환값 미사용)
+		lockerService.selectLockerNumRentDetail(lockerVO);
 
 		// lockerVO.setUserId(boxNumChange.getUserId());
 		// lockerVO.setBoxFlag(boxNumChange.getBoxFlag());
