@@ -1,6 +1,5 @@
 package com.academy.login.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -17,7 +16,7 @@ import com.academy.common.CommonVO;
  *  @see
  *  
  */
-public class MemberVO extends CommonVO implements Serializable{
+public class MemberVO extends CommonVO {
 	
 	private static final long serialVersionUID = 638950577710720796L;
 

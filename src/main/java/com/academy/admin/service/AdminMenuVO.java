@@ -1,6 +1,5 @@
 package com.academy.admin.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -17,7 +16,7 @@ import com.academy.common.CommonVO;
  *  2025.12.10         system            최초 생성
  * </pre>
  */
-public class AdminMenuVO extends CommonVO implements Serializable {
+public class AdminMenuVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

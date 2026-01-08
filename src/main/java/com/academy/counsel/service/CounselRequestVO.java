@@ -1,6 +1,5 @@
 package com.academy.counsel.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.academy.common.CommonVO;
@@ -18,7 +17,7 @@ import com.academy.common.CommonVO;
  *  2025.12.11         system            상담 신청 관리 신규 생성
  * </pre>
  */
-public class CounselRequestVO extends CommonVO implements Serializable {
+public class CounselRequestVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

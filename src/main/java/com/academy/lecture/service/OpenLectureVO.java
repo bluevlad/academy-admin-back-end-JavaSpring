@@ -1,6 +1,5 @@
 package com.academy.lecture.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -8,7 +7,7 @@ import com.academy.common.CommonVO;
  * OpenLecture Value Object
  * TB_OPEN_LECTURE 테이블 매핑 VO
  */
-public class OpenLectureVO extends CommonVO implements Serializable {
+public class OpenLectureVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

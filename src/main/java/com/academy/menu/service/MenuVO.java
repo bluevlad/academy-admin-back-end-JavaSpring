@@ -1,10 +1,9 @@
 package com.academy.menu.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
-public class MenuVO extends CommonVO implements Serializable {
+public class MenuVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

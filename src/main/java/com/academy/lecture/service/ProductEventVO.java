@@ -1,6 +1,5 @@
 package com.academy.lecture.service;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.academy.common.CommonVO;
@@ -9,7 +8,7 @@ import com.academy.common.CommonVO;
  * ProductEvent Value Object
  * TB_PRODUCT_EVENT 테이블 매핑 VO
  */
-public class ProductEventVO extends CommonVO implements Serializable {
+public class ProductEventVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

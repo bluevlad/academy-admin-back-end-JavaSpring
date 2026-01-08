@@ -1,6 +1,5 @@
 package com.academy.bookCmmt.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -11,7 +10,7 @@ import com.academy.common.CommonVO;
  * @since 2025.11
  * @version 1.0
  */
-public class BookCmmtVO extends CommonVO implements Serializable {
+public class BookCmmtVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

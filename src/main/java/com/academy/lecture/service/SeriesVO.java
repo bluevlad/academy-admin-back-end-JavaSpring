@@ -1,6 +1,5 @@
 package com.academy.lecture.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -8,7 +7,7 @@ import com.academy.common.CommonVO;
  * Series Value Object
  * TB_SERIES_INFO 테이블 매핑 VO
  */
-public class SeriesVO extends CommonVO implements Serializable {
+public class SeriesVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

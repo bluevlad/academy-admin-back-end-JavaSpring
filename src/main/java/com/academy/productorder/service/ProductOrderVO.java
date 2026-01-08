@@ -1,6 +1,5 @@
 package com.academy.productorder.service;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.academy.common.CommonVO;
@@ -9,7 +8,7 @@ import com.academy.common.CommonVO;
  * ProductOrder Value Object
  * TB_ORDERS, TB_OFF_ORDERS 테이블 매핑 VO
  */
-public class ProductOrderVO extends CommonVO implements Serializable {
+public class ProductOrderVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 

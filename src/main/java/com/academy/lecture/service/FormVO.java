@@ -1,6 +1,5 @@
 package com.academy.lecture.service;
 
-import java.io.Serializable;
 
 import com.academy.common.CommonVO;
 
@@ -8,7 +7,7 @@ import com.academy.common.CommonVO;
  * Form (Learning Form) Value Object
  * TB_LEARNING_FORM_INFO 테이블 매핑 VO
  */
-public class FormVO extends CommonVO implements Serializable {
+public class FormVO extends CommonVO {
 
     private static final long serialVersionUID = 1L;
 
