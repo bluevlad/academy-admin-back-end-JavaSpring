@@ -41,12 +41,16 @@ import com.academy.common.FileVO;
 @Deprecated
 public class FileDownloadView extends AbstractView {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Deprecated
     public FileDownloadView(){
         setContentType("application/download; utf-8");
     }
 
+    @Deprecated
     @Override
+    @SuppressWarnings("null")
     protected void renderMergedOutputModel(@NonNull Map<String, Object> model, @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) throws Exception {
         FileVO file = (FileVO)model.get("downloadFile");
 

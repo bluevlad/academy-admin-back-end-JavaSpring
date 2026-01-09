@@ -43,6 +43,7 @@ public class LectureApi extends CORSFilter {
 	private LectureService lectureservice;
 	private TeacherService teacherservice;
 	private CmmUseService cmmUseService;
+	@SuppressWarnings("unused")
 	private SubjectService subjectService;
 	private ProductOrderService productOrderService;
 

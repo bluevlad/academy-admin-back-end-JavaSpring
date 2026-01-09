@@ -114,7 +114,7 @@ public class ApiInfoApi extends CORSFilter {
             }
 
             String moduleName = extractModule(className);
-            moduleCounts.merge(moduleName, 1, Integer::sum);
+            moduleCounts.merge(moduleName, 1, (a, b) -> a + b);
             totalCount++;
 
             // 모듈별 API 목록 구성

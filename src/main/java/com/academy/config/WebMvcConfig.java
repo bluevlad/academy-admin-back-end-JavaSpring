@@ -2,6 +2,7 @@ package com.academy.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,20 +10,21 @@ import com.academy.common.ApiLoggingInterceptor;
 import com.academy.common.PaginationAuthInterceptor;
 
 @Configuration
+@SuppressWarnings("null")
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private final ApiLoggingInterceptor apiLoggingInterceptor;
     private final PaginationAuthInterceptor paginationAuthInterceptor;
 
     @Autowired
-    public WebMvcConfig(ApiLoggingInterceptor apiLoggingInterceptor,
-                        PaginationAuthInterceptor paginationAuthInterceptor) {
+    public WebMvcConfig(@NonNull ApiLoggingInterceptor apiLoggingInterceptor,
+                        @NonNull PaginationAuthInterceptor paginationAuthInterceptor) {
         this.apiLoggingInterceptor = apiLoggingInterceptor;
         this.paginationAuthInterceptor = paginationAuthInterceptor;
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(@NonNull InterceptorRegistry registry) {
         // API 로깅 인터셉터
         registry.addInterceptor(apiLoggingInterceptor)
                 .addPathPatterns("/api/**")

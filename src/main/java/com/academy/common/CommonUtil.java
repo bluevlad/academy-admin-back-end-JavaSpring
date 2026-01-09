@@ -344,7 +344,7 @@ public class CommonUtil {
                 char[] escaped = specialCharactersRepresentation[c];
                 if (escaped != null) {
                     // create StringBuffer to hold escaped xml string
-                    if (start == 0) {
+                    if (escapedBuffer == null) {
                         escapedBuffer = new StringBuffer(length + 5);
                     }
                     // add unescaped portion

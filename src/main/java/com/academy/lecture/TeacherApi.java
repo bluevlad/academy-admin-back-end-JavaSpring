@@ -276,14 +276,16 @@ public class TeacherApi extends CORSFilter {
 		setSessionInfo(vo, request);
 
 		String[] DEL_ARR = request.getParameterValues("DEL_ARR");
+		int deletedCount = 0;
 		if (DEL_ARR != null && DEL_ARR.length > 0) {
 			vo.setDelArr(DEL_ARR);
 			teacherservice.teacherIsUseUpdate(vo);
+			deletedCount = DEL_ARR.length;
 		}
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("result", "success");
-		result.put("message", DEL_ARR.length + "명의 강사가 삭제되었습니다");
+		result.put("message", deletedCount + "명의 강사가 삭제되었습니다");
 
 		JSONObject jObject = new JSONObject(result);
 		return jObject;
@@ -349,6 +351,7 @@ public class TeacherApi extends CORSFilter {
 	 * @param request
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	private void setSessionInfo(TeacherVO vo, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
@@ -412,6 +415,7 @@ public class TeacherApi extends CORSFilter {
 	 * @return TeacherVO
 	 * @throws Exception
 	 */
+	@SuppressWarnings("null")
 	public TeacherVO lecFileProcess(TeacherVO vo, MultipartHttpServletRequest multipartRequest) throws Exception {
 		String rootPath = uploadPath;
 		String subPath = "member_upload/";

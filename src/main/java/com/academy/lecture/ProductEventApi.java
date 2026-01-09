@@ -183,16 +183,16 @@ public class ProductEventApi extends CORSFilter {
 		searchMap.put("endNo", String.valueOf(endNo));
 
 		// 카테고리 셀렉트박스 리스트
-		List category_list = productevent.getCaCatCdList(searchMap);
+		List<HashMap<String, String>> category_list = productevent.getCaCatCdList(searchMap);
 
 		// 학습형태 셀렉트박스 리스트
-		List lec_list = productevent.getVwMenuMstTree_lec(searchMap);
+		List<HashMap<String, String>> lec_list = productevent.getVwMenuMstTree_lec(searchMap);
 
 		// 과목 셀렉트박스 리스트
-		List subject_list = productevent.getCaSubjectCdList(searchMap);
+		List<HashMap<String, String>> subject_list = productevent.getCaSubjectCdList(searchMap);
 
 		// 강의선택 팝업 리스트
-		List list = productevent.getCbLecMstFreeOrderList(searchMap);
+		List<HashMap<String, String>> list = productevent.getCbLecMstFreeOrderList(searchMap);
 
 		// 강의선택 팝업 카운트
 		int listCount = productevent.getCbLecMstListFreeOrderCount(searchMap);
@@ -231,7 +231,7 @@ public class ProductEventApi extends CORSFilter {
 		vo.setEventId(String.valueOf(event_id));
 
 		int addedCount = 0;
-		if (v_leccode != null && !"".equals(v_leccode)) {
+		if (v_leccode != null && v_leccode.length > 0) {
 			for (int i = 0; i < v_leccode.length; i++) {
 				vo.setLeccode(v_leccode[i]);
 				productevent.lec_insert(vo);
@@ -267,7 +267,7 @@ public class ProductEventApi extends CORSFilter {
 		vo.setEventId(String.valueOf(event_id));
 
 		int deletedCount = 0;
-		if (i_leccode != null && !"".equals(i_leccode)) {
+		if (i_leccode != null && i_leccode.length > 0) {
 			for (int i = 0; i < i_leccode.length; i++) {
 				vo.setLeccode(i_leccode[i]);
 				productevent.lec_delete(vo);
@@ -292,6 +292,7 @@ public class ProductEventApi extends CORSFilter {
 	 * @param request
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	private void setSessionInfo(ProductEventVO vo, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session != null) {

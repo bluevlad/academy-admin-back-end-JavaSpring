@@ -381,6 +381,7 @@ public class FileMngUtil {
      * @see com.academy.common.file.web.FileDownloadController
      */
     @Deprecated
+    @SuppressWarnings("null")
     public void downFile(HttpServletResponse response, String streFileNm, String orignFileNm) throws Exception {
         String downFileName = streFileNm;
         String orgFileName = orignFileNm;
