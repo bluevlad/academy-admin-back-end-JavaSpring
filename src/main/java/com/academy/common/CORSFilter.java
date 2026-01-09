@@ -28,6 +28,7 @@ public class CORSFilter implements Filter {
     /**
      * @see Filter#destroy()
      */
+    @Override
     public void destroy() {
         // TODO Auto-generated method stub
     }
@@ -35,6 +36,7 @@ public class CORSFilter implements Filter {
     /**
      * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
      */
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws IOException, ServletException {
 
@@ -74,6 +76,7 @@ public class CORSFilter implements Filter {
     /**
      * @see Filter#init(FilterConfig)
      */
+    @Override
     public void init(FilterConfig fConfig) throws ServletException {
         // TODO Auto-generated method stub
     }

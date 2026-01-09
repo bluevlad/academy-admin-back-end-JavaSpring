@@ -35,7 +35,7 @@ public class EgovWebUtil {
 		String returnValue = value;
 		returnValue = clearXSSMinimum(returnValue);
 
-		returnValue = returnValue.replaceAll("%00", null);
+		returnValue = returnValue.replaceAll("%00", "");
 
 		returnValue = returnValue.replaceAll("%", "&#37;");
 
@@ -74,7 +74,7 @@ public class EgovWebUtil {
 		}
 
 		returnValue = returnValue.replaceAll("/", "");
-		returnValue = returnValue.replaceAll("\\", "");
+		returnValue = returnValue.replaceAll("\\\\", "");
 		returnValue = returnValue.replaceAll("\\.\\.", ""); // ..
 		returnValue = returnValue.replaceAll("&", "");
 
@@ -100,7 +100,7 @@ public class EgovWebUtil {
 	 }
 
 	 public static String removeOSCmdRisk(String parameter) {
-		 return parameter.replaceAll("\\p{Space}", "").replaceAll("\\*", "").replaceAll("|", "").replaceAll(";", "");
+		 return parameter.replaceAll("\\p{Space}", "").replaceAll("\\*", "").replaceAll("\\|", "").replaceAll(";", "");
 	 }
 
 }

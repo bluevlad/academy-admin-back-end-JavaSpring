@@ -39,8 +39,8 @@ public class CommonUtil {
      */
 	
     public static boolean empty(Object obj) {
-    	if (obj instanceof Collection) {
-			return ((Collection) obj).isEmpty();
+    	if (obj instanceof Collection<?>) {
+			return ((Collection<?>) obj).isEmpty();
 		} else if (obj instanceof Object[]) {
 			return (((Object[]) obj).length == 0) ? true : false;
 		} else {
@@ -80,7 +80,7 @@ public class CommonUtil {
         return empty(obj) ? def : obj;
     }
 
-    public static String isNull(Map obj, String def) {
+    public static String isNull(Map<?, ?> obj, String def) {
         return empty(obj.toString()) ? def : obj.toString();
     }
 

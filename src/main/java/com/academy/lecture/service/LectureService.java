@@ -458,7 +458,7 @@ public class LectureService {
 
         if(null != oldfreetonewfree_list && oldfreetonewfree_list.size() > 0) {
             for(int i=0; i<oldfreetonewfree_list.size(); i++){
-                HashMap<String, String> map = (HashMap)oldfreetonewfree_list.get(i);
+                HashMap<String, String> map = (HashMap<String, String>)oldfreetonewfree_list.get(i);
                 String LECCODE = map.get("LECCODE");
 
                 paramMap.put("SHEARH_LECCODE", LECCODE);
@@ -522,7 +522,7 @@ public class LectureService {
 
         if(null != oldfreetonewfree_list && oldfreetonewfree_list.size() > 0) {
             for(int i=0; i<oldfreetonewfree_list.size(); i++){
-                HashMap<String, String> map = (HashMap)oldfreetonewfree_list.get(i);
+                HashMap<String, String> map = (HashMap<String, String>)oldfreetonewfree_list.get(i);
                 String LECCODE = map.get("LECCODE");
 
                 paramMap.put("SHEARH_LECCODE", LECCODE);
