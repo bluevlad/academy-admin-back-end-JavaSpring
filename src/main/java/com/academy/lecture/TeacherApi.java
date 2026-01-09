@@ -54,7 +54,7 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/list")
+	@GetMapping(value = "/list")
 	public JSONObject list(@ModelAttribute TeacherVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
@@ -72,16 +72,16 @@ public class TeacherApi extends CORSFilter {
 		int listCount = 0;
 		List<HashMap<String, String>> kindlist = teacherservice.getKindList(vo);
 
-		if("main".equals(vo.getSearchCategory())){
+		if ("main".equals(vo.getSearchCategory())) {
 			list = teacherservice.teacherMainList(vo);
 			listCount = teacherservice.teacherMainListCount(vo);
-		}else if("intro".equals(vo.getSearchCategory())){
+		} else if ("intro".equals(vo.getSearchCategory())) {
 			list = teacherservice.teacherIntroList(vo);
 			listCount = teacherservice.teacherIntroListCount(vo);
-		}else if("intro_off".equals(vo.getSearchCategory())){
+		} else if ("intro_off".equals(vo.getSearchCategory())) {
 			list = teacherservice.teacherIntro_offList(vo);
 			listCount = teacherservice.teacherIntro_offListCount(vo);
-		}else{
+		} else {
 			list = teacherservice.teacherList(vo);
 			listCount = teacherservice.teacherListCount(vo);
 		}
@@ -105,7 +105,7 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/view")
+	@GetMapping(value = "/view")
 	public JSONObject view(@ModelAttribute TeacherVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 		List<HashMap<String, String>> view = teacherservice.teacherView(vo);
@@ -147,20 +147,20 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/idCheck")
+	@GetMapping(value = "/idCheck")
 	public JSONObject idCheck(@ModelAttribute TeacherVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
-	    int listCount = teacherservice.teacherIdCheck(vo);
+		int listCount = teacherservice.teacherIdCheck(vo);
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
-	    if(listCount > 0) {
-	    	result.put("available", false);
-	    	result.put("message", "이미 사용중인 ID입니다");
-	    } else {
-	    	result.put("available", true);
-	    	result.put("message", "사용 가능한 ID입니다");
-	    }
+		if (listCount > 0) {
+			result.put("available", false);
+			result.put("message", "이미 사용중인 ID입니다");
+		} else {
+			result.put("available", true);
+			result.put("message", "사용 가능한 ID입니다");
+		}
 
 		JSONObject jObject = new JSONObject(result);
 		return jObject;
@@ -174,19 +174,20 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PostMapping(value="/save")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
-	public JSONObject save(@RequestBody TeacherVO vo, HttpServletRequest request, MultipartHttpServletRequest multipartRequest) throws Exception {
+	@PostMapping(value = "/save")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
+	public JSONObject save(@RequestBody TeacherVO vo, HttpServletRequest request,
+			MultipartHttpServletRequest multipartRequest) throws Exception {
 		setSessionInfo(vo, request);
 
 		lecFileProcess(vo, multipartRequest);
 
-        String[] ORI_CATEGORY_CODE = request.getParameterValues("ORI_CATEGORY_CODE");
-        String[] CETCARR = request.getParameterValues("CATEGORY_CODE");
-        String[] SETCARR = request.getParameterValues("SUBJECT_CD");
-        vo.setOriCategoryCode(ORI_CATEGORY_CODE);
-        vo.setCetcarr(CETCARR);
-        vo.setSetcarr(SETCARR);
+		String[] ORI_CATEGORY_CODE = request.getParameterValues("ORI_CATEGORY_CODE");
+		String[] CETCARR = request.getParameterValues("CATEGORY_CODE");
+		String[] SETCARR = request.getParameterValues("SUBJECT_CD");
+		vo.setOriCategoryCode(ORI_CATEGORY_CODE);
+		vo.setCetcarr(CETCARR);
+		vo.setSetcarr(SETCARR);
 
 		teacherservice.teacherInsert(vo);
 
@@ -206,23 +207,24 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PutMapping(value="/update")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
-	public JSONObject update(@RequestBody TeacherVO vo, HttpServletRequest request, MultipartHttpServletRequest multipartRequest) throws Exception {
+	@PutMapping(value = "/update")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
+	public JSONObject update(@RequestBody TeacherVO vo, HttpServletRequest request,
+			MultipartHttpServletRequest multipartRequest) throws Exception {
 		setSessionInfo(vo, request);
 		lecFileProcess(vo, multipartRequest);
 
 		String rootPath = uploadPath;
 		deleteOldFiles(vo, rootPath);
 
-        String[] ORI_CATEGORY_CODE = request.getParameterValues("ORI_CATEGORY_CODE");
-        String[] CETCARR = request.getParameterValues("CATEGORY_CODE");
-        String[] SETCARR = request.getParameterValues("SUBJECT_CD");
-        String[] OFF_SETCARR = request.getParameterValues("OFF_SUBJECT_CD");
-        vo.setOriCategoryCode(ORI_CATEGORY_CODE);
-        vo.setCetcarr(CETCARR);
-        vo.setSetcarr(SETCARR);
-        vo.setOffSetcarr(OFF_SETCARR);
+		String[] ORI_CATEGORY_CODE = request.getParameterValues("ORI_CATEGORY_CODE");
+		String[] CETCARR = request.getParameterValues("CATEGORY_CODE");
+		String[] SETCARR = request.getParameterValues("SUBJECT_CD");
+		String[] OFF_SETCARR = request.getParameterValues("OFF_SUBJECT_CD");
+		vo.setOriCategoryCode(ORI_CATEGORY_CODE);
+		vo.setCetcarr(CETCARR);
+		vo.setSetcarr(SETCARR);
+		vo.setOffSetcarr(OFF_SETCARR);
 
 		teacherservice.teacherUpdate(vo);
 
@@ -242,13 +244,13 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@DeleteMapping(value="/delete")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@DeleteMapping(value = "/delete")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject delete(@RequestBody TeacherVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
-        String[] DEL_ARR = {vo.getUserId()};
-        vo.setDelArr(DEL_ARR);
+		String[] DEL_ARR = { vo.getUserId() };
+		vo.setDelArr(DEL_ARR);
 
 		teacherservice.teacherIsUseUpdate(vo);
 
@@ -268,14 +270,14 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@DeleteMapping(value="/listDelete")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@DeleteMapping(value = "/listDelete")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject listDelete(@RequestBody TeacherVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
 		String[] DEL_ARR = request.getParameterValues("DEL_ARR");
-        if(DEL_ARR != null && DEL_ARR.length > 0){
-            vo.setDelArr(DEL_ARR);
+		if (DEL_ARR != null && DEL_ARR.length > 0) {
+			vo.setDelArr(DEL_ARR);
 			teacherservice.teacherIsUseUpdate(vo);
 		}
 
@@ -295,17 +297,17 @@ public class TeacherApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PutMapping(value="/seqUpdate")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PutMapping(value = "/seqUpdate")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject seqUpdate(@RequestBody TeacherVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
 		String[] SEQARR = request.getParameterValues("SEQ");
-        if(SEQARR != null && SEQARR.length > 0){
-            vo.setNum(request.getParameterValues("Num"));
-            vo.setSeq(SEQARR);
-            vo.setProfessorUserId(request.getParameterValues("PROFESSOR_USER_ID"));
-            vo.setSubjectCd(request.getParameterValues("SUBJECT_CD"));
+		if (SEQARR != null && SEQARR.length > 0) {
+			vo.setNum(request.getParameterValues("Num"));
+			vo.setSeq(SEQARR);
+			vo.setProfessorUserId(request.getParameterValues("PROFESSOR_USER_ID"));
+			vo.setSubjectCd(request.getParameterValues("SUBJECT_CD"));
 
 			teacherservice.teacherSeqUpdate(vo);
 		}
@@ -316,28 +318,28 @@ public class TeacherApi extends CORSFilter {
 
 		JSONObject jObject = new JSONObject(result);
 		return jObject;
-    }
+	}
 
-    /**
-     * @Method Name : findTeacherList
-     * @작성일 : 2015. 07.
-     * @Method 설명 : 강사 검색 목록
-     * @param request
-     * @return JSONObject
-     * @throws Exception
-     */
-    @GetMapping(value="/find")
-    public JSONObject findTeacherList(@ModelAttribute TeacherVO vo, HttpServletRequest request) throws Exception {
-        setSessionInfo(vo, request);
+	/**
+	 * @Method Name : findTeacherList
+	 * @작성일 : 2015. 07.
+	 * @Method 설명 : 강사 검색 목록
+	 * @param request
+	 * @return JSONObject
+	 * @throws Exception
+	 */
+	@GetMapping(value = "/find")
+	public JSONObject findTeacherList(@ModelAttribute TeacherVO vo, HttpServletRequest request) throws Exception {
+		setSessionInfo(vo, request);
 
-        List<HashMap<String, String>> list = teacherservice.findTeacherList(vo);
+		List<HashMap<String, String>> list = teacherservice.findTeacherList(vo);
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", list);
 
 		JSONObject jObject = new JSONObject(result);
 		return jObject;
-    }
+	}
 
 	/**
 	 * @Method Name : setSessionInfo
@@ -347,11 +349,11 @@ public class TeacherApi extends CORSFilter {
 	 * @param request
 	 * @throws Exception
 	 */
-    private void setSessionInfo(TeacherVO vo, HttpServletRequest request) throws Exception {
+	private void setSessionInfo(TeacherVO vo, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession(false);
-		if(session != null) {
-			HashMap<String, String> loginInfo = (HashMap<String, String>)session.getAttribute("AdmUserInfo");
-			if(loginInfo != null) {
+		if (session != null) {
+			HashMap<String, String> loginInfo = (HashMap<String, String>) session.getAttribute("AdmUserInfo");
+			if (loginInfo != null) {
 				vo.setRegId(loginInfo.get("USER_ID"));
 				vo.setUpdId(loginInfo.get("USER_ID"));
 			}
@@ -359,10 +361,10 @@ public class TeacherApi extends CORSFilter {
 
 		vo.setCurrentPage(Integer.parseInt(CommonUtil.isNull(request.getParameter("currentPage"), "1")));
 		vo.setPageRow(Integer.parseInt(CommonUtil.isNull(request.getParameter("pageRow"), String.valueOf(pageUnit))));
-        vo.setSearchCategory(CommonUtil.isNull(request.getParameter("SEARCHCATEGORY"), ""));
+		vo.setSearchCategory(CommonUtil.isNull(request.getParameter("SEARCHCATEGORY"), ""));
 		vo.setSearchType(CommonUtil.isNull(request.getParameter("SEARCHTYPE"), ""));
 		vo.setSearchText(CommonUtil.isNull(request.getParameter("SEARCHTEXT"), ""));
-        vo.setOnoffdiv(CommonUtil.isNull(request.getParameter("ONOFFDIV"), ""));
+		vo.setOnoffdiv(CommonUtil.isNull(request.getParameter("ONOFFDIV"), ""));
 		vo.setUserId(CommonUtil.isNull(request.getParameter("USER_ID"), ""));
 		vo.setUserNm(CommonUtil.isNull(request.getParameter("USER_NM"), ""));
 		vo.setUserNicknm(CommonUtil.isNull(request.getParameter("USER_NICKNM"), ""));
@@ -371,34 +373,34 @@ public class TeacherApi extends CORSFilter {
 		vo.setUserPwd(CommonUtil.isNull(request.getParameter("USER_PWD"), ""));
 		vo.setBirthDay(CommonUtil.isNull(request.getParameter("BIRTH_DAY"), ""));
 		vo.setEmail(CommonUtil.isNull(request.getParameter("EMAIL"), ""));
-        vo.setAccount(CommonUtil.isNull(request.getParameter("ACCOUNT"), ""));
+		vo.setAccount(CommonUtil.isNull(request.getParameter("ACCOUNT"), ""));
 		vo.setPhoneNo(CommonUtil.isNull(request.getParameter("PHONE_NO"), ""));
 		vo.setUserPoint(CommonUtil.isNull(request.getParameter("USER_POINT"), "0"));
 		vo.setOnOpenyn(CommonUtil.isNull(request.getParameter("ON_OPENYN"), "Y"));
 		vo.setOffOpenyn(CommonUtil.isNull(request.getParameter("OFF_OPENYN"), "Y"));
 		vo.setPrfBrdOn(CommonUtil.isNull(request.getParameter("PRF_BRD_ON"), "N"));
 		vo.setPrfBrdOf(CommonUtil.isNull(request.getParameter("PRF_BRD_OF"), "N"));
-        vo.setPayment(CommonUtil.isNull(request.getParameter("PAYMENT"), ""));
-        vo.setOffPayment(CommonUtil.isNull(request.getParameter("OFF_PAYMENT"), ""));
-        vo.setOnUrl(CommonUtil.isNull(request.getParameter("ON_URL"), ""));
-        vo.setOffUrl(CommonUtil.isNull(request.getParameter("OFF_URL"), ""));
-        vo.setBrdYn(CommonUtil.isNull(request.getParameter("BRD_YN"), ""));
-        vo.setOffBrdYn(CommonUtil.isNull(request.getParameter("OFF_BRD_YN"), ""));
-        vo.setProfile(CommonUtil.isNull(request.getParameter("PROFILE"), ""));
-        vo.setOffProfile(CommonUtil.isNull(request.getParameter("OFF_PROFILE"), ""));
+		vo.setPayment(CommonUtil.isNull(request.getParameter("PAYMENT"), ""));
+		vo.setOffPayment(CommonUtil.isNull(request.getParameter("OFF_PAYMENT"), ""));
+		vo.setOnUrl(CommonUtil.isNull(request.getParameter("ON_URL"), ""));
+		vo.setOffUrl(CommonUtil.isNull(request.getParameter("OFF_URL"), ""));
+		vo.setBrdYn(CommonUtil.isNull(request.getParameter("BRD_YN"), ""));
+		vo.setOffBrdYn(CommonUtil.isNull(request.getParameter("OFF_BRD_YN"), ""));
+		vo.setProfile(CommonUtil.isNull(request.getParameter("PROFILE"), ""));
+		vo.setOffProfile(CommonUtil.isNull(request.getParameter("OFF_PROFILE"), ""));
 		vo.setTitle(CommonUtil.isNull(request.getParameter("TITLE"), ""));
 		vo.setOffTitle(CommonUtil.isNull(request.getParameter("OFF_TITLE"), ""));
 		vo.setBookLog(CommonUtil.isNull(request.getParameter("BOOK_LOG"), ""));
-        vo.setOffBookLog(CommonUtil.isNull(request.getParameter("OFF_BOOK_LOG"), ""));
+		vo.setOffBookLog(CommonUtil.isNull(request.getParameter("OFF_BOOK_LOG"), ""));
 		vo.setYplan(CommonUtil.isNull(request.getParameter("YPLAN"), ""));
 		vo.setOffYplan(CommonUtil.isNull(request.getParameter("OFF_YPLAN"), ""));
 		vo.setLecinfo(CommonUtil.isNull(request.getParameter("LECINFO"), ""));
 		vo.setOffLecinfo(CommonUtil.isNull(request.getParameter("OFF_LECINFO"), ""));
-        vo.setProfHtml(CommonUtil.isNull(request.getParameter("PROF_HTML"), ""));
-        vo.setOffProfHtml(CommonUtil.isNull(request.getParameter("OFF_PROF_HTML"), ""));
-        vo.setSearchSbjtcd(CommonUtil.isNull(request.getParameter("SEARCHSBJTCD"), ""));
-        vo.setSrchcode(CommonUtil.isNull(request.getParameter("SRCHCODE"), ""));
-        vo.setSrchtxt(CommonUtil.isNull(request.getParameter("SRCHTXT"), ""));
+		vo.setProfHtml(CommonUtil.isNull(request.getParameter("PROF_HTML"), ""));
+		vo.setOffProfHtml(CommonUtil.isNull(request.getParameter("OFF_PROF_HTML"), ""));
+		vo.setSearchSbjtcd(CommonUtil.isNull(request.getParameter("SEARCHSBJTCD"), ""));
+		vo.setSrchcode(CommonUtil.isNull(request.getParameter("SRCHCODE"), ""));
+		vo.setSrchtxt(CommonUtil.isNull(request.getParameter("SRCHTXT"), ""));
 	}
 
 	/**
@@ -410,20 +412,22 @@ public class TeacherApi extends CORSFilter {
 	 * @return TeacherVO
 	 * @throws Exception
 	 */
-    public TeacherVO lecFileProcess(TeacherVO vo, MultipartHttpServletRequest multipartRequest) throws Exception {
+	public TeacherVO lecFileProcess(TeacherVO vo, MultipartHttpServletRequest multipartRequest) throws Exception {
 		String rootPath = uploadPath;
 		String subPath = "member_upload/";
 
-		String[] picFields = {"PIC1", "PIC2", "PIC3", "PIC4", "PIC5", "PIC6", "PIC7", "PIC8", "PIC9", "PIC10",
-							  "OFF_PIC1", "OFF_PIC2", "OFF_PIC3", "OFF_PIC4", "OFF_PIC5", "OFF_PIC6", "OFF_PIC7", "OFF_PIC8", "OFF_PIC9", "OFF_PIC10",
-							  "PRF_ONPIC1", "PRF_ONPIC2", "PRF_ONPIC3", "PRF_OFFPIC1", "PRF_OFFPIC2", "PRF_OFFPIC3",
-							  "PRF_LISTONBANNER", "PRF_LISTOFFBANNER", "PROF_IMG", "OFF_PROF_IMG", "PRF_TOPONIMG", "PRF_TOPOFFIMG"};
+		String[] picFields = { "PIC1", "PIC2", "PIC3", "PIC4", "PIC5", "PIC6", "PIC7", "PIC8", "PIC9", "PIC10",
+				"OFF_PIC1", "OFF_PIC2", "OFF_PIC3", "OFF_PIC4", "OFF_PIC5", "OFF_PIC6", "OFF_PIC7", "OFF_PIC8", "OFF_PIC9",
+				"OFF_PIC10",
+				"PRF_ONPIC1", "PRF_ONPIC2", "PRF_ONPIC3", "PRF_OFFPIC1", "PRF_OFFPIC2", "PRF_OFFPIC3",
+				"PRF_LISTONBANNER", "PRF_LISTOFFBANNER", "PROF_IMG", "OFF_PROF_IMG", "PRF_TOPONIMG", "PRF_TOPOFFIMG" };
 
-		for(String field : picFields) {
+		for (String field : picFields) {
 			MultipartFile file = multipartRequest.getFile(field);
-			if(file != null && !file.isEmpty()) {
-				HashMap<String, Object> fileMap = fileUtil.uploadFile(file, rootPath, subPath);
-				// Note: The field mapping to VO properties would need to be added to TeacherVO or handled differently
+			if (file != null && !file.isEmpty()) {
+				fileUtil.uploadFile(file, rootPath, subPath);
+				// Note: The field mapping to VO properties would need to be added to TeacherVO
+				// or handled differently
 				// For now, this maintains the same logic as the original code
 				Thread.sleep(100);
 			}
@@ -440,11 +444,16 @@ public class TeacherApi extends CORSFilter {
 	 * @param rootPath
 	 * @throws Exception
 	 */
-    private void deleteOldFiles(TeacherVO vo, String rootPath) throws Exception {
-		String[] deleteFields = {"PIC1_DEL", "PIC2_DEL", "PIC3_DEL", "PIC4_DEL", "PIC5_DEL", "PIC6_DEL", "PIC7_DEL", "PIC8_DEL", "PIC9_DEL", "PIC10_DEL",
-								"OFF_PIC1_DEL", "OFF_PIC2_DEL", "OFF_PIC3_DEL", "OFF_PIC4_DEL", "OFF_PIC5_DEL", "OFF_PIC6_DEL", "OFF_PIC7_DEL", "OFF_PIC8_DEL", "OFF_PIC9_DEL", "OFF_PIC10_DEL",
-								"PRF_ONPIC1_DEL", "PRF_ONPIC2_DEL", "PRF_ONPIC3_DEL", "PRF_OFFPIC1_DEL", "PRF_OFFPIC2_DEL", "PRF_OFFPIC3_DEL",
-								"PRF_LISTONBANNER_DEL", "PRF_LISTOFFBANNER_DEL", "PROF_IMG_DEL", "OFF_PROF_IMG_DEL", "PRF_TOPONIMG_DEL", "PRF_TOPOFFIMG_DEL"};
+	private void deleteOldFiles(TeacherVO vo, String rootPath) throws Exception {
+		// String[] deleteFields = {"PIC1_DEL", "PIC2_DEL", "PIC3_DEL", "PIC4_DEL",
+		// "PIC5_DEL", "PIC6_DEL", "PIC7_DEL", "PIC8_DEL", "PIC9_DEL", "PIC10_DEL",
+		// "OFF_PIC1_DEL", "OFF_PIC2_DEL", "OFF_PIC3_DEL", "OFF_PIC4_DEL",
+		// "OFF_PIC5_DEL", "OFF_PIC6_DEL", "OFF_PIC7_DEL", "OFF_PIC8_DEL",
+		// "OFF_PIC9_DEL", "OFF_PIC10_DEL",
+		// "PRF_ONPIC1_DEL", "PRF_ONPIC2_DEL", "PRF_ONPIC3_DEL", "PRF_OFFPIC1_DEL",
+		// "PRF_OFFPIC2_DEL", "PRF_OFFPIC3_DEL",
+		// "PRF_LISTONBANNER_DEL", "PRF_LISTOFFBANNER_DEL", "PROF_IMG_DEL",
+		// "OFF_PROF_IMG_DEL", "PRF_TOPONIMG_DEL", "PRF_TOPOFFIMG_DEL"};
 
 		// Note: File deletion logic would need to be implemented based on VO properties
 		// This maintains the original logic structure

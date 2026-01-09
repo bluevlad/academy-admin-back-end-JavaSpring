@@ -470,7 +470,8 @@ public class LockerApi extends CORSFilter {
 			ModelMap model) throws Exception {
 
 		String orderno = commandMap.get("orderno") == null ? "" : (String) commandMap.get("orderno");
-		String statuscode = commandMap.get("statuscode") == null ? "" : (String) commandMap.get("statuscode");
+		// String statuscode = commandMap.get("statuscode") == null ? "" : (String)
+		// commandMap.get("statuscode");
 
 		lockerVO.setOrderNo(orderno);
 		// lockerVO.setStatuscode(statuscode);

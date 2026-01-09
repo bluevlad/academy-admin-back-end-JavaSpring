@@ -4,9 +4,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.academy.common.CORSFilter;
-import com.academy.common.file.FileUtil;
 import com.academy.book.service.BookService;
 import com.academy.lecture.service.LectureMstService;
 import com.academy.lecture.service.LectureVO;
@@ -33,16 +29,13 @@ import com.academy.book.service.BookVO;
 @RequestMapping("/api/lecturemst")
 public class LectureMstApi extends CORSFilter {
 
-	private final FileUtil fileUtil;
 	private final BookService bookservice;
 	private final LectureMstService lecturemstservice;
 	private final TeacherService teacherservice;
 
 	@Autowired
-	public LectureMstApi(FileUtil fileUtil,
-			BookService bookservice, LectureMstService lecturemstservice,
+	public LectureMstApi(BookService bookservice, LectureMstService lecturemstservice,
 			TeacherService teacherservice) {
-		this.fileUtil = fileUtil;
 		this.bookservice = bookservice;
 		this.lecturemstservice = lecturemstservice;
 		this.teacherservice = teacherservice;
@@ -56,7 +49,7 @@ public class LectureMstApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/list")
+	@GetMapping(value = "/list")
 	public JSONObject list(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		/* 페이징 */
@@ -69,7 +62,7 @@ public class LectureMstApi extends CORSFilter {
 		/* 페이징 */
 
 		TeacherVO teacherVO = new TeacherVO();
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 		List<HashMap<String, String>> kindlist = teacherservice.getKindList(teacherVO);
 
 		SubjectVO subjectVO = new SubjectVO();
@@ -99,10 +92,10 @@ public class LectureMstApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/subjectTeacherList")
+	@GetMapping(value = "/subjectTeacherList")
 	public JSONObject getSubjectTeacherList(@ModelAttribute LectureVO lectureVO) throws Exception {
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 
 		List<HashMap<String, String>> subjectteacherlist = bookservice.getCaSubjectTeacherList(bookVO);
 
@@ -121,12 +114,12 @@ public class LectureMstApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/view")
+	@GetMapping(value = "/view")
 	public JSONObject view(@ModelAttribute LectureVO lectureVO) throws Exception {
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 
-        List<HashMap<String, String>> view = lecturemstservice.lectureView(lectureVO);
+		List<HashMap<String, String>> view = lecturemstservice.lectureView(lectureVO);
 		List<HashMap<String, String>> viewbooklist = lecturemstservice.lectureViewBookList(lectureVO);
 		List<HashMap<String, String>> subjectteacherlist = bookservice.getCaSubjectTeacherList(bookVO);
 
@@ -149,7 +142,7 @@ public class LectureMstApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/dataViewList")
+	@GetMapping(value = "/dataViewList")
 	public JSONObject getDataViewList(@ModelAttribute LectureVO lectureVO) throws Exception {
 
 		List<HashMap<String, String>> memolist = lecturemstservice.lectureDataMemoViewList(lectureVO);
@@ -175,13 +168,13 @@ public class LectureMstApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PostMapping(value="/save")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PostMapping(value = "/save")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject save(@RequestBody LectureVO lectureVO) throws Exception {
 
 		Calendar cal = Calendar.getInstance();
-		String[] CATEGORY_CD_ARR = lectureVO.getCategoryCdArr();
-		String[] LEARNING_CD_ARR = lectureVO.getLearningCdArr();
+		// String[] CATEGORY_CD_ARR = lectureVO.getCategoryCdArr();
+		// String[] LEARNING_CD_ARR = lectureVO.getLearningCdArr();
 		String[] JU_RSC_ID_ARR = lectureVO.getJuRscIdArr();
 		String[] BU_RSC_ID_ARR = lectureVO.getBuRscIdArr();
 		String[] SU_RSC_ID_ARR = lectureVO.getSuRscIdArr();
@@ -190,10 +183,10 @@ public class LectureMstApi extends CORSFilter {
 		String SEQ = "";
 
 		List<HashMap<String, String>> getBridgeMstcodeSeqList = lecturemstservice.getBridgeMstcodeSeq(lectureVO);
-		if(getBridgeMstcodeSeqList.size() > 0){
+		if (getBridgeMstcodeSeqList.size() > 0) {
 			SEQ = getBridgeMstcodeSeqList.get(0).get("SEQ");
 			lectureVO.setJseq(getBridgeMstcodeSeqList.get(0).get("SEQ"));
-		}else{
+		} else {
 			SEQ = "1";
 			lectureVO.setJseq("1");
 		}
@@ -202,7 +195,7 @@ public class LectureMstApi extends CORSFilter {
 		lectureVO.setPrefix(prefix);
 		List<HashMap<String, String>> getBridgeMstcodeList = lecturemstservice.getBridgeMstcode(lectureVO);
 
-		if(getBridgeMstcodeList.size() > 0)
+		if (getBridgeMstcodeList.size() > 0)
 			BRIDGE_MSTCODE = prefix + getBridgeMstcodeList.get(0).get("BRIDGE_MSTCODE");
 		else
 			BRIDGE_MSTCODE = prefix + "00001";
@@ -212,7 +205,7 @@ public class LectureMstApi extends CORSFilter {
 		lectureVO.setPrefix(prefix);
 
 		List<HashMap<String, String>> getLeccodeList = lecturemstservice.getMstcode(lectureVO);
-		if(getLeccodeList.size() > 0)
+		if (getLeccodeList.size() > 0)
 			MSTCODE = prefix + getLeccodeList.get(0).get("MSTCODE");
 		else
 			MSTCODE = prefix + "00001";
@@ -222,22 +215,22 @@ public class LectureMstApi extends CORSFilter {
 		lectureVO.setJseq(SEQ);
 		lecturemstservice.lectureBridgeInsert(lectureVO);
 
-		if(JU_RSC_ID_ARR != null){
-			for(int k=0; k<JU_RSC_ID_ARR.length; k++){
+		if (JU_RSC_ID_ARR != null) {
+			for (int k = 0; k < JU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(JU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("J");
 				lecturemstservice.lectureBookInsert2(lectureVO);
 			}
 		}
-		if(BU_RSC_ID_ARR != null){
-			for(int k=0; k<BU_RSC_ID_ARR.length; k++){
+		if (BU_RSC_ID_ARR != null) {
+			for (int k = 0; k < BU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(BU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("B");
 				lecturemstservice.lectureBookInsert2(lectureVO);
 			}
 		}
-		if(SU_RSC_ID_ARR != null){
-			for(int k=0; k<SU_RSC_ID_ARR.length; k++){
+		if (SU_RSC_ID_ARR != null) {
+			for (int k = 0; k < SU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(SU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("S");
 				lecturemstservice.lectureBookInsert2(lectureVO);
@@ -262,8 +255,8 @@ public class LectureMstApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PutMapping(value="/update")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PutMapping(value = "/update")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject update(@RequestBody LectureVO lectureVO) throws Exception {
 
 		lecturemstservice.lectureBookDelete(lectureVO);
@@ -273,35 +266,35 @@ public class LectureMstApi extends CORSFilter {
 		String[] BU_RSC_ID_ARR = lectureVO.getBuRscIdArr();
 		String[] SU_RSC_ID_ARR = lectureVO.getSuRscIdArr();
 
-		if(JU_RSC_ID_ARR != null){
-			for(int k=0; k<JU_RSC_ID_ARR.length; k++){
+		if (JU_RSC_ID_ARR != null) {
+			for (int k = 0; k < JU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(JU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("J");
-				if("ALL".equals(lectureVO.getUpdateFlag())){
+				if ("ALL".equals(lectureVO.getUpdateFlag())) {
 					lecturemstservice.lectureBookInsert(lectureVO);
-				}else{
+				} else {
 					lecturemstservice.lectureBookInsert2(lectureVO);
 				}
 			}
 		}
-		if(BU_RSC_ID_ARR != null){
-			for(int k=0; k<BU_RSC_ID_ARR.length; k++){
+		if (BU_RSC_ID_ARR != null) {
+			for (int k = 0; k < BU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(BU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("B");
-				if("ALL".equals(lectureVO.getUpdateFlag())){
+				if ("ALL".equals(lectureVO.getUpdateFlag())) {
 					lecturemstservice.lectureBookInsert(lectureVO);
-				}else{
+				} else {
 					lecturemstservice.lectureBookInsert2(lectureVO);
 				}
 			}
 		}
-		if(SU_RSC_ID_ARR != null){
-			for(int k=0; k<SU_RSC_ID_ARR.length; k++){
+		if (SU_RSC_ID_ARR != null) {
+			for (int k = 0; k < SU_RSC_ID_ARR.length; k++) {
 				lectureVO.setRscId(SU_RSC_ID_ARR[k]);
 				lectureVO.setFlag("S");
-				if("ALL".equals(lectureVO.getUpdateFlag())){
+				if ("ALL".equals(lectureVO.getUpdateFlag())) {
 					lecturemstservice.lectureBookInsert(lectureVO);
-				}else{
+				} else {
 					lecturemstservice.lectureBookInsert2(lectureVO);
 				}
 			}
@@ -323,8 +316,8 @@ public class LectureMstApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@DeleteMapping(value="/delete")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@DeleteMapping(value = "/delete")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject delete(@RequestBody LectureVO lectureVO) throws Exception {
 
 		lecturemstservice.lectureDelete(lectureVO);

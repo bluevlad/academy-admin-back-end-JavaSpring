@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -48,7 +47,8 @@ public class CouponMngApi extends CORSFilter {
      * 쿠폰 목록 조회
      */
     @GetMapping("/list")
-    public JSONObject list(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    public JSONObject list(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         int currentPage = Integer.parseInt(params.get("currentPage"));
@@ -76,7 +76,8 @@ public class CouponMngApi extends CORSFilter {
      * 쿠폰 상세 조회
      */
     @GetMapping("/view")
-    public JSONObject view(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    public JSONObject view(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         HashMap<String, String> view = couponMngService.getCouponOne(params);
@@ -92,7 +93,8 @@ public class CouponMngApi extends CORSFilter {
      * 쿠폰 등록을 위한 기본 데이터
      */
     @GetMapping("/writeData")
-    public JSONObject writeData(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    public JSONObject writeData(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         Calendar month = Calendar.getInstance();
@@ -110,8 +112,9 @@ public class CouponMngApi extends CORSFilter {
      * 쿠폰 등록
      */
     @PostMapping("/insert")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
-    public JSONObject insert(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public JSONObject insert(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         couponMngService.insertCoupon(params);
@@ -128,8 +131,9 @@ public class CouponMngApi extends CORSFilter {
      * 쿠폰 수정
      */
     @PutMapping("/update")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
-    public JSONObject update(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public JSONObject update(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         couponMngService.updateCoupon(params);
@@ -146,7 +150,8 @@ public class CouponMngApi extends CORSFilter {
      * 쿠폰 발급 수강생 리스트
      */
     @GetMapping("/userList")
-    public JSONObject userList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    public JSONObject userList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         int currentPage = Integer.parseInt(params.get("currentPage"));
@@ -174,7 +179,8 @@ public class CouponMngApi extends CORSFilter {
      * 제휴사 수강권/쿠폰 리스트
      */
     @GetMapping("/coopLectureList")
-    public JSONObject coopLectureList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    public JSONObject coopLectureList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         int currentPage = Integer.parseInt(params.get("currentPage"));
@@ -204,7 +210,8 @@ public class CouponMngApi extends CORSFilter {
      * 제휴사 쿠폰 발급 리스트
      */
     @GetMapping("/coopCouponList")
-    public JSONObject coopCouponList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    public JSONObject coopCouponList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         int currentPage = Integer.parseInt(params.get("currentPage"));
@@ -232,8 +239,9 @@ public class CouponMngApi extends CORSFilter {
      * 제휴사 쿠폰 등록
      */
     @PostMapping("/insertCoopCoupon")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
-    public JSONObject insertCoopCoupon(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public JSONObject insertCoopCoupon(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         couponMngService.insertCoopCoupon(params);
@@ -250,8 +258,9 @@ public class CouponMngApi extends CORSFilter {
      * 제휴사 쿠폰 삭제
      */
     @DeleteMapping("/deleteCoopCoupon")
-    @Transactional(readOnly=false, rollbackFor=Exception.class)
-    public JSONObject deleteCoopCoupon(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public JSONObject deleteCoopCoupon(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         couponMngService.deleteCoopCoupon(params);
@@ -268,7 +277,8 @@ public class CouponMngApi extends CORSFilter {
      * 공무원 쿠폰 사용 현황
      */
     @GetMapping("/couponOrderList")
-    public JSONObject couponOrderList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request) throws Exception {
+    public JSONObject couponOrderList(@ModelAttribute HashMap<String, String> params, HttpServletRequest request)
+            throws Exception {
         setParam(params, request);
 
         Calendar month = Calendar.getInstance();
@@ -294,7 +304,7 @@ public class CouponMngApi extends CORSFilter {
     private void setParam(HashMap<String, String> params, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession(false);
         @SuppressWarnings("unchecked")
-        HashMap<String, String> loginInfo = (HashMap<String, String>)session.getAttribute("AdmUserInfo");
+        HashMap<String, String> loginInfo = (HashMap<String, String>) session.getAttribute("AdmUserInfo");
 
         params.put("REG_ID", loginInfo.get("USER_ID"));
         params.put("UPD_ID", loginInfo.get("USER_ID"));

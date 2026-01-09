@@ -29,7 +29,6 @@ import com.academy.common.CORSFilter;
 import com.academy.common.service.CmmUseService;
 import com.academy.common.file.FileUtil;
 import com.academy.book.service.BookService;
-import com.academy.productorder.service.ProductOrderService;
 
 @RestController
 @RequestMapping("/api/openlecture")
@@ -44,20 +43,18 @@ public class OpenLectureApi extends CORSFilter {
 	private final TeacherService teacherservice;
 	private final CmmUseService cmmUseService;
 	private final SubjectService subjectservice;
-	private final ProductOrderService productOrderService;
 
 	@Autowired
 	public OpenLectureApi(FileUtil fileUtil,
 			BookService bookservice, OpenLectureService openlectureservice,
 			TeacherService teacherservice, CmmUseService cmmUseService,
-			SubjectService subjectservice, ProductOrderService productOrderService) {
+			SubjectService subjectservice) {
 		this.fileUtil = fileUtil;
 		this.bookservice = bookservice;
 		this.openlectureservice = openlectureservice;
 		this.teacherservice = teacherservice;
 		this.cmmUseService = cmmUseService;
 		this.subjectservice = subjectservice;
-		this.productOrderService = productOrderService;
 	}
 
 	/**
@@ -69,7 +66,7 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/list")
+	@GetMapping(value = "/list")
 	public JSONObject list(@ModelAttribute OpenLectureVO openLectureVO, HttpServletRequest request) throws Exception {
 		setSessionInfo(openLectureVO, request);
 
@@ -88,10 +85,10 @@ public class OpenLectureApi extends CORSFilter {
 		SubjectVO subjectVO = new SubjectVO();
 		subjectVO.setIsUse("Y");
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 		List<HashMap<String, String>> formlist = bookservice.getLearningFormList(bookVO);
 
-        LectureVO LectureVO = new LectureVO();
+		LectureVO LectureVO = new LectureVO();
 		List<HashMap<String, String>> list = openlectureservice.openlectureList(LectureVO);
 		int listCount = openlectureservice.openlectureListCount(LectureVO);
 
@@ -116,8 +113,9 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/writeData")
-	public JSONObject getWriteData(@ModelAttribute OpenLectureVO openLectureVO, HttpServletRequest request) throws Exception {
+	@GetMapping(value = "/writeData")
+	public JSONObject getWriteData(@ModelAttribute OpenLectureVO openLectureVO, HttpServletRequest request)
+			throws Exception {
 		setSessionInfo(openLectureVO, request);
 
 		TeacherVO teacherVO = new TeacherVO();
@@ -126,7 +124,7 @@ public class OpenLectureApi extends CORSFilter {
 		SubjectVO subjectVO = new SubjectVO();
 		subjectVO.setIsUse("Y");
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 		List<HashMap<String, String>> formlist = bookservice.getLearningFormList(bookVO);
 
 		subjectVO.setStartNo("1");
@@ -140,13 +138,13 @@ public class OpenLectureApi extends CORSFilter {
 		teacherVO.setIsUse("Y");
 		List<HashMap<String, String>> teacherlist = teacherservice.teacherList(teacherVO);
 
-        Map<String, String> vo = new HashMap<String, String>();
-        vo.put("SYS_CD", "ICON_GUBUN");
-        List<HashMap<String, String>> ICON_GUBUNs = cmmUseService.selectCmmCodeMap(vo);
+		Map<String, String> vo = new HashMap<String, String>();
+		vo.put("SYS_CD", "ICON_GUBUN");
+		List<HashMap<String, String>> ICON_GUBUNs = cmmUseService.selectCmmCodeMap(vo);
 
-        Map<String, String> openCodeVO = new HashMap<String, String>();
-        openCodeVO.put("SYS_CD", "OPEN_CODE");
-        List<HashMap<String, String>> open_code_commoncode = cmmUseService.selectCmmCodeMap(openCodeVO);
+		Map<String, String> openCodeVO = new HashMap<String, String>();
+		openCodeVO.put("SYS_CD", "OPEN_CODE");
+		List<HashMap<String, String>> open_code_commoncode = cmmUseService.selectCmmCodeMap(openCodeVO);
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("kindlist", kindlist);
@@ -169,11 +167,11 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/view")
+	@GetMapping(value = "/view")
 	public JSONObject view(@ModelAttribute OpenLectureVO openLectureVO, HttpServletRequest request) throws Exception {
 		setSessionInfo(openLectureVO, request);
 
-        LectureVO lectureVO = new LectureVO();
+		LectureVO lectureVO = new LectureVO();
 		List<HashMap<String, String>> view = openlectureservice.openlectureView(lectureVO);
 
 		TeacherVO teacherVO = new TeacherVO();
@@ -192,13 +190,13 @@ public class OpenLectureApi extends CORSFilter {
 		teacherVO.setIsUse("Y");
 		List<HashMap<String, String>> teacherlist = teacherservice.teacherList(teacherVO);
 
-        Map<String, String> vo = new HashMap<String, String>();
-        vo.put("SYS_CD", "ICON_GUBUN");
-        List<HashMap<String, String>> ICON_GUBUNs = cmmUseService.selectCmmCodeMap(vo);
+		Map<String, String> vo = new HashMap<String, String>();
+		vo.put("SYS_CD", "ICON_GUBUN");
+		List<HashMap<String, String>> ICON_GUBUNs = cmmUseService.selectCmmCodeMap(vo);
 
-        Map<String, String> openCodeVO = new HashMap<String, String>();
-        openCodeVO.put("SYS_CD", "OPEN_CODE");
-        List<HashMap<String, String>> open_code_commoncode = cmmUseService.selectCmmCodeMap(openCodeVO);
+		Map<String, String> openCodeVO = new HashMap<String, String>();
+		openCodeVO.put("SYS_CD", "OPEN_CODE");
+		List<HashMap<String, String>> open_code_commoncode = cmmUseService.selectCmmCodeMap(openCodeVO);
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("kindlist", kindlist);
@@ -223,7 +221,7 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/bookList")
+	@GetMapping(value = "/bookList")
 	public JSONObject bookList(@ModelAttribute OpenLectureVO openLectureVO, HttpServletRequest request) throws Exception {
 		setSessionInfo(openLectureVO, request);
 
@@ -242,10 +240,10 @@ public class OpenLectureApi extends CORSFilter {
 		SubjectVO subjectVO = new SubjectVO();
 		subjectVO.setIsUse("Y");
 
-        BookVO bookVO = new BookVO();
+		BookVO bookVO = new BookVO();
 		List<HashMap<String, String>> formlist = bookservice.getLearningFormList(bookVO);
 
-        LectureVO lectureVO = new LectureVO();
+		LectureVO lectureVO = new LectureVO();
 
 		List<HashMap<String, String>> list = openlectureservice.bookList(lectureVO);
 		int listCount = openlectureservice.bookListCount(lectureVO);
@@ -272,8 +270,8 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PostMapping(value="/save")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PostMapping(value = "/save")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject save(@ModelAttribute OpenLectureVO openLectureVO, HttpServletRequest request,
 			MultipartHttpServletRequest multipartRequest) throws Exception {
 		setSessionInfo(openLectureVO, request);
@@ -283,13 +281,13 @@ public class OpenLectureApi extends CORSFilter {
 		String LECCODE = "";
 		String SEQ = "";
 
-        LectureVO lectureVO = new LectureVO();
+		LectureVO lectureVO = new LectureVO();
 
 		List<HashMap<String, String>> getBridgeLeccodeSeqList = openlectureservice.getBridgeLeccodeSeq(lectureVO);
-		if(getBridgeLeccodeSeqList.size() > 0){
+		if (getBridgeLeccodeSeqList.size() > 0) {
 			SEQ = getBridgeLeccodeSeqList.get(0).get("SEQ");
 			openLectureVO.setSeq(getBridgeLeccodeSeqList.get(0).get("SEQ"));
-		}else{
+		} else {
 			SEQ = "1";
 			openLectureVO.setSeq(SEQ);
 		}
@@ -297,7 +295,7 @@ public class OpenLectureApi extends CORSFilter {
 		String prefix = "O" + cal.get(Calendar.YEAR);
 		openLectureVO.setPrefix(prefix);
 		List<HashMap<String, String>> getLeccodeList = openlectureservice.getopenLeccode(lectureVO);
-		if(getLeccodeList.size() > 0)
+		if (getLeccodeList.size() > 0)
 			LECCODE = prefix + getLeccodeList.get(0).get("OPENLECCODE");
 		else
 			LECCODE = prefix + "00001";
@@ -324,8 +322,8 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PutMapping(value="/update")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PutMapping(value = "/update")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject update(@ModelAttribute OpenLectureVO openLectureVO, HttpServletRequest request,
 			MultipartHttpServletRequest multipartRequest) throws Exception {
 		setSessionInfo(openLectureVO, request);
@@ -333,10 +331,11 @@ public class OpenLectureApi extends CORSFilter {
 		String rootPath = uploadPath;
 		lecFileProcess(openLectureVO, multipartRequest);
 
-		if("Y".equals(openLectureVO.getOpenFileDel()) || (openLectureVO.getOpenFile() != null && !"".equals(openLectureVO.getOpenFile())))
+		if ("Y".equals(openLectureVO.getOpenFileDel())
+				|| (openLectureVO.getOpenFile() != null && !"".equals(openLectureVO.getOpenFile())))
 			fileUtil.deleteFile(rootPath + openLectureVO.getOpenFileDelnm());
 
-        LectureVO lectureVO = new LectureVO();
+		LectureVO lectureVO = new LectureVO();
 
 		openlectureservice.openlectureUpdate(lectureVO);
 
@@ -357,8 +356,8 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@DeleteMapping(value="/delete")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@DeleteMapping(value = "/delete")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject delete(@RequestBody OpenLectureVO openLectureVO, HttpServletRequest request) throws Exception {
 		setSessionInfo(openLectureVO, request);
 
@@ -383,13 +382,14 @@ public class OpenLectureApi extends CORSFilter {
 	 * @return void
 	 * @throws Exception
 	 */
-	private void lecFileProcess(OpenLectureVO openLectureVO, MultipartHttpServletRequest multipartRequest) throws Exception {
+	private void lecFileProcess(OpenLectureVO openLectureVO, MultipartHttpServletRequest multipartRequest)
+			throws Exception {
 		String rootPath = uploadPath;
 		String subPath = "openlecture_upload/";
 
 		MultipartFile OPEN_FILE = multipartRequest.getFile("OPEN_FILE");
 
-		if(OPEN_FILE != null && OPEN_FILE.isEmpty() == false) {
+		if (OPEN_FILE != null && OPEN_FILE.isEmpty() == false) {
 			HashMap<String, Object> fileMap1 = fileUtil.uploadFile(OPEN_FILE, rootPath, subPath);
 			openLectureVO.setOpenFile(fileMap1.get("fileFullPath").toString());
 			Thread.sleep(100);
@@ -408,9 +408,9 @@ public class OpenLectureApi extends CORSFilter {
 	@SuppressWarnings("unchecked")
 	private void setSessionInfo(OpenLectureVO openLectureVO, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession(false);
-		if(session != null) {
-			HashMap<String, String> loginInfo = (HashMap<String, String>)session.getAttribute("AdmUserInfo");
-			if(loginInfo != null) {
+		if (session != null) {
+			HashMap<String, String> loginInfo = (HashMap<String, String>) session.getAttribute("AdmUserInfo");
+			if (loginInfo != null) {
 				openLectureVO.setRegId(loginInfo.get("USER_ID"));
 				openLectureVO.setUpdId(loginInfo.get("USER_ID"));
 			}

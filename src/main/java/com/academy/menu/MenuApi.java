@@ -16,7 +16,6 @@ import com.academy.common.CORSFilter;
 import com.academy.menu.service.MenuService;
 import com.academy.menu.service.MenuVO;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Menu", description = "메뉴 관리 API")

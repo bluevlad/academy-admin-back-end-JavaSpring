@@ -1,7 +1,6 @@
 package com.academy.freeOrder;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
@@ -26,16 +25,18 @@ import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 무료 수강신청 관리 API Controller
+ * 
  * @author system
  * @version 1.0
  * @see
- * <pre>
+ * 
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *    수정일           수정자                수정내용
  *  ---------------    --------------    ---------------------------
  *  2025.12.11         system            무료 수강신청 관리 신규 생성
- * </pre>
+ *      </pre>
  */
 @Tag(name = "FreeOrder", description = "무료 수강신청 관리 API")
 @RestController
@@ -227,7 +228,8 @@ public class FreeOrderApi extends CORSFilter {
         try {
             // 세션에서 관리자 ID 조회
             @SuppressWarnings("unchecked")
-            HashMap<String, String> sessionMap = (HashMap<String, String>) request.getSession().getAttribute("AdmUserInfo");
+            HashMap<String, String> sessionMap = (HashMap<String, String>) request.getSession()
+                    .getAttribute("AdmUserInfo");
             String adminUserId = sessionMap != null ? sessionMap.get("USER_ID") : "";
 
             if (adminUserId == null || adminUserId.isEmpty()) {
@@ -248,20 +250,22 @@ public class FreeOrderApi extends CORSFilter {
             TimeZone tz = TimeZone.getTimeZone("Asia/Seoul");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             sdf.setTimeZone(tz);
-            String today = sdf.format(new Date());
+            // String today = sdf.format(new Date());
 
             String userIp = request.getRemoteAddr();
             String leccode = freeOrderVO.getLeccode();
 
             for (String userId : userIds) {
                 userId = userId.trim();
-                if (userId.isEmpty()) continue;
+                if (userId.isEmpty())
+                    continue;
 
                 freeOrderVO.setUserid(userId);
 
                 // 사용자 존재여부 확인
                 JSONObject memberInfo = freeOrderService.getMemberExists(freeOrderVO);
-                if (memberInfo == null) continue;
+                if (memberInfo == null)
+                    continue;
 
                 // 주문번호 채번
                 freeOrderVO.setOrdernoCount("M");
@@ -309,7 +313,8 @@ public class FreeOrderApi extends CORSFilter {
         try {
             // 세션에서 관리자 ID 조회
             @SuppressWarnings("unchecked")
-            HashMap<String, String> sessionMap = (HashMap<String, String>) request.getSession().getAttribute("AdmUserInfo");
+            HashMap<String, String> sessionMap = (HashMap<String, String>) request.getSession()
+                    .getAttribute("AdmUserInfo");
             String adminUserId = sessionMap != null ? sessionMap.get("USER_ID") : "";
 
             if (adminUserId == null || adminUserId.isEmpty()) {
@@ -336,17 +341,20 @@ public class FreeOrderApi extends CORSFilter {
 
             for (String userId : userIds) {
                 userId = userId.trim();
-                if (userId.isEmpty()) continue;
+                if (userId.isEmpty())
+                    continue;
 
                 freeOrderVO.setUserid(userId);
 
                 // 사용자 존재여부 확인
                 JSONObject memberInfo = freeOrderService.getMemberExists(freeOrderVO);
-                if (memberInfo == null) continue;
+                if (memberInfo == null)
+                    continue;
 
                 for (String lec : leccodes) {
                     lec = lec.trim();
-                    if (lec.isEmpty()) continue;
+                    if (lec.isEmpty())
+                        continue;
 
                     // 주문번호 채번
                     freeOrderVO.setOrdernoCount("M");
@@ -466,7 +474,8 @@ public class FreeOrderApi extends CORSFilter {
         try {
             // 세션에서 관리자 ID 조회
             @SuppressWarnings("unchecked")
-            HashMap<String, String> sessionMap = (HashMap<String, String>) request.getSession().getAttribute("AdmUserInfo");
+            HashMap<String, String> sessionMap = (HashMap<String, String>) request.getSession()
+                    .getAttribute("AdmUserInfo");
             String adminUserId = sessionMap != null ? sessionMap.get("USER_ID") : "";
 
             freeOrderVO.setUserId(adminUserId);

@@ -24,11 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.academy.common.CORSFilter;
 import com.academy.common.CommonUtil;
-import com.academy.book.service.BookService;
-import com.academy.lecture.service.LectureService;
 import com.academy.lecture.service.ProductEventService;
 import com.academy.lecture.service.ProductEventVO;
-import com.academy.lecture.service.TeacherService;
 
 @RestController
 @RequestMapping("/api/productevent")
@@ -38,17 +35,10 @@ public class ProductEventApi extends CORSFilter {
 	private int pageUnit;
 
 	private final ProductEventService productevent;
-	private final LectureService lectureservice;
-	private final BookService bookservice;
-	private final TeacherService teacherservice;
 
 	@Autowired
-	public ProductEventApi(ProductEventService productevent, LectureService lectureservice,
-			BookService bookservice, TeacherService teacherservice) {
+	public ProductEventApi(ProductEventService productevent) {
 		this.productevent = productevent;
-		this.lectureservice = lectureservice;
-		this.bookservice = bookservice;
-		this.teacherservice = teacherservice;
 	}
 
 	/**
@@ -59,7 +49,7 @@ public class ProductEventApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/list")
+	@GetMapping(value = "/list")
 	public JSONObject list(@ModelAttribute ProductEventVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
@@ -93,7 +83,7 @@ public class ProductEventApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/view")
+	@GetMapping(value = "/view")
 	public JSONObject view(@ModelAttribute ProductEventVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
@@ -116,8 +106,8 @@ public class ProductEventApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PostMapping(value="/insert")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PostMapping(value = "/insert")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject insert(@RequestBody ProductEventVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
@@ -139,8 +129,8 @@ public class ProductEventApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PutMapping(value="/update")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PutMapping(value = "/update")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject update(@RequestBody ProductEventVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
@@ -162,8 +152,9 @@ public class ProductEventApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@GetMapping(value="/subjectList")
-	public JSONObject getSubjectList(@ModelAttribute ProductEventVO vo, HttpServletRequest request) throws UnsupportedEncodingException {
+	@GetMapping(value = "/subjectList")
+	public JSONObject getSubjectList(@ModelAttribute ProductEventVO vo, HttpServletRequest request)
+			throws UnsupportedEncodingException {
 		String keyword = CommonUtil.isNull(request.getParameter("keyword"), "");
 
 		int currentPage = Integer.parseInt(CommonUtil.isNull(request.getParameter("currentPage"), "1"));
@@ -180,7 +171,7 @@ public class ProductEventApi extends CORSFilter {
 		int endNo = startNo + pageRow;
 
 		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("keyword", URLDecoder.decode(keyword,"UTF-8"));
+		searchMap.put("keyword", URLDecoder.decode(keyword, "UTF-8"));
 		searchMap.put("currentPage", currentPage);
 		searchMap.put("pageRow", pageRow);
 		searchMap.put("s_cat_cd", s_cat_cd);
@@ -229,8 +220,8 @@ public class ProductEventApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@PostMapping(value="/addLecture")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@PostMapping(value = "/addLecture")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject addLecture(@RequestBody ProductEventVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
@@ -241,7 +232,7 @@ public class ProductEventApi extends CORSFilter {
 
 		int addedCount = 0;
 		if (v_leccode != null && !"".equals(v_leccode)) {
-			for(int i=0; i<v_leccode.length; i++){
+			for (int i = 0; i < v_leccode.length; i++) {
 				vo.setLeccode(v_leccode[i]);
 				productevent.lec_insert(vo);
 				addedCount++;
@@ -265,8 +256,8 @@ public class ProductEventApi extends CORSFilter {
 	 * @return JSONObject
 	 * @throws Exception
 	 */
-	@DeleteMapping(value="/deleteLecture")
-	@Transactional(readOnly=false,rollbackFor=Exception.class)
+	@DeleteMapping(value = "/deleteLecture")
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public JSONObject deleteLecture(@RequestBody ProductEventVO vo, HttpServletRequest request) throws Exception {
 		setSessionInfo(vo, request);
 
@@ -277,7 +268,7 @@ public class ProductEventApi extends CORSFilter {
 
 		int deletedCount = 0;
 		if (i_leccode != null && !"".equals(i_leccode)) {
-			for(int i=0; i<i_leccode.length; i++){
+			for (int i = 0; i < i_leccode.length; i++) {
 				vo.setLeccode(i_leccode[i]);
 				productevent.lec_delete(vo);
 				deletedCount++;
@@ -303,9 +294,9 @@ public class ProductEventApi extends CORSFilter {
 	 */
 	private void setSessionInfo(ProductEventVO vo, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession(false);
-		if(session != null) {
-			HashMap<String, String> loginInfo = (HashMap<String, String>)session.getAttribute("AdmUserInfo");
-			if(loginInfo != null) {
+		if (session != null) {
+			HashMap<String, String> loginInfo = (HashMap<String, String>) session.getAttribute("AdmUserInfo");
+			if (loginInfo != null) {
 				vo.setRegId(loginInfo.get("USER_ID"));
 				vo.setUpdId(loginInfo.get("USER_ID"));
 			}
@@ -318,13 +309,13 @@ public class ProductEventApi extends CORSFilter {
 		vo.setEventType(CommonUtil.isNull(request.getParameter("EVENT_TYPE"), ""));
 
 		String eventAmount = CommonUtil.isNull(request.getParameter("EVENT_AMOUNT"), "");
-		if(!eventAmount.isEmpty()) {
+		if (!eventAmount.isEmpty()) {
 			vo.setEventAmount(Integer.parseInt(eventAmount));
 		}
 
 		// Date fields would need proper handling
-		String stDate = CommonUtil.isNull(request.getParameter("ST_DATE"), "");
-		String edDate = CommonUtil.isNull(request.getParameter("ED_DATE"), "");
+		// String stDate = CommonUtil.isNull(request.getParameter("ST_DATE"), "");
+		// String edDate = CommonUtil.isNull(request.getParameter("ED_DATE"), "");
 		// Note: Date parsing would be needed here
 
 		vo.setEventYn(CommonUtil.isNull(request.getParameter("EVENT_YN"), ""));

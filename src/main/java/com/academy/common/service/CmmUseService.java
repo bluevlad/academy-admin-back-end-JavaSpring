@@ -1,7 +1,6 @@
 package com.academy.common.service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,19 +13,20 @@ import com.academy.mapper.CmmUseMapper;
 
 /**
  * 공통코드등 전체 업무에서 공용해서 사용해야 하는 서비스 클래스
+ * 
  * @author Y.K.KIM
  * @since 2025.11
  * @version 1.0
  * @see
  *
- * <pre>
+ *      <pre>
  * << 개정이력(Modification Information) >>
  *
  *   수정일      수정자           수정내용
  *  -------    --------    ---------------------------
  *   2025.11  Y.K.KIM          최초 생성
  *
- * </pre>
+ *      </pre>
  */
 @Service
 public class CmmUseService implements Serializable {
@@ -52,6 +52,7 @@ public class CmmUseService implements Serializable {
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
+     * 
      * @param searchMap Map<String, String>
      * @return List(코드)
      * @throws Exception
@@ -63,6 +64,7 @@ public class CmmUseService implements Serializable {
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
+     * 
      * @param searchMap Map<String, String>
      * @return List(코드)
      * @throws Exception
@@ -74,6 +76,7 @@ public class CmmUseService implements Serializable {
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
+     * 
      * @param searchMap Map<String, String>
      * @return List(코드)
      * @throws Exception
@@ -85,22 +88,26 @@ public class CmmUseService implements Serializable {
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
+     * 
      * @param searchList Map<String, List<String>>
      * @return List(코드)
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectCmmCdMultiCondWthList(Map<String, List<String>> searchList) throws Exception {
+    public List<HashMap<String, String>> selectCmmCdMultiCondWthList(Map<String, List<String>> searchList)
+            throws Exception {
         return cmmUseMapper.selectCmmCdMultiCondWthList(searchList);
     }
 
     /**
      * 공통코드를 조회한다.
      * Map을 이용하여 정보를 조회한다
+     * 
      * @param searchArray Map<String, String[]>
      * @return List(코드)
      * @throws Exception
      */
-    public List<HashMap<String, String>> selectCmmCdMultiCondWthArray(Map<String, String[]> searchArray) throws Exception {
+    public List<HashMap<String, String>> selectCmmCdMultiCondWthArray(Map<String, String[]> searchArray)
+            throws Exception {
         return cmmUseMapper.selectCmmCdMultiCondWthArray(searchArray);
     }
 

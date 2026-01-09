@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.academy.common.CORSFilter;
 import com.academy.common.service.CmmUseService;
-import com.academy.common.CommonUtil;
 import com.academy.book.service.BookService;
 import com.academy.lecture.service.LectureService;
 import com.academy.lecture.service.LectureVO;
