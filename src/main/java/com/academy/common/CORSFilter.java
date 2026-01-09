@@ -22,7 +22,6 @@ public class CORSFilter implements Filter {
      * Default constructor.
      */
     public CORSFilter() {
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -30,7 +29,6 @@ public class CORSFilter implements Filter {
      */
     @Override
     public void destroy() {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -78,7 +76,6 @@ public class CORSFilter implements Filter {
      */
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
-        // TODO Auto-generated method stub
     }
 
 }

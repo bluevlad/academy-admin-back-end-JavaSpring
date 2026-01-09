@@ -21,8 +21,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * </pre>
  */
-@SuppressWarnings("serial")
 public class ComDefaultCodeVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     String SYS_CD = "";
     String SYS_NM = "";

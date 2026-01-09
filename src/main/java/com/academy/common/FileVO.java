@@ -20,8 +20,9 @@ import java.io.Serializable;
  *
  *
  */
-@SuppressWarnings("serial")
 public class FileVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public String ATCH_FILE_ID; // 파일번호
     public long FILE_SN; //파일 시리얼 번호
