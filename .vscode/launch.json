@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "AcademyApplication (Local)",
+            "request": "launch",
+            "mainClass": "com.academy.AcademyApplication",
+            "projectName": "academy-admin",
+            "args": "--spring.profiles.active=local",
+            "env": {
+                "SPRING_PROFILES_ACTIVE": "local"
+            }
+        },
+        {
+            "type": "java",
+            "name": "AcademyApplication (Default)",
+            "request": "launch",
+            "mainClass": "com.academy.AcademyApplication",
+            "projectName": "academy-admin"
+        }
+    ]
+}
