@@ -94,7 +94,10 @@ public class FileUtil implements Serializable {
             if(!dir.exists()) dir.mkdirs();
 
             String originalFileName = uploadFile.getOriginalFilename();
-            String originalFileExt =originalFileName.substring(originalFileName.lastIndexOf("."));
+            if (originalFileName == null || originalFileName.isEmpty()) {
+                return info;
+            }
+            String originalFileExt = originalFileName.substring(originalFileName.lastIndexOf("."));
             String newFileName = getCurrentDateTime() + originalFileExt;
 
             String fileFullPath = path + newFileName;
@@ -123,7 +126,10 @@ public class FileUtil implements Serializable {
             if(!dir.exists()) dir.mkdirs();
 
             String originalFileName = uploadFile.getOriginalFilename();
-            String originalFileExt =originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+            if (originalFileName == null || originalFileName.isEmpty()) {
+                return info;
+            }
+            String originalFileExt = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
             String newFileName = getCurrentDateTime() + "." + originalFileExt;
 
             String fileFullPath = path + newFileName;
@@ -160,7 +166,10 @@ public class FileUtil implements Serializable {
             if(!dir.exists()) dir.mkdirs();
 
             String originalFileName = uploadFile.getOriginalFilename();
-            String originalFileExt =originalFileName.substring(originalFileName.lastIndexOf("."));
+            if (originalFileName == null || originalFileName.isEmpty()) {
+                return info;
+            }
+            String originalFileExt = originalFileName.substring(originalFileName.lastIndexOf("."));
             String newFileName = getCurrentDateTime() + originalFileExt;
 
             String fileFullPath = path + originalFileName;
@@ -198,7 +207,10 @@ public class FileUtil implements Serializable {
             if(!dir.exists()) dir.mkdirs();
 
             String originalFileName = uploadFile.getOriginalFilename();
-            String originalFileExt =originalFileName.substring(originalFileName.lastIndexOf("."));
+            if (originalFileName == null || originalFileName.isEmpty()) {
+                return info;
+            }
+            String originalFileExt = originalFileName.substring(originalFileName.lastIndexOf("."));
             String newFileName = getCurrentDateTime() + originalFileExt;
 
             String fileFullPath = path + newFileName;

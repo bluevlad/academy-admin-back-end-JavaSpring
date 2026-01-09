@@ -81,40 +81,35 @@ public class ProductEventService {
 
     // 강의선택 팝업 카테고리 셀렉트박스 리스트
     // TODO: FreeOrderMapper 생성 후 구현
-    @SuppressWarnings("rawtypes")
-    public List getCaCatCdList(Map keyName){
+    public List<HashMap<String, String>> getCaCatCdList(Map<String, Object> keyName){
         // return freeOrderMapper.getCaCatCdList(keyName);
         throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
     }
 
     // 강의선택 팝업 학습형태 셀렉트박스 리스트
     // TODO: FreeOrderMapper 생성 후 구현
-    @SuppressWarnings("rawtypes")
-    public List getVwMenuMstTree_lec(Map keyName){
+    public List<HashMap<String, String>> getVwMenuMstTree_lec(Map<String, Object> keyName){
         // return freeOrderMapper.getVwMenuMstTree_lec(keyName);
         throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
     }
 
     // 강의선택 팝업 과목 셀렉트박스 리스트
     // TODO: FreeOrderMapper 생성 후 구현
-    @SuppressWarnings("rawtypes")
-    public List getCaSubjectCdList(Map keyName){
+    public List<HashMap<String, String>> getCaSubjectCdList(Map<String, Object> keyName){
         // return freeOrderMapper.getCaSubjectCdList(keyName);
         throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
     }
 
     // 강의선택 팝업  리스트
     // TODO: FreeOrderMapper 생성 후 구현
-    @SuppressWarnings("rawtypes")
-    public List getCbLecMstFreeOrderList(Map keyName){
+    public List<HashMap<String, String>> getCbLecMstFreeOrderList(Map<String, Object> keyName){
         // return freeOrderMapper.getCbLecMstFreeOrderList(keyName);
         throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
     }
 
     // 강의선택 팝업  카운트
     // TODO: FreeOrderMapper 생성 후 구현
-    @SuppressWarnings("rawtypes")
-    public int getCbLecMstListFreeOrderCount(Map keyName) {
+    public int getCbLecMstListFreeOrderCount(Map<String, Object> keyName) {
         // return freeOrderMapper.getCbLecMstListFreeOrderCount(keyName);
         throw new UnsupportedOperationException("FreeOrderMapper not implemented yet");
     }

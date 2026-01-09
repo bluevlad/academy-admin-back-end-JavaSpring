@@ -116,7 +116,7 @@ public class FileMngUtil {
             // 원 파일명이 없는 경우 처리
             // (첨부가 되지 않은 input file type)
             // --------------------------------------
-            if ("".equals(orginFileName)) {
+            if (orginFileName == null || "".equals(orginFileName)) {
                 continue;
             }
             //// ------------------------------------
@@ -296,6 +296,10 @@ public class FileMngUtil {
         String newName = "";
         String stordFilePath = MirProperties.getProperty("Globals.fileStorePath");
         String orginFileName = file.getOriginalFilename();
+
+        if (orginFileName == null || orginFileName.isEmpty()) {
+            return map;
+        }
 
         int index = orginFileName.lastIndexOf(".");
         // String fileName = orginFileName.substring(0, _index);

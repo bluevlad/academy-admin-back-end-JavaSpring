@@ -109,24 +109,14 @@ public interface LectureMapper {
     List<HashMap<String, String>> lectureDown_Count(LectureVO lectureVO);
 
     // Legacy methods for complex logic (Object parameter)
-    @SuppressWarnings("rawtypes")
     List<HashMap<String, String>> oldFreeToNewFree(Object params);
-    @SuppressWarnings("rawtypes")
     List<HashMap<String, String>> oldBogangFreeToNewBogangFree(Object params);
-    @SuppressWarnings("rawtypes")
     List<HashMap<String, String>> getBridgeLeccodeSeq(Object params);
-    @SuppressWarnings("rawtypes")
     List<HashMap<String, String>> getBridgeLeccode(Object params);
-    @SuppressWarnings("rawtypes")
     List<HashMap<String, String>> getLeccode(Object params);
-    @SuppressWarnings("rawtypes")
     String getRleccode(Object params);
-    @SuppressWarnings("rawtypes")
     void oldFreeToNewFreeInsert(Object params);
-    @SuppressWarnings("rawtypes")
     void oldBogangFreeToNewFreeBogangInsert(Object params);
-    @SuppressWarnings("rawtypes")
     void lectureBridgeInsert(Object params);
-    @SuppressWarnings("rawtypes")
     void oldTbmovieToNewTbmovieInsert(Object params);
 }
