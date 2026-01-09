@@ -214,7 +214,10 @@ public class FileMngUtil {
      * @param request
      * @param response
      * @throws Exception
+     * @deprecated FileDownloadController의 ResponseEntity 방식을 사용하세요.
+     * @see com.academy.common.file.web.FileDownloadController
      */
+    @Deprecated
     public static void downFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String downFileName = "";
@@ -374,7 +377,10 @@ public class FileMngUtil {
      *                    : 파일저장 경로가 포함된 형태
      * @param orignFileNm
      * @throws Exception
+     * @deprecated FileDownloadController의 ResponseEntity 방식을 사용하세요.
+     * @see com.academy.common.file.web.FileDownloadController
      */
+    @Deprecated
     public void downFile(HttpServletResponse response, String streFileNm, String orignFileNm) throws Exception {
         String downFileName = streFileNm;
         String orgFileName = orignFileNm;

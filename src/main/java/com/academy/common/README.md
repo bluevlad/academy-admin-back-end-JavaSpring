@@ -77,6 +77,16 @@ common/
 - 파일 삭제 처리
 - 파일명 생성 및 검증
 
+### FileDownloadController (파일 다운로드 API)
+- **GET** `/download.do` - 파일 다운로드
+  - `path` (필수): 파일 상대 경로
+  - `filename` (선택): 다운로드 시 표시될 파일명
+- **GET** `/imgFileView.do` - 이미지 파일 뷰어
+  - `path` (필수): 이미지 파일 경로
+- ResponseEntity 기반 현대적인 파일 다운로드 구현
+- 브라우저별 파일명 인코딩 자동 처리
+- 이미지 타입 자동 감지 (PNG, JPG, GIF, BMP, WebP, SVG)
+
 ### Configurations
 - CORS 설정
 - 애플리케이션 전역 설정
@@ -112,6 +122,190 @@ fileUtil.uploadFile(multipartFile, uploadPath);
 - 모든 API 컨트롤러는 CORSFilter를 상속해야 합니다
 - 파일 업로드 경로는 application.properties에서 설정합니다
 - CORS 설정은 Configurations에서 관리됩니다
+
+---
+
+## React 프론트엔드 연동 가이드
+
+### 파일 다운로드
+
+```javascript
+/**
+ * 파일 다운로드 함수
+ * @param {string} filePath - 서버 내 파일 상대 경로
+ * @param {string} fileName - 다운로드 시 표시될 파일명 (선택)
+ */
+const downloadFile = async (filePath, fileName) => {
+  try {
+    const params = new URLSearchParams({ path: filePath });
+    if (fileName) {
+      params.append('filename', fileName);
+    }
+
+    const response = await fetch(`/download.do?${params.toString()}`);
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('파일을 찾을 수 없습니다.');
+      }
+      throw new Error('파일 다운로드에 실패했습니다.');
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName || filePath.split('/').pop();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Download error:', error);
+    alert(error.message);
+  }
+};
+
+// 사용 예시
+downloadFile('/uploads/documents/report.pdf', '월간보고서.pdf');
+```
+
+### 이미지 표시
+
+```jsx
+// 방법 1: img 태그 직접 사용
+<img
+  src={`/imgFileView.do?path=${encodeURIComponent('/images/photo.png')}`}
+  alt="이미지"
+/>
+
+// 방법 2: React 컴포넌트로 래핑
+const ImageViewer = ({ path, alt, ...props }) => {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return <div className="image-error">이미지를 불러올 수 없습니다.</div>;
+  }
+
+  return (
+    <img
+      src={`/imgFileView.do?path=${encodeURIComponent(path)}`}
+      alt={alt}
+      onError={() => setError(true)}
+      {...props}
+    />
+  );
+};
+
+// 사용 예시
+<ImageViewer path="/uploads/images/product.jpg" alt="상품 이미지" />
+```
+
+### 파일 업로드 (FormData 사용)
+
+```javascript
+/**
+ * 파일 업로드 함수
+ * @param {File} file - 업로드할 파일
+ * @param {string} uploadUrl - 업로드 API 엔드포인트
+ * @returns {Promise<Object>} 업로드 결과
+ */
+const uploadFile = async (file, uploadUrl) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await fetch(uploadUrl, {
+      method: 'POST',
+      body: formData,
+      // Content-Type은 자동 설정됨 (multipart/form-data)
+    });
+
+    if (!response.ok) {
+      throw new Error('파일 업로드에 실패했습니다.');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+};
+
+// React 컴포넌트 예시
+const FileUploader = ({ onUploadComplete }) => {
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      const result = await uploadFile(file, '/api/file/upload');
+      onUploadComplete(result);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  return (
+    <input type="file" onChange={handleFileChange} />
+  );
+};
+```
+
+### Axios 사용 시
+
+```javascript
+import axios from 'axios';
+
+// 파일 다운로드
+const downloadFileWithAxios = async (filePath, fileName) => {
+  try {
+    const response = await axios.get('/download.do', {
+      params: { path: filePath, filename: fileName },
+      responseType: 'blob',
+    });
+
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName || filePath.split('/').pop());
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Download error:', error);
+  }
+};
+
+// 파일 업로드
+const uploadFileWithAxios = async (file, uploadUrl) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await axios.post(uploadUrl, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    onUploadProgress: (progressEvent) => {
+      const percentCompleted = Math.round(
+        (progressEvent.loaded * 100) / progressEvent.total
+      );
+      console.log(`업로드 진행률: ${percentCompleted}%`);
+    },
+  });
+
+  return response.data;
+};
+```
+
+### API 응답 코드
+
+| HTTP 상태 코드 | 설명 |
+|---------------|------|
+| 200 OK | 요청 성공 |
+| 404 Not Found | 파일을 찾을 수 없음 |
+| 500 Internal Server Error | 서버 오류 |
 
 ---
 

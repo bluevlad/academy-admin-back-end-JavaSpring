@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
@@ -30,9 +31,14 @@ import com.academy.common.FileVO;
  *   수정일      수정자           수정내용
  *  -------    --------    ---------------------------
  *   2025.11  Y.K.KIM          최초 생성
+ *   2026.01  Claude          @Deprecated 추가, @NonNull 어노테이션 추가
  *
  * </pre>
+ *
+ * @deprecated FileDownloadController의 ResponseEntity 방식을 사용하세요.
+ * @see com.academy.common.file.web.FileDownloadController
  */
+@Deprecated
 public class FileDownloadView extends AbstractView {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -41,7 +47,7 @@ public class FileDownloadView extends AbstractView {
     }
 
     @Override
-    protected void renderMergedOutputModel(Map<String, Object> model,	HttpServletRequest request, HttpServletResponse response)throws Exception {
+    protected void renderMergedOutputModel(@NonNull Map<String, Object> model, @NonNull HttpServletRequest request, @NonNull HttpServletResponse response) throws Exception {
         FileVO file = (FileVO)model.get("downloadFile");
 
         if (file == null) {
