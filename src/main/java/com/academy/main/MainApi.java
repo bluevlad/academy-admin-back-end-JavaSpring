@@ -65,14 +65,16 @@ public class MainApi extends CORSFilter {
 	 * @return String
 	 * @exception Exception
 	 */
+	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/getLeftMenu")
-	public JSONObject leftmenu(@ModelAttribute("MenuVO") MenuVO menuVO) throws Exception { 
+	public JSONObject leftmenu(@ModelAttribute("MenuVO") MenuVO menuVO) throws Exception {
 	    List<JSONObject> buildMenu = buildMenuTree(0);
 	    JSONObject response = new JSONObject();
 	    response.put("items", buildMenu);
 	    return response;
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<JSONObject> buildMenuTree(int parentId) {
 	    List<JSONObject> menuTree = new ArrayList<>();
 	    MenuVO menuVO = new MenuVO();
@@ -83,11 +85,11 @@ public class MainApi extends CORSFilter {
 	    for (JSONObject item : menuItems) {
 	        int menuId = CommonUtil.parseInt(item.get("menu_no"));
 	        List<JSONObject> children = buildMenuTree(menuId);
-	        
+
 	        if (!children.isEmpty()) {
 	            item.put("children", children);
 	        }
-	        
+
 	        menuTree.add(item);
 	    }
 	    return menuTree;
