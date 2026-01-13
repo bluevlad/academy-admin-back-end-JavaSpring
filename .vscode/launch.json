@@ -9,7 +9,8 @@
             "projectName": "academy-admin",
             "args": "--spring.profiles.active=local",
             "env": {
-                "SPRING_PROFILES_ACTIVE": "local"
+                "SPRING_PROFILES_ACTIVE": "local",
+                "JAVA_HOME": "C:\\Java\\jdk-17.0.2"
             }
         },
         {
@@ -17,7 +18,10 @@
             "name": "AcademyApplication (Default)",
             "request": "launch",
             "mainClass": "com.academy.AcademyApplication",
-            "projectName": "academy-admin"
+            "projectName": "academy-admin",
+            "env": {
+                "JAVA_HOME": "C:\\Java\\jdk-17.0.2"
+            }
         }
     ]
 }
