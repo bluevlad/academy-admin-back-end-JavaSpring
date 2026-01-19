@@ -24,3 +24,5 @@ mvnw.cmd
 .vscode/settings.json
 .vscode/launch.json
 .vscode/settings.json
+run-user-backend.ps1
+run-user-frontend.ps1
