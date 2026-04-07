@@ -238,6 +238,15 @@ When working on lecture modules, note:
   - `admin-guide.html` — 관리자 콘솔 가이드
   - `api-guide.html` — 관리자 API 가이드
 
+## 연동 프론트엔드
+
+- **프로젝트**: `../academy-front-end-React-material-dashboard/`
+- **URL**: `http://localhost:3000`
+- **API 클라이언트**: `../academy-front-end-React-material-dashboard/src/shared/api/client.js`
+- **API 모듈**: `../academy-front-end-React-material-dashboard/src/api/` (Axios 기반)
+
+백엔드 API 추가/변경 시 프론트엔드 API 모듈도 함께 업데이트.
+
 ## Known Issues
 
 **BOM Encoding:** If encountering compile errors with `\ufeff` character, ensure source files are saved as UTF-8 without BOM. This has been fixed in `Configurations.java` and `DBUtil.java`.
