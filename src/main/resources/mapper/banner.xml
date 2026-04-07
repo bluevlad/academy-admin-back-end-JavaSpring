@@ -3,6 +3,7 @@
     수정일              수정자           수정내용
   ===========      =========    =================
  *2025.12.11       system       배너 관리 매퍼 신규 생성 (MySQL 버전)
+ *2026.04.08       claude       실제 DB 스키마에 맞게 전체 쿼리 통일 (SEQ, BANNER_TITLE, P_SEQ)
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.academy.mapper.BannerMapper">
@@ -11,18 +12,11 @@
          배너 마스터 (TB_BANNER) 관련
          ===================================================== -->
 
-    <!-- 배너 목록 조회 -->
+    <!-- 배너 목록 조회 (실제 DB 스키마에 맞게 수정) -->
     <select id="selectBannerList" parameterType="com.academy.banner.service.BannerVO" resultType="org.json.simple.JSONObject">
         SELECT
-            TB.BANNER_CD,
-            TB.BANNER_NM,
-            TB.BANNER_COUNT,
-            TB.BANNER_PRICE,
-            TB.DEPOSIT,
-            TB.ROW_COUNT,
-            TB.ROW_NUM,
-            TB.START_NUM,
-            TB.END_NUM,
+            TB.SEQ AS BANNER_CD,
+            TB.BANNER_TITLE AS BANNER_NM,
             TB.ONOFF_DIV,
             TB.SCREEN_GUBUN,
             TB.CATEGORY_CD,
@@ -36,8 +30,8 @@
             TB.REG_ID,
             DATE_FORMAT(TB.UPD_DT, '%Y-%m-%d') AS UPD_DT,
             TB.UPD_ID,
-            (SELECT COUNT(BANNER_NUM) FROM TB_BANNER_ITEM WHERE BANNER_CD = TB.BANNER_CD AND BANNER_FLAG = 'Y') AS Y_CNT,
-            (SELECT COUNT(BANNER_NUM) FROM TB_BANNER_ITEM WHERE BANNER_CD = TB.BANNER_CD AND BANNER_FLAG = 'N') AS N_CNT
+            (SELECT COUNT(SEQ) FROM TB_BANNER_ITEM WHERE P_SEQ = TB.SEQ AND IS_USE = 'Y') AS Y_CNT,
+            (SELECT COUNT(SEQ) FROM TB_BANNER_ITEM WHERE P_SEQ = TB.SEQ AND IS_USE = 'N') AS N_CNT
         FROM TB_BANNER TB
         WHERE 1=1
         <if test="menuType != null and menuType != ''">
@@ -57,12 +51,12 @@
             AND TB.BANNER_NO = #{searchBannerNo}
         </if>
         <if test="searchText != null and searchText != ''">
-            AND TB.BANNER_NM LIKE CONCAT('%', #{searchText}, '%')
+            AND TB.BANNER_TITLE LIKE CONCAT('%', #{searchText}, '%')
         </if>
         <if test="isUse != null and isUse != ''">
             AND TB.IS_USE = #{isUse}
         </if>
-        ORDER BY TB.BANNER_CD ASC
+        ORDER BY TB.SEQ ASC
         LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
     </select>
 
@@ -88,7 +82,7 @@
             AND TB.BANNER_NO = #{searchBannerNo}
         </if>
         <if test="searchText != null and searchText != ''">
-            AND TB.BANNER_NM LIKE CONCAT('%', #{searchText}, '%')
+            AND TB.BANNER_TITLE LIKE CONCAT('%', #{searchText}, '%')
         </if>
         <if test="isUse != null and isUse != ''">
             AND TB.IS_USE = #{isUse}
@@ -98,8 +92,8 @@
     <!-- 배너 상세 조회 -->
     <select id="selectBannerDetail" parameterType="com.academy.banner.service.BannerVO" resultType="org.json.simple.JSONObject">
         SELECT
-            BANNER_CD,
-            BANNER_NM,
+            SEQ AS BANNER_CD,
+            BANNER_TITLE AS BANNER_NM,
             BANNER_COUNT,
             BANNER_PRICE,
             DEPOSIT,
@@ -121,14 +115,14 @@
             UPD_DT,
             UPD_ID
         FROM TB_BANNER
-        WHERE BANNER_CD = #{bannerCd}
+        WHERE SEQ = #{bannerCd}
     </select>
 
     <!-- 배너 아이템 사용중 수 조회 -->
     <select id="selectBannerItemYCount" parameterType="com.academy.banner.service.BannerVO" resultType="int">
-        SELECT COUNT(BANNER_NUM)
+        SELECT COUNT(SEQ)
         FROM TB_BANNER_ITEM
-        WHERE BANNER_CD = #{bannerCd} AND BANNER_FLAG = 'Y'
+        WHERE P_SEQ = #{bannerCd} AND IS_USE = 'Y'
     </select>
 
     <!-- 배너 등록 -->
@@ -137,8 +131,8 @@
             SELECT REPLACE(UUID(),'-','')
         </selectKey>
         INSERT INTO TB_BANNER (
-            BANNER_CD,
-            BANNER_NM,
+            SEQ,
+            BANNER_TITLE,
             BANNER_COUNT,
             BANNER_PRICE,
             DEPOSIT,
@@ -197,7 +191,7 @@
     <update id="updateBanner" parameterType="com.academy.banner.service.BannerVO">
         UPDATE TB_BANNER
         SET
-            BANNER_NM = #{bannerNm},
+            BANNER_TITLE = #{bannerNm},
             BANNER_COUNT = #{bannerCount},
             BANNER_PRICE = #{bannerPrice},
             DEPOSIT = #{deposit},
@@ -219,14 +213,14 @@
             IS_USE = #{isUse},
             UPD_DT = now(),
             UPD_ID = #{updId}
-        WHERE BANNER_CD = #{bannerCd}
+        WHERE SEQ = #{bannerCd}
     </update>
 
     <!-- 배너 수정 (아이템 수, 시작/종료번호 제외) -->
     <update id="updateBanner2" parameterType="com.academy.banner.service.BannerVO">
         UPDATE TB_BANNER
         SET
-            BANNER_NM = #{bannerNm},
+            BANNER_TITLE = #{bannerNm},
             DEPOSIT = #{deposit},
             ROW_COUNT = #{rowCount},
             ROW_NUM = #{rowNum},
@@ -244,18 +238,18 @@
             IS_USE = #{isUse},
             UPD_DT = now(),
             UPD_ID = #{updId}
-        WHERE BANNER_CD = #{bannerCd}
+        WHERE SEQ = #{bannerCd}
     </update>
 
     <!-- 배너 삭제 -->
     <delete id="deleteBanner" parameterType="com.academy.banner.service.BannerVO">
-        DELETE FROM TB_BANNER WHERE BANNER_CD = #{bannerCd}
+        DELETE FROM TB_BANNER WHERE SEQ = #{bannerCd}
     </delete>
 
     <!-- 배너 관련 전체 삭제 (배너 + 아이템) -->
     <delete id="deleteBannerAll" parameterType="com.academy.banner.service.BannerVO">
-        DELETE FROM TB_BANNER_ITEM WHERE BANNER_CD = #{bannerCd};
-        DELETE FROM TB_BANNER WHERE BANNER_CD = #{bannerCd};
+        DELETE FROM TB_BANNER_ITEM WHERE P_SEQ = #{bannerCd};
+        DELETE FROM TB_BANNER WHERE SEQ = #{bannerCd};
     </delete>
 
 
@@ -266,7 +260,7 @@
     <!-- 배너 아이템 목록 조회 -->
     <select id="selectBannerItemList" parameterType="com.academy.banner.service.BannerItemVO" resultType="org.json.simple.JSONObject">
         SELECT
-            TBI.BANNER_CD,
+            TBI.P_SEQ AS BANNER_CD,
             TBI.BANNER_NUM,
             TBI.USER_ID,
             TBI.BANNER_FLAG,
@@ -290,7 +284,7 @@
             TMM.USER_NM
         FROM TB_BANNER_ITEM TBI
         LEFT OUTER JOIN TB_MEMBER TMM ON TBI.USER_ID = TMM.USER_ID
-        WHERE TBI.BANNER_CD = #{bannerCd}
+        WHERE TBI.P_SEQ = #{bannerCd}
         <if test="searchText != null and searchText != ''">
             AND (TBI.BANNER_SUBTITLE LIKE CONCAT('%', #{searchText}, '%')
                  OR TBI.USER_ID LIKE CONCAT('%', #{searchText}, '%'))
@@ -303,7 +297,7 @@
     <select id="selectBannerItemListCount" parameterType="com.academy.banner.service.BannerItemVO" resultType="int">
         SELECT COUNT(*) AS CNT
         FROM TB_BANNER_ITEM TBI
-        WHERE TBI.BANNER_CD = #{bannerCd}
+        WHERE TBI.P_SEQ = #{bannerCd}
         <if test="searchText != null and searchText != ''">
             AND (TBI.BANNER_SUBTITLE LIKE CONCAT('%', #{searchText}, '%')
                  OR TBI.USER_ID LIKE CONCAT('%', #{searchText}, '%'))
@@ -313,8 +307,8 @@
     <!-- 배너 아이템 상세 조회 -->
     <select id="selectBannerItemDetail" parameterType="com.academy.banner.service.BannerItemVO" resultType="org.json.simple.JSONObject">
         SELECT
-            TB.BANNER_NM,
-            TBI.BANNER_CD,
+            TB.BANNER_TITLE AS BANNER_NM,
+            TBI.P_SEQ AS BANNER_CD,
             TBI.BANNER_NUM,
             TBI.USER_ID,
             TBI.BANNER_FLAG,
@@ -336,15 +330,15 @@
             TBI.UPD_DT,
             TBI.UPD_ID
         FROM TB_BANNER TB
-        INNER JOIN TB_BANNER_ITEM TBI ON TB.BANNER_CD = TBI.BANNER_CD
-        WHERE TBI.BANNER_CD = #{bannerCd}
+        INNER JOIN TB_BANNER_ITEM TBI ON TB.SEQ = TBI.P_SEQ
+        WHERE TBI.P_SEQ = #{bannerCd}
           AND TBI.BANNER_NUM = #{bannerNum}
     </select>
 
     <!-- 배너 아이템 등록 -->
     <insert id="insertBannerItem" parameterType="com.academy.banner.service.BannerItemVO">
         INSERT INTO TB_BANNER_ITEM (
-            BANNER_CD,
+            P_SEQ,
             BANNER_NUM,
             USER_ID,
             BANNER_FLAG,
@@ -463,7 +457,7 @@
             </if>
             UPD_DT = now(),
             UPD_ID = #{updId}
-        WHERE BANNER_CD = #{bannerCd} AND BANNER_NUM = #{bannerNum}
+        WHERE P_SEQ = #{bannerCd} AND BANNER_NUM = #{bannerNum}
     </update>
 
     <!-- 배너 아이템 플래그 수정 -->
@@ -476,7 +470,7 @@
             </if>
             UPD_DT = now(),
             UPD_ID = #{updId}
-        WHERE BANNER_CD = #{bannerCd} AND BANNER_NUM = #{bannerNum}
+        WHERE P_SEQ = #{bannerCd} AND BANNER_NUM = #{bannerNum}
     </update>
 
     <!-- 배너 아이템 초기화 -->
@@ -490,18 +484,18 @@
             BANNER_NOTE = '',
             UPD_DT = now(),
             UPD_ID = #{updId}
-        WHERE BANNER_CD = #{bannerCd} AND BANNER_NUM = #{bannerNum}
+        WHERE P_SEQ = #{bannerCd} AND BANNER_NUM = #{bannerNum}
     </update>
 
     <!-- 배너 아이템 삭제 -->
     <delete id="deleteBannerItem" parameterType="com.academy.banner.service.BannerItemVO">
         DELETE FROM TB_BANNER_ITEM
-        WHERE BANNER_CD = #{bannerCd} AND BANNER_NUM = #{bannerNum}
+        WHERE P_SEQ = #{bannerCd} AND BANNER_NUM = #{bannerNum}
     </delete>
 
     <!-- 배너 아이템 일괄 삭제 (부모 배너 기준) -->
     <delete id="deleteBannerItemByBannerCd" parameterType="com.academy.banner.service.BannerVO">
-        DELETE FROM TB_BANNER_ITEM WHERE BANNER_CD = #{bannerCd}
+        DELETE FROM TB_BANNER_ITEM WHERE P_SEQ = #{bannerCd}
     </delete>
 
 </mapper>

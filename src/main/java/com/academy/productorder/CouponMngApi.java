@@ -303,11 +303,14 @@ public class CouponMngApi extends CORSFilter {
      */
     private void setParam(HashMap<String, String> params, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession(false);
-        @SuppressWarnings("unchecked")
-        HashMap<String, String> loginInfo = (HashMap<String, String>) session.getAttribute("AdmUserInfo");
-
-        params.put("REG_ID", loginInfo.get("USER_ID"));
-        params.put("UPD_ID", loginInfo.get("USER_ID"));
+        if (session != null) {
+            @SuppressWarnings("unchecked")
+            HashMap<String, String> loginInfo = (HashMap<String, String>) session.getAttribute("AdmUserInfo");
+            if (loginInfo != null) {
+                params.put("REG_ID", loginInfo.get("USER_ID"));
+                params.put("UPD_ID", loginInfo.get("USER_ID"));
+            }
+        }
 
         params.put("currentPage", CommonUtil.isNull(request.getParameter("currentPage"), "1"));
         params.put("pageRow", CommonUtil.isNull(request.getParameter("pageRow"), String.valueOf(pageUnit)));

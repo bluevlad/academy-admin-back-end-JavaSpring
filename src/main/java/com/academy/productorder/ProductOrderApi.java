@@ -661,12 +661,15 @@ public class ProductOrderApi extends CORSFilter {
      */
     private void setParam(ProductOrderVO vo, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession(false);
-        @SuppressWarnings("unchecked")
-        HashMap<String, String> loginInfo = (HashMap<String, String>)session.getAttribute("AdmUserInfo");
-
-        vo.setRegId(loginInfo.get("USER_ID"));
-        vo.setUpdId(loginInfo.get("USER_ID"));
-        vo.setManagerId(loginInfo.get("USER_ID"));
+        if (session != null) {
+            @SuppressWarnings("unchecked")
+            HashMap<String, String> loginInfo = (HashMap<String, String>)session.getAttribute("AdmUserInfo");
+            if (loginInfo != null) {
+                vo.setRegId(loginInfo.get("USER_ID"));
+                vo.setUpdId(loginInfo.get("USER_ID"));
+                vo.setManagerId(loginInfo.get("USER_ID"));
+            }
+        }
 
         // 페이징 파라미터
         String currentPageStr = request.getParameter("currentPage");
