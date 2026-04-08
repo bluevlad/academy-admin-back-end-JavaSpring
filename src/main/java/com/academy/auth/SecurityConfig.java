@@ -24,7 +24,7 @@ public class SecurityConfig {
             "http://localhost:3000",
             "http://study.unmong.com:3000",
             "http://admin.unmong.com:8080",
-            "http://www.unmong.com:3000"
+            "http://academy.unmong.com:3000"
         ));
         configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of(
