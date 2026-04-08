@@ -8,23 +8,42 @@ jobs:
   deploy:
     name: Deploy API on Local Machine
     runs-on: self-hosted
-    
+
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Create .env file
       run: |
         "DB_URL=${{ secrets.DB_URL }}" | Out-File -FilePath .env -Encoding utf8
         "DB_USERNAME=${{ secrets.DB_USERNAME }}" | Out-File -FilePath .env -Append -Encoding utf8
         "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" | Out-File -FilePath .env -Append -Encoding utf8
+        "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" | Out-File -FilePath .env -Append -Encoding utf8
+        "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" | Out-File -FilePath .env -Append -Encoding utf8
+        "SUPER_ADMIN_EMAILS=${{ secrets.SUPER_ADMIN_EMAILS }}" | Out-File -FilePath .env -Append -Encoding utf8
       shell: pwsh
 
     - name: Docker Compose Down
-      run: docker-compose down --remove-orphans
+      run: docker-compose -f docker-compose.local.yml down --remove-orphans
       continue-on-error: true
       shell: pwsh
 
+    - name: Docker Build (no cache)
+      run: docker-compose -f docker-compose.local.yml build --no-cache
+      shell: pwsh
+
     - name: Docker Compose Up
-      run: docker-compose up -d --build
+      run: docker-compose -f docker-compose.local.yml up -d
+      shell: pwsh
+
+    - name: Health Check
+      run: |
+        Start-Sleep -Seconds 15
+        try {
+          $response = Invoke-WebRequest -Uri "http://localhost:9001/actuator/health" -UseBasicParsing -TimeoutSec 10
+          Write-Host "Health check passed: $($response.StatusCode)"
+        } catch {
+          Write-Host "Warning: Health check failed - $($_.Exception.Message)"
+          Write-Host "Container may still be starting up. Check manually."
+        }
       shell: pwsh

@@ -1,5 +1,6 @@
 server:
   port: ${SERVER_PORT:8080}
+  forward-headers-strategy: framework
 
 # Define log path to prevent "Could not resolve placeholder 'log.path'" error
 log:
@@ -11,15 +12,6 @@ spring:
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:password}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${GOOGLE_CLIENT_ID:}
-            client-secret: ${GOOGLE_CLIENT_SECRET:}
-            scope: openid,email,profile
-            redirect-uri: "{baseUrl}/api/auth/google/callback"
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
