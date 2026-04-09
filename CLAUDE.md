@@ -240,10 +240,10 @@ When working on lecture modules, note:
 
 ## 연동 프론트엔드
 
-- **프로젝트**: `../academy-front-end-React-material-dashboard/`
+- **프로젝트**: `../frontend/`
 - **URL**: `http://localhost:3000`
-- **API 클라이언트**: `../academy-front-end-React-material-dashboard/src/shared/api/client.js`
-- **API 모듈**: `../academy-front-end-React-material-dashboard/src/api/` (Axios 기반)
+- **API 클라이언트**: `../frontend/src/shared/api/client.js`
+- **API 모듈**: `../frontend/src/api/` (Axios 기반)
 
 백엔드 API 추가/변경 시 프론트엔드 API 모듈도 함께 업데이트.
 

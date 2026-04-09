@@ -45,7 +45,7 @@ public class CORSFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String origin = request.getHeader("Origin");
         if (origin != null && (origin.equals("http://study.unmong.com:3000") ||
-                origin.equals("http://admin.unmong.com:8080") ||
+                origin.equals("http://academy.unmong.com:9001") ||
                 origin.equals("http://localhost:3000") ||
                 origin.equals("http://academy.unmong.com:3000"))) {
             ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Origin", origin);

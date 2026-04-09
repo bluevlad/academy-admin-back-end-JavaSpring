@@ -23,7 +23,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of(
             "http://localhost:3000",
             "http://study.unmong.com:3000",
-            "http://admin.unmong.com:8080",
+            "http://academy.unmong.com:9001",
             "http://academy.unmong.com:3000"
         ));
         configuration.setAllowedMethods(List.of("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"));

@@ -1,5 +1,7 @@
 server:
   port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /admin
   forward-headers-strategy: framework
 
 # Define log path to prevent "Could not resolve placeholder 'log.path'" error
