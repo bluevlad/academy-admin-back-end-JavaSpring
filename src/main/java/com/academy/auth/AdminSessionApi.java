@@ -32,12 +32,12 @@ import jakarta.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping("/api/admin-auth")
-public class AdminAuthApi {
+public class AdminSessionApi {
 
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
-    public AdminAuthApi(AuthenticationManager authenticationManager) {
+    public AdminSessionApi(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
